@@ -69,15 +69,20 @@ public class Player extends Entity{
 
 
     private void updateJumpBox() {
-        if (right) {
-            jumpBox.x = hitbox.x;
-            jumpBox.y = hitbox.y + hitbox.height;
-        }
         if (left) {
             jumpBox.x = hitbox.x + hitbox.width;
             jumpBox.y = hitbox.y + hitbox.height;
         }
 
+        if (right || inAir) {
+            jumpBox.x = hitbox.x;
+            jumpBox.y = hitbox.y + hitbox.height;
+        }
+
+        if (mirrorWidth == -1) {
+            jumpBox.x = hitbox.x + hitbox.width;
+            jumpBox.y = hitbox.y + hitbox.height;
+        }
 
     }
 
