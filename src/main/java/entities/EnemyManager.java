@@ -16,6 +16,7 @@ public class EnemyManager {
     private ArrayList<Pig> pigs = new ArrayList<>();
 
     public EnemyManager(Playing playing) {
+        this.playing = playing;
         loadEnemyImgs();
         getPigsFromPng();
     }
@@ -30,6 +31,7 @@ public class EnemyManager {
         for (Pig onePig: pigs) {
             if (jumpBox.intersects(onePig.getHitbox())) {
                 onePig.dead();
+                playing.getPlayer().setAttack(true);
                 return;
             }
         }
