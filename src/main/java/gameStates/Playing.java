@@ -58,6 +58,11 @@ public class Playing extends State implements StateInterface {
         enemyManager.checkHit(jumpBox);
     }
 
+    public void resetGame() {
+        player.resetPlayer();
+        enemyManager.resetEnemyManager();
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1)

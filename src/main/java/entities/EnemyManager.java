@@ -88,6 +88,13 @@ public class EnemyManager {
 
     }
 
+    public void resetEnemyManager() {
+        for (Pig onePig : pigs){
+            onePig.resetEnemy();
+        }
+
+    }
+
     public ArrayList<Pig> getPigs() {
         return pigs;
     }

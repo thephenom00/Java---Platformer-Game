@@ -98,7 +98,6 @@ public class Pig extends Enemy {
     protected void playerGetHit(Player player) {
         player.getHit(true);
         player.subtractLife();
-        player.setLeft(true);
         changeAction(IDLE);
     }
 

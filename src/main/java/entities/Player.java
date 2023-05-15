@@ -98,7 +98,6 @@ public class Player extends Entity{
         lives--;
         if (lives == 0) {
             Gamestate.state = Gamestate.GAMEOVER;
-//            resetGame();
         }
     }
 
@@ -322,6 +321,24 @@ public class Player extends Entity{
 
     public void getHit(boolean getHit) {
         this.getHit = getHit;
+    }
+
+    public void resetPlayer() {
+        resetDirBooleans();
+        resetInAir();
+        resetAniTick();
+        moving = false;
+        attacking = false;
+        getHit = false;
+        playerAction = IDLE;
+        lives = 3;
+
+        hitbox.x = x;
+        hitbox.y = y;
+
+        if (!IsEntityOnFloor(hitbox, lvlData)) {
+            inAir = true;
+        }
     }
 
 

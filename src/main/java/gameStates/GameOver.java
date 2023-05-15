@@ -10,9 +10,11 @@ import static utilz.Size.*;
 
 public class GameOver extends State implements StateInterface{
     private Game game;
-    public GameOver(Game game) {
+    private Playing playing;
+    public GameOver(Game game, Playing playing) {
         super(game);
         this.game = game;
+        this.playing = playing;
     }
 
     @Override
@@ -66,6 +68,7 @@ public class GameOver extends State implements StateInterface{
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.MENU;
+                playing.resetGame();
                 break;
         }
     }

@@ -38,7 +38,7 @@ public class Game implements Runnable {
     private void initClasses() {
         menu = new Menu(this, logger);
         playing = new Playing(this, logger);
-        gameOver = new GameOver(this);
+        gameOver = new GameOver(this, playing);
     }
 
     // Starts the thread

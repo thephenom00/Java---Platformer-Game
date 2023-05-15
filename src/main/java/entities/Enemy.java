@@ -159,6 +159,15 @@ public abstract class Enemy extends Entity{
         }
     }
 
+    public void resetEnemy() {
+        hitbox.x = x;
+        hitbox.y = y;
+        firstUpdate = false;
+        changeAction(IDLE);
+        alive = true;
+        fallSpeed = 0;
+    }
+
     // We draw it in enemyHandler
     public int getAniIndex() {
         return aniIndex;
