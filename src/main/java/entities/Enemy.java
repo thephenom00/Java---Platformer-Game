@@ -19,6 +19,10 @@ public abstract class Enemy extends Entity{
     protected float enemySpeed = 0.3f * SCALE;
     protected int runDirection = LEFT;
 
+    // Mirror the player
+    protected int mirrorX = 0;
+    protected int mirrorWidth = 1;
+
 
     // Range
     protected int yLevel;
@@ -39,8 +43,13 @@ public abstract class Enemy extends Entity{
         // Enemy ... Player
         if (player.hitbox.x > hitbox.x) {
             runDirection = RIGHT;
+            mirrorX = width;
+            mirrorWidth = -1;
+
         } else {
             runDirection = LEFT;
+            mirrorX = 0;
+            mirrorWidth = 1;
         }
     }
 

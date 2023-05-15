@@ -32,7 +32,6 @@ public class EnemyManager {
             if (jumpBox.intersects(onePig.getHitbox()) && onePig.enemyAction != DEAD) {
                 onePig.dead();
                 playing.getPlayer().setAttack(true);
-                return;
             }
         }
 
@@ -45,7 +44,7 @@ public class EnemyManager {
 
     public void draw(Graphics g) {
         drawPigs(g);
-//        drawHitbox(g);
+        drawHitbox(g);
     }
 
     // Saves all the Pigs from list into an array
@@ -59,7 +58,11 @@ public class EnemyManager {
 
     private void drawPigs(Graphics g) {
         for (Pig onePig : pigs)
-            g.drawImage(pigArray[onePig.getEnemyAction()][onePig.getAniIndex()], (int) onePig.getHitbox().x - PIG_XOFFSET, (int) onePig.getHitbox().y - PIG_YOFFSET, PIG_WIDTH, PIG_HEIGHT, null);
+            g.drawImage(pigArray[onePig.getEnemyAction()][onePig.getAniIndex()],
+                    (int) onePig.getHitbox().x - PIG_XOFFSET + onePig.mirrorX,
+                    (int) onePig.getHitbox().y - PIG_YOFFSET,
+                    PIG_WIDTH * onePig.mirrorWidth,
+                    PIG_HEIGHT, null);
     }
 
     private void drawHitbox(Graphics g) {

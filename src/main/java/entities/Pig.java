@@ -2,6 +2,7 @@ package entities;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+import static utilz.Constants.Directions.*;
 import static utilz.Size.*;
 
 import static utilz.Constants.EnemyConstants.*;
@@ -13,7 +14,7 @@ public class Pig extends Enemy {
 
     public Pig(float x, float y) {
         super(x, y, PIG_WIDTH, PIG_HEIGHT, PIG);
-        createHitbox(x, y, (int)( PIG_HITBOX_WIDTH * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
+        createHitbox(x, y, (int)(PIG_HITBOX_WIDTH * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
     }
 
 
