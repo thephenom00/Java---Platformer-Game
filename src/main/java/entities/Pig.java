@@ -70,20 +70,31 @@ public class Pig extends Enemy {
                 case RUNNING:
                     running(lvlData, player);
 
-                    if (attackBox.intersects(player.getHitBox())) {
+                    if (isPlayerInAttackRange(player)) {
                         changeAction(ATTACK);
-                        player.subtractLife();
                     }
 
                     if (!canSeePlayer(lvlData, player)) {
                         changeAction(IDLE);
                     }
                     break;
+
                 case ATTACK:
+                    if (aniIndex == 3 && isPlayerInAttackRange(player)) {
+                        player.subtractLife();
+                        changeAction(IDLE);
+                        break;
+                    }
+
 
             }
 
         }
     }
+
+    protected boolean isPlayerInAttackRange(Player player) {
+        return attackBox.intersects(player.getHitBox());
+    }
+
 
 }

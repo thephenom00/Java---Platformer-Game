@@ -51,7 +51,7 @@ public class EnemyManager {
     public void draw(Graphics g) {
         drawPigs(g);
 //        drawHitbox(g);
-//        drawAttackBox(g);
+        drawAttackBox(g);
     }
 
     // Saves all the Pigs from list into an array
