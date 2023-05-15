@@ -50,7 +50,7 @@ public class Playing extends State implements StateInterface {
     public void draw(Graphics g) {
         g.drawImage(background, 0, 0, GAME_WIDTH, GAME_HEIGHT, null);
         levelManager.draw(g);
-        player.render(g);
+        player.draw(g);
         enemyManager.draw(g);
     }
 

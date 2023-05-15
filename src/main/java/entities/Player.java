@@ -40,6 +40,10 @@ public class Player extends Entity{
     private int mirrorX = 0;
     private int mirrorWidth = 1;
 
+    // GUI
+    private int lives = 0;
+    private int coins = 0;
+
     public Player(float x, float y, int width, int height, Playing playing) {
         super(x, y, width, height);
         this.playing = playing;
@@ -54,17 +58,29 @@ public class Player extends Entity{
         setAnimation();
         updateJumpBox();
 
-        if (inAir) {
-            checkHit();
-        }
+        checkHit();
 
     }
 
-    public void render(Graphics g) {
-        // Subtract offset from hitbox
+    public void draw(Graphics g) {
+        // Draw the player
         g.drawImage(animations[playerAction][aniIndex], (int) (hitbox.x - xDrawOffset) + mirrorX, (int) (hitbox.y - yDrawOffset), width * mirrorWidth, height, null);
-//        drawHitbox(g);
+
+        // Draw hitboxes
+        // drawHitbox(g);
         drawJumpBox(g);
+
+        // Display lives text
+        Font font = new Font("Arial", Font.PLAIN,  20);
+        g.setFont(font);
+        g.setColor(Color.BLACK);
+        g.drawString("Lives: 3", 10, 20);
+
+        // Display coins to collect
+        Font coinsFont = new Font("Arial", Font.PLAIN, 16);
+        g.setFont(coinsFont);
+        g.setColor(Color.BLACK);
+        g.drawString("Coins to Collect: " + coins, 10, 40);
     }
 
 
@@ -312,5 +328,12 @@ public class Player extends Entity{
         this.jump = jump;
     }
 
+    public int getLives() {
+        return lives;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
 
 }
