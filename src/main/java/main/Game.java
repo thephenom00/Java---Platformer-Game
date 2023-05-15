@@ -3,10 +3,7 @@ package main;
 
 import java.awt.Graphics;
 
-import gameStates.GameOver;
-import gameStates.Gamestate;
-import gameStates.Menu;
-import gameStates.Playing;
+import gameStates.*;
 import utilz.LoggerManager;
 
 public class Game implements Runnable {
@@ -21,6 +18,7 @@ public class Game implements Runnable {
     private Playing playing;
     private Menu menu;
     private GameOver gameOver;
+    private YouWin youwin;
 
 
     public Game(LoggerManager logger) {
@@ -39,7 +37,8 @@ public class Game implements Runnable {
     private void initClasses() {
         menu = new Menu(this, logger);
         playing = new Playing(this, logger);
-        gameOver = new GameOver(this, playing);
+        gameOver = new GameOver(this, playing); // RESTART
+        youwin = new YouWin(this, playing); // RESTART
     }
 
     // Starts the thread
@@ -49,20 +48,15 @@ public class Game implements Runnable {
     }
 
     public void update() {
-        switch (Gamestate.state) {
-            case MENU:
-                menu.update();
-                break;
-            case PLAYING:
-                playing.update();
-                break;
-            case GAMEOVER:
-                gameOver.update();
-            default:
-                break;
-
-        }
+            switch (Gamestate.state) {
+            case MENU -> menu.update();
+            case PLAYING -> playing.update();
+            case GAMEOVER -> gameOver.update();
+            case WIN -> youwin.update();
+            default -> { }
+        };
     }
+
 
 
     public void render(Graphics g) {
@@ -70,6 +64,7 @@ public class Game implements Runnable {
             case MENU -> menu.draw(g);
             case PLAYING -> playing.draw(g);
             case GAMEOVER -> gameOver.draw(g);
+            case WIN -> youwin.draw(g);
             default -> {}
         }
 
@@ -145,6 +140,10 @@ public class Game implements Runnable {
 
     public GameOver getGameOver() {
         return gameOver;
+    }
+
+    public YouWin getYouWin(){
+        return youwin;
     }
 
 }

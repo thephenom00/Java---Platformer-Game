@@ -40,17 +40,12 @@ public class KeyboardInputs implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (Gamestate.state) {
-            case MENU:
-                gamePanel.getGame().getMenu().keyPressed(e);
-                break;
-            case PLAYING:
-                gamePanel.getGame().getPlaying().keyPressed(e);
-                break;
-            case GAMEOVER:
-                gamePanel.getGame().getGameOver().keyPressed(e);
-                break;
-            default:
-                break;
-        }
+            case MENU -> gamePanel.getGame().getMenu().keyPressed(e);
+            case PLAYING -> gamePanel.getGame().getPlaying().keyPressed(e);
+            case GAMEOVER -> gamePanel.getGame().getGameOver().keyPressed(e);
+            case WIN -> gamePanel.getGame().getYouWin().keyPressed(e);
+            default -> { /* Handle unknown state or perform default action */ }
+        };
     }
+
 }

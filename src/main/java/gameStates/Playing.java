@@ -70,20 +70,17 @@ public class Playing extends State implements StateInterface {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_A:
-                player.setLeft(true);
-                break;
-            case KeyEvent.VK_D:
-                player.setRight(true);
-                break;
-            case KeyEvent.VK_SPACE:
-                player.setJump(true);
-                break;
-            case KeyEvent.VK_ESCAPE:
+            case KeyEvent.VK_A, KeyEvent.VK_LEFT -> player.setLeft(true);
+            case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> player.setRight(true);
+            case KeyEvent.VK_SPACE -> player.setJump(true);
+            case KeyEvent.VK_P -> Gamestate.state = Gamestate.WIN;
+            case KeyEvent.VK_ESCAPE -> {
                 Gamestate.state = Gamestate.MENU;
                 logger.log("Switched to MENU state");
+            }
         }
     }
+
 
     @Override
     public void keyReleased(KeyEvent e) {

@@ -4,7 +4,8 @@ package gameStates;
 public enum Gamestate {
     PLAYING,
     MENU,
-    GAMEOVER;
+    GAMEOVER,
+    WIN;
     // Always starts in MENU
     public static Gamestate state = MENU;
 }
