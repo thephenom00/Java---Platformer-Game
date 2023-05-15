@@ -24,8 +24,11 @@ public class Player extends Entity{
     private Playing playing;
 
     // Offset for hitbox
-    private float xDrawOffset = 23 * SCALE;
+    private float xDrawOffsetRight = 23 * SCALE;
+    private float xDrawOffsetLeft = 38 * SCALE;
     private float yDrawOffset = 17 * SCALE;
+
+    private Boolean facing = true;
 
     // Jump and gravitation
     private float airSpeed = 0f; // Speed we are travelling in the air
@@ -66,12 +69,22 @@ public class Player extends Entity{
 
     public void draw(Graphics g) {
         // Draw the player
-        g.drawImage(animations[playerAction][aniIndex],
-                (int) (hitbox.x - xDrawOffset) + flipX,
-                (int) (hitbox.y - yDrawOffset),
-                width * flipW,
-                height,
-                null);
+        if (facing) {
+            g.drawImage(animations[playerAction][aniIndex],
+                    (int) (hitbox.x - xDrawOffsetRight) + flipX,
+                    (int) (hitbox.y - yDrawOffset),
+                    width * flipW,
+                    height,
+                    null);
+        } else {
+            g.drawImage(animations[playerAction][aniIndex],
+                    (int) (hitbox.x - xDrawOffsetLeft) + flipX,
+                    (int) (hitbox.y - yDrawOffset),
+                    width * flipW,
+                    height,
+                    null);
+        }
+
 
         // Draw hitboxes
 //        drawHitbox(g);
@@ -189,10 +202,16 @@ public class Player extends Entity{
         // If right or left is clicked, speed is added
         if (left) {
             xSpeed -= playerSpeed;
+            flipX = width;
+            flipW = -1;
+            facing = false;
         }
 
         if (right) {
             xSpeed += playerSpeed;
+            flipX = 0;
+            flipW = 1;
+            facing = true;
         }
 
 
