@@ -134,6 +134,7 @@ public abstract class Enemy extends Entity{
                 if (enemyAction == ATTACK) {
                     enemyAction = IDLE;
                 }
+
                 if (enemyAction == DEAD) {
                     alive = false;
                 }

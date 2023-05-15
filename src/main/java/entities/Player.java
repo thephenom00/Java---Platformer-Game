@@ -5,6 +5,7 @@ import static utilz.Physics.*;
 
 import gameStates.Gamestate;
 import gameStates.Playing;
+import main.Game;
 import utilz.LoadSave;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -17,7 +18,7 @@ public class Player extends Entity{
     private BufferedImage[][] animations;
     private int aniTick, aniIndex, aniSpeed = 25;
     private int playerAction = IDLE;
-    private boolean moving = false, attacking = false, getHit = false;
+    private boolean moving = false, attacking = false, getHit = false, dead = false;
     private boolean up, left, right, down, jump;
     private float playerSpeed = 1.0f * SCALE;
     private int[][] lvlData;
@@ -96,9 +97,6 @@ public class Player extends Entity{
 
     public void subtractLife() {
         lives--;
-        if (lives == 0) {
-            Gamestate.state = Gamestate.GAMEOVER;
-        }
     }
 
     private void drawCoins(Graphics g) {
@@ -160,6 +158,13 @@ public class Player extends Entity{
 
         if (getHit) {
             playerAction = HIT;
+        }
+
+        if (dead){
+            playerAction = DEAD;
+            if (aniIndex == 3) {
+                Gamestate.state = Gamestate.GAMEOVER;
+            }
         }
 
 
@@ -323,6 +328,10 @@ public class Player extends Entity{
         this.getHit = getHit;
     }
 
+    public void setDeath(boolean dead) {
+        this.dead = dead;
+    }
+
     public void resetPlayer() {
         resetDirBooleans();
         resetInAir();
@@ -332,6 +341,7 @@ public class Player extends Entity{
         getHit = false;
         playerAction = IDLE;
         lives = 3;
+
 
         hitbox.x = x;
         hitbox.y = y;
