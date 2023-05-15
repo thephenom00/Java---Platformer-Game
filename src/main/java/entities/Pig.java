@@ -58,10 +58,6 @@ public class Pig extends Enemy {
             switch (enemyAction) {
 
                 case IDLE:
-//                    if (canSeePlayer(lvlData, player)) {
-//                        facePlayer(player);
-//                        changeAction(RUNNING);
-//                    }
                     changeAction(RUNNING);
                     break;
 
@@ -75,10 +71,6 @@ public class Pig extends Enemy {
                     }
 
                     running(lvlData, player);
-
-//                    if (!canSeePlayer(lvlData, player)) {
-//                        changeAction(IDLE);
-//                    }
                     break;
 
                 case ATTACK:
@@ -122,5 +114,7 @@ public class Pig extends Enemy {
             return 0;
         }
     }
+
+
 }
 

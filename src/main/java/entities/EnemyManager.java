@@ -1,5 +1,6 @@
 package entities;
 
+import gameStates.Gamestate;
 import gameStates.Playing;
 import utilz.LoadSave;
 
@@ -13,7 +14,8 @@ import static utilz.Constants.EnemyConstants.*;
 public class EnemyManager {
     private final Playing playing;
     private BufferedImage[][] pigArray;
-    private ArrayList<Pig> pigs = new ArrayList<>();
+    private static ArrayList<Pig> pigs = new ArrayList<>();
+    public static int numberOfPigsAlive;
 
 
     public EnemyManager(Playing playing) {
@@ -28,7 +30,6 @@ public class EnemyManager {
             if (onePig.alive) {
                 onePig.update(lvlData, player);
             }
-
     }
 
     public void checkHit(Rectangle2D.Float jumpBox) {
@@ -47,6 +48,7 @@ public class EnemyManager {
     // Gets all the pigs from the Level array and stores to list
     public void getPigsFromPng() {
         pigs = LoadSave.GetPigs();
+        numberOfPigsAlive = pigs.size();
     }
 
     public void draw(Graphics g) {
@@ -93,11 +95,23 @@ public class EnemyManager {
         for (Pig onePig : pigs){
             onePig.resetEnemy();
         }
+        numberOfPigsAlive = pigs.size();
 
     }
 
-    public ArrayList<Pig> getPigs() {
+    public static ArrayList<Pig> getPigs() {
         return pigs;
+    }
+
+
+    private void checkPigsAlive() {
+//        if (numberOfPigsAlive == 0) {
+//            Gamestate.state = Gamestate.WIN;
+//        }
+    }
+
+    public static void subtractPigFromArray() {
+        numberOfPigsAlive--;
     }
 
 

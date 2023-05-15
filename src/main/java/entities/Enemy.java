@@ -1,5 +1,7 @@
 package entities;
 
+import gameStates.Gamestate;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -137,6 +139,10 @@ public abstract class Enemy extends Entity{
 
                 if (enemyAction == DEAD) {
                     alive = false;
+                    EnemyManager.subtractPigFromArray();
+                    if (EnemyManager.numberOfPigsAlive == 0) {
+                        Gamestate.state = Gamestate.WIN;
+                    }
                 }
             }
         }
