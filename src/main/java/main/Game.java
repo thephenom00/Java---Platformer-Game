@@ -3,6 +3,7 @@ package main;
 
 import java.awt.Graphics;
 
+import gameStates.GameOver;
 import gameStates.Gamestate;
 import gameStates.Menu;
 import gameStates.Playing;
@@ -19,6 +20,7 @@ public class Game implements Runnable {
     private LoggerManager logger;
     private Playing playing;
     private Menu menu;
+    private GameOver gameOver;
 
 
     public Game(LoggerManager logger) {
@@ -36,6 +38,7 @@ public class Game implements Runnable {
     private void initClasses() {
         menu = new Menu(this, logger);
         playing = new Playing(this, logger);
+        gameOver = new GameOver(this);
     }
 
     // Starts the thread
@@ -52,6 +55,8 @@ public class Game implements Runnable {
             case PLAYING:
                 playing.update();
                 break;
+            case GAMEOVER:
+                gameOver.update();
             default:
                 break;
 
@@ -66,6 +71,9 @@ public class Game implements Runnable {
                 break;
             case PLAYING:
                 playing.draw(g);
+                break;
+            case GAMEOVER:
+                gameOver.draw(g);
                 break;
             default:
                 break;
@@ -137,6 +145,10 @@ public class Game implements Runnable {
 
     public Playing getPlaying() {
         return playing;
+    }
+
+    public GameOver getGameOver() {
+        return gameOver;
     }
 
 }

@@ -3,8 +3,8 @@ package entities;
 import static utilz.Physics.CanMoveHere;
 import static utilz.Physics.*;
 
+import gameStates.Gamestate;
 import gameStates.Playing;
-import main.Game;
 import utilz.LoadSave;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -28,7 +28,7 @@ public class Player extends Entity{
     private float xDrawOffsetLeft = 38 * SCALE;
     private float yDrawOffset = 17 * SCALE;
 
-    private Boolean facing = true;
+    private Boolean facingRight = true;
 
     // Jump and gravitation
     private float airSpeed = 0f; // Speed we are travelling in the air
@@ -41,8 +41,8 @@ public class Player extends Entity{
     private Rectangle2D.Float jumpBox;
 
     // Mirror the player
-    private int flipX = 0;
-    private int flipW = 1;
+    private int mirrorX = 0;
+    private int mirrorWidth = 1;
 
     // GUI
     private int lives = 3;
@@ -69,18 +69,18 @@ public class Player extends Entity{
 
     public void draw(Graphics g) {
         // Draw the player
-        if (facing) {
+        if (facingRight) {
             g.drawImage(animations[playerAction][aniIndex],
-                    (int) (hitbox.x - xDrawOffsetRight) + flipX,
+                    (int) (hitbox.x - xDrawOffsetRight) + mirrorX,
                     (int) (hitbox.y - yDrawOffset),
-                    width * flipW,
+                    width * mirrorWidth,
                     height,
                     null);
         } else {
             g.drawImage(animations[playerAction][aniIndex],
-                    (int) (hitbox.x - xDrawOffsetLeft) + flipX,
+                    (int) (hitbox.x - xDrawOffsetLeft) + mirrorX,
                     (int) (hitbox.y - yDrawOffset),
-                    width * flipW,
+                    width * mirrorWidth,
                     height,
                     null);
         }
@@ -97,7 +97,8 @@ public class Player extends Entity{
     public void subtractLife() {
         lives--;
         if (lives == 0) {
-//            gameOver();
+            Gamestate.state = Gamestate.GAMEOVER;
+//            resetGame();
         }
     }
 
@@ -129,7 +130,7 @@ public class Player extends Entity{
             jumpBox.y = hitbox.y + hitbox.height;
         }
 
-        if (flipW == -1) {
+        if (mirrorWidth == -1) {
             jumpBox.x = hitbox.x + hitbox.width;
             jumpBox.y = hitbox.y + hitbox.height;
         }
@@ -202,16 +203,16 @@ public class Player extends Entity{
         // If right or left is clicked, speed is added
         if (left) {
             xSpeed -= playerSpeed;
-            flipX = width;
-            flipW = -1;
-            facing = false;
+            mirrorX = width;
+            mirrorWidth = -1;
+            facingRight = false;
         }
 
         if (right) {
             xSpeed += playerSpeed;
-            flipX = 0;
-            flipW = 1;
-            facing = true;
+            mirrorX = 0;
+            mirrorWidth = 1;
+            facingRight = true;
         }
 
 

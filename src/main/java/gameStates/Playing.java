@@ -79,7 +79,8 @@ public class Playing extends State implements StateInterface {
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.MENU;
                 logger.log("Switched to MENU state");
-                break;
+            case KeyEvent.VK_M:
+                Gamestate.state = Gamestate.GAMEOVER;
         }
     }
 
