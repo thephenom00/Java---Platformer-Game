@@ -8,12 +8,15 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import static utilz.Constants.Directions.*;
 import static utilz.Constants.EnemyConstants.*;
 
 public class EnemyManager {
     private Playing playing;
     private BufferedImage[][] pigArray;
     private ArrayList<Pig> pigs = new ArrayList<>();
+    protected int mirrorX = 0;
+    protected int mirrorWidth = 1;
 
     public EnemyManager(Playing playing) {
         this.playing = playing;
@@ -34,7 +37,7 @@ public class EnemyManager {
         for (Pig onePig: pigs) {
             if (onePig.alive) {
                 if (jumpBox.intersects(onePig.getHitbox()) && onePig.enemyAction != DEAD) {
-                    onePig.dead();
+                    onePig.changeAction(DEAD);
                     playing.getPlayer().setAttack(true);
                     return;
                 }
@@ -67,9 +70,9 @@ public class EnemyManager {
         for (Pig onePig : pigs)
             if (onePig.alive) {
                 g.drawImage(pigArray[onePig.getEnemyAction()][onePig.getAniIndex()],
-                        (int) onePig.getHitbox().x - PIG_XOFFSET + onePig.mirrorX,
+                        (int) onePig.getHitbox().x - PIG_XOFFSET + onePig.checkMirrorX(),
                         (int) onePig.getHitbox().y - PIG_YOFFSET,
-                        PIG_WIDTH * onePig.mirrorWidth,
+                        PIG_WIDTH * onePig.checkMirrorWidth(),
                         PIG_HEIGHT, null);
             }
 
@@ -98,4 +101,8 @@ public class EnemyManager {
     public ArrayList<Pig> getPigs() {
         return pigs;
     }
+
+
+
+
 }

@@ -46,13 +46,9 @@ public abstract class Enemy extends Entity{
         // Enemy ... Player
         if (player.hitbox.x > hitbox.x) {
             runDirection = RIGHT;
-            mirrorX = width;
-            mirrorWidth = -1;
 
         } else {
             runDirection = LEFT;
-            mirrorX = 0;
-            mirrorWidth = 1;
         }
     }
 
@@ -80,12 +76,6 @@ public abstract class Enemy extends Entity{
 
     }
 
-    protected boolean isInAttackRange(Player player) {
-        int EnemyPlayerDistance = (int) Math.abs(hitbox.x - player.hitbox.x);
-        if (EnemyPlayerDistance <= attackRange && playerYLevel == yLevel)
-            return true;
-        return false;
-    }
 
     protected void changeAction(int enemyAction) {
         this.enemyAction = enemyAction;
@@ -162,10 +152,12 @@ public abstract class Enemy extends Entity{
     public void resetEnemy() {
         hitbox.x = x;
         hitbox.y = y;
-        firstUpdate = false;
+        firstUpdate = true;
         changeAction(IDLE);
         alive = true;
         fallSpeed = 0;
+        mirrorWidth = 1;
+        mirrorX = 0;
     }
 
     // We draw it in enemyHandler
@@ -184,5 +176,6 @@ public abstract class Enemy extends Entity{
     public boolean isAlive() {
         return alive;
     }
-
 }
+
+

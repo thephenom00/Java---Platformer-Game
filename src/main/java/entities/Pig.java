@@ -43,13 +43,6 @@ public class Pig extends Enemy {
         attackBox.y = hitbox.y;
     }
 
-
-
-
-    public void dead() {
-        changeAction(DEAD);
-    }
-
     public void updateMovement(int[][] lvlData, Player player) {
         if (firstUpdate) {
             firstUpdateCheck(lvlData);
@@ -61,22 +54,27 @@ public class Pig extends Enemy {
             switch (enemyAction) {
 
                 case IDLE:
-                    if (canSeePlayer(lvlData, player)) {
-                        facePlayer(player);
-                        changeAction(RUNNING);
-                    }
+//                    if (canSeePlayer(lvlData, player)) {
+//                        facePlayer(player);
+//                        changeAction(RUNNING);
+//                    }
+                    changeAction(RUNNING);
                     break;
 
                 case RUNNING:
-                    running(lvlData, player);
+                    if (canSeePlayer(lvlData, player)) {
+                        facePlayer(player);
+                   }
 
                     if (isPlayerInAttackRange(player)) {
                         changeAction(ATTACK);
                     }
 
-                    if (!canSeePlayer(lvlData, player)) {
-                        changeAction(IDLE);
-                    }
+                    running(lvlData, player);
+
+//                    if (!canSeePlayer(lvlData, player)) {
+//                        changeAction(IDLE);
+//                    }
                     break;
 
                 case ATTACK:
@@ -101,5 +99,21 @@ public class Pig extends Enemy {
         changeAction(IDLE);
     }
 
+    protected int checkMirrorWidth() {
+        if (runDirection == RIGHT) {
+            return -1;
+        } else {
+            return 1;
+        }
 
+    }
+
+    protected int checkMirrorX() {
+        if (runDirection == RIGHT) {
+            return width;
+        } else {
+            return 0;
+        }
+    }
 }
+
