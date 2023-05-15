@@ -35,7 +35,7 @@ public abstract class Enemy extends Entity{
 
 
     protected void facePlayer(Player player) {
-        
+
         // Enemy ... Player
         if (player.hitbox.x > hitbox.x) {
             runDirection = RIGHT;
@@ -59,6 +59,7 @@ public abstract class Enemy extends Entity{
     }
 
     protected boolean isPlayerInRange(Player player) {
+
         int EnemyPlayerDistance = (int) Math.abs(hitbox.x - player.hitbox.x);
         if (EnemyPlayerDistance <= seePlayerRange) {
             return true;
