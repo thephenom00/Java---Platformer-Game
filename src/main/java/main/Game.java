@@ -22,8 +22,6 @@ public class Game implements Runnable {
     private Menu menu;
     private GameOver gameOver;
 
-    public boolean runThread = true;
-
 
     public Game(LoggerManager logger) {
         this.logger = logger;
@@ -96,7 +94,7 @@ public class Game implements Runnable {
         double deltaU = 0;
         double deltaF = 0;
 
-        while (runThread) {
+        while (true) {
             long currentTime = System.nanoTime();
             long timeAfterOneLoop = currentTime - previousTime;
 
@@ -126,9 +124,6 @@ public class Game implements Runnable {
                 updates = 0;
             }
 
-            if (Gamestate.state == Gamestate.GAMEOVER) {
-                runThread = false;
-            }
 
         }
 

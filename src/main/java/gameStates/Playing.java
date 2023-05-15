@@ -61,7 +61,6 @@ public class Playing extends State implements StateInterface {
     public void resetGame() {
         player.resetPlayer();
         enemyManager.resetEnemyManager();
-        game.runThread = true;
     }
 
     @Override
@@ -83,8 +82,6 @@ public class Playing extends State implements StateInterface {
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.MENU;
                 logger.log("Switched to MENU state");
-            case KeyEvent.VK_M:
-                Gamestate.state = Gamestate.GAMEOVER;
         }
     }
 
