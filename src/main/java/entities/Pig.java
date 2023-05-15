@@ -81,8 +81,7 @@ public class Pig extends Enemy {
 
                 case ATTACK:
                     if (aniIndex == 3 && isPlayerInAttackRange(player)) {
-                        player.subtractLife();
-                        changeAction(IDLE);
+                        playerGetHit(player);
                         break;
                     }
 
@@ -94,6 +93,13 @@ public class Pig extends Enemy {
 
     protected boolean isPlayerInAttackRange(Player player) {
         return attackBox.intersects(player.getHitBox());
+    }
+
+    protected void playerGetHit(Player player) {
+        player.getHit(true);
+        player.subtractLife();
+        player.setLeft(true);
+        changeAction(IDLE);
     }
 
 

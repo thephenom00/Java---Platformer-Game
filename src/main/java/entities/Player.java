@@ -17,7 +17,7 @@ public class Player extends Entity{
     private BufferedImage[][] animations;
     private int aniTick, aniIndex, aniSpeed = 25;
     private int playerAction = IDLE;
-    private boolean moving = false, attacking = false;
+    private boolean moving = false, attacking = false, getHit = false;
     private boolean up, left, right, down, jump;
     private float playerSpeed = 1.0f * SCALE;
     private int[][] lvlData;
@@ -88,7 +88,7 @@ public class Player extends Entity{
 
         // Draw hitboxes
 //        drawHitbox(g);
-//        drawJumpBox(g);
+        drawJumpBox(g);
 
         drawLives(g);
         drawCoins(g);
@@ -120,21 +120,8 @@ public class Player extends Entity{
 
 
     private void updateJumpBox() {
-        if (left) {
-            jumpBox.x = hitbox.x + hitbox.width;
-            jumpBox.y = hitbox.y + hitbox.height;
-        }
-
-        if (right || inAir) {
-            jumpBox.x = hitbox.x;
-            jumpBox.y = hitbox.y + hitbox.height;
-        }
-
-        if (mirrorWidth == -1) {
-            jumpBox.x = hitbox.x + hitbox.width;
-            jumpBox.y = hitbox.y + hitbox.height;
-        }
-
+        jumpBox.x = hitbox.x;
+        jumpBox.y = hitbox.y + hitbox.height;
     }
 
     public void createJumpBox(float x, float y, float width, float height) {
@@ -170,6 +157,10 @@ public class Player extends Entity{
 
         if (attacking) {
             playerAction = ATTACK;
+        }
+
+        if (getHit) {
+            playerAction = HIT;
         }
 
 
@@ -286,6 +277,7 @@ public class Player extends Entity{
             if (aniIndex >= GetSpriteAmount(playerAction)) {
                 aniIndex = 0;
                 attacking = false;
+                getHit = false;
             }
         }
     }
@@ -326,6 +318,10 @@ public class Player extends Entity{
 
     public void setAttack(boolean attacking) {
         this.attacking = attacking;
+    }
+
+    public void getHit(boolean getHit) {
+        this.getHit = getHit;
     }
 
 
