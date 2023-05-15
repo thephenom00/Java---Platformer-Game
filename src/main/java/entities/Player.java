@@ -41,7 +41,7 @@ public class Player extends Entity{
     private int mirrorWidth = 1;
 
     // GUI
-    private int lives = 0;
+    private int lives = 3;
     private int coins = 0;
 
     public Player(float x, float y, int width, int height, Playing playing) {
@@ -70,17 +70,31 @@ public class Player extends Entity{
         // drawHitbox(g);
         drawJumpBox(g);
 
-        // Display lives text
-        Font font = new Font("Arial", Font.PLAIN,  20);
-        g.setFont(font);
-        g.setColor(Color.BLACK);
-        g.drawString("Lives: 3", 10, 20);
+        drawLives(g);
+        drawCoins(g);
+    }
 
-        // Display coins to collect
+    public void subtractLife() {
+        lives--;
+        if (lives == 0) {
+//            gameOver();
+        }
+    }
+
+    private void drawCoins(Graphics g) {
+        // Draws coins to collect
         Font coinsFont = new Font("Arial", Font.PLAIN, 16);
         g.setFont(coinsFont);
         g.setColor(Color.BLACK);
         g.drawString("Coins to Collect: " + coins, 10, 40);
+    }
+
+    private void drawLives(Graphics g) {
+        // Draws lives text
+        Font font = new Font("Arial", Font.PLAIN,  20);
+        g.setFont(font);
+        g.setColor(Color.BLACK);
+        g.drawString("Lives: " + lives, 10, 20);
     }
 
 

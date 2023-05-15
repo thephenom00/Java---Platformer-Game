@@ -11,10 +11,15 @@ import static utilz.Constants.EnemyConstants.*;
 public class Pig extends Enemy {
     private static final int PIG_HITBOX_WIDTH = 14;
     private static final int PIG_HITBOX_HEIGHT = 19;
+    private Rectangle2D.Float attackBox;
 
     public Pig(float x, float y) {
         super(x, y, PIG_WIDTH, PIG_HEIGHT, PIG);
         createHitbox(x, y, (int)(PIG_HITBOX_WIDTH * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
+        createAttackBox();
+    }
+
+    private void createAttackBox() {
     }
 
 
@@ -49,6 +54,7 @@ public class Pig extends Enemy {
 
                     if (isInAttackRange(player)) {
                         changeAction(ATTACK);
+                        player.subtractLife();
                     }
 
                     if (!canSeePlayer(lvlData, player)) {
