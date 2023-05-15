@@ -16,7 +16,7 @@ public abstract class Enemy extends Entity{
     protected boolean inAir;
     protected float fallSpeed;
     protected float gravity = 0.04f * SCALE;
-    protected float enemySpeed = 1f * SCALE;
+    protected float enemySpeed = 0.3f * SCALE;
     protected int runDirection = LEFT;
 
 
@@ -35,6 +35,7 @@ public abstract class Enemy extends Entity{
 
 
     protected void facePlayer(Player player) {
+        
         // Enemy ... Player
         if (player.hitbox.x > hitbox.x) {
             runDirection = RIGHT;
