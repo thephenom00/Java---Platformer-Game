@@ -29,7 +29,7 @@ public class EnemyManager {
 
     public void checkHit(Rectangle2D.Float jumpBox) {
         for (Pig onePig: pigs) {
-            if (jumpBox.intersects(onePig.getHitbox())) {
+            if (jumpBox.intersects(onePig.getHitbox()) && onePig.enemyAction != DEAD) {
                 onePig.dead();
                 playing.getPlayer().setAttack(true);
                 return;
