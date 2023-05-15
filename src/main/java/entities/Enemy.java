@@ -30,6 +30,9 @@ public abstract class Enemy extends Entity{
     protected float attackRange = TILES_SIZE;
     protected float seePlayerRange = TILES_SIZE * 5;
 
+    // Is Alive
+    protected boolean alive = true;
+
     public Enemy(float x, float y, int width, int height, int enemyType) {
         super(x, y, width, height);
         this.enemyType = enemyType;
@@ -141,6 +144,9 @@ public abstract class Enemy extends Entity{
                 if (enemyAction == ATTACK) {
                     enemyAction = IDLE;
                 }
+                if (enemyAction == DEAD) {
+                    alive = false;
+                }
             }
         }
     }
@@ -164,6 +170,10 @@ public abstract class Enemy extends Entity{
 
     public int getYPosition() {
         return yLevel;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 
 }

@@ -25,16 +25,20 @@ public class GameOver extends State implements StateInterface{
         g.setColor(new Color(0, 0, 0, 200));
         g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-//        g.setColor(Color.white);
-//        g.drawString("Game Over", GAME_WIDTH / 2, 150);
-//        g.drawString("Press esc to enter Main Menu!", GAME_WIDTH / 2, 300);
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 24));
-        String gameOverText = "Game Over!";
+        String gameOverText = "GAME OVER!";
         int textWidth = g.getFontMetrics().stringWidth(gameOverText);
         int x = (GAME_WIDTH - textWidth) / 2;
         int y = GAME_HEIGHT / 2;
         g.drawString(gameOverText, x, y);
+
+
+        String pressEscText = "Press ESC to get to MENU";
+        int pressEscTextWidth = g.getFontMetrics().stringWidth(pressEscText);
+        int x2 = (GAME_WIDTH - pressEscTextWidth) / 2;
+        int y2 = y + 50; // Adjust the vertical position as needed
+        g.drawString(pressEscText, x2, y2);
     }
 
     @Override

@@ -78,8 +78,9 @@ public class Pig extends Enemy {
                     if (!canSeePlayer(lvlData, player)) {
                         changeAction(IDLE);
                     }
-
                     break;
+                case ATTACK:
+
             }
 
         }

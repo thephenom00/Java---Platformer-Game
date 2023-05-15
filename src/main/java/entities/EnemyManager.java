@@ -24,14 +24,20 @@ public class EnemyManager {
     // Updates all pigs in our arraylist
     public void update(int[][] lvlData, Player player) {
         for (Pig onePig : pigs)
-            onePig.update(lvlData, player);
+            if (onePig.alive) {
+                onePig.update(lvlData, player);
+            }
+
     }
 
     public void checkHit(Rectangle2D.Float jumpBox) {
         for (Pig onePig: pigs) {
-            if (jumpBox.intersects(onePig.getHitbox()) && onePig.enemyAction != DEAD) {
-                onePig.dead();
-                playing.getPlayer().setAttack(true);
+            if (onePig.alive) {
+                if (jumpBox.intersects(onePig.getHitbox()) && onePig.enemyAction != DEAD) {
+                    onePig.dead();
+                    playing.getPlayer().setAttack(true);
+                    return;
+                }
             }
         }
 
@@ -45,7 +51,7 @@ public class EnemyManager {
     public void draw(Graphics g) {
         drawPigs(g);
 //        drawHitbox(g);
-        drawAttackBox(g);
+//        drawAttackBox(g);
     }
 
     // Saves all the Pigs from list into an array
@@ -59,11 +65,14 @@ public class EnemyManager {
 
     private void drawPigs(Graphics g) {
         for (Pig onePig : pigs)
-            g.drawImage(pigArray[onePig.getEnemyAction()][onePig.getAniIndex()],
-                    (int) onePig.getHitbox().x - PIG_XOFFSET + onePig.mirrorX,
-                    (int) onePig.getHitbox().y - PIG_YOFFSET,
-                    PIG_WIDTH * onePig.mirrorWidth,
-                    PIG_HEIGHT, null);
+            if (onePig.alive) {
+                g.drawImage(pigArray[onePig.getEnemyAction()][onePig.getAniIndex()],
+                        (int) onePig.getHitbox().x - PIG_XOFFSET + onePig.mirrorX,
+                        (int) onePig.getHitbox().y - PIG_YOFFSET,
+                        PIG_WIDTH * onePig.mirrorWidth,
+                        PIG_HEIGHT, null);
+            }
+
     }
 
     private void drawHitbox(Graphics g) {
@@ -73,7 +82,10 @@ public class EnemyManager {
 
     private void drawAttackBox(Graphics g) {
         for (Pig onePig : pigs)
-            onePig.drawAttackBox(g);
+            if (onePig.alive) {
+                onePig.drawAttackBox(g);
+            }
+
     }
 
     public ArrayList<Pig> getPigs() {
