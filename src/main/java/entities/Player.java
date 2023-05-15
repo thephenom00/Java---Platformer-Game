@@ -89,7 +89,7 @@ public class Player extends Entity{
 
         // Draw hitboxes
 //        drawHitbox(g);
-        drawJumpBox(g);
+//        drawJumpBox(g);
 
         drawLives(g);
         drawCoins(g);
@@ -336,6 +336,7 @@ public class Player extends Entity{
         resetDirBooleans();
         resetInAir();
         resetAniTick();
+        dead = false;
         moving = false;
         attacking = false;
         getHit = false;

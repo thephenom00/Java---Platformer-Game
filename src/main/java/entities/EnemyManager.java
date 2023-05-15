@@ -8,15 +8,13 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import static utilz.Constants.Directions.*;
 import static utilz.Constants.EnemyConstants.*;
 
 public class EnemyManager {
-    private Playing playing;
+    private final Playing playing;
     private BufferedImage[][] pigArray;
     private ArrayList<Pig> pigs = new ArrayList<>();
-    protected int mirrorX = 0;
-    protected int mirrorWidth = 1;
+
 
     public EnemyManager(Playing playing) {
         this.playing = playing;
@@ -54,7 +52,7 @@ public class EnemyManager {
     public void draw(Graphics g) {
         drawPigs(g);
 //        drawHitbox(g);
-        drawAttackBox(g);
+//        drawAttackBox(g);
     }
 
     // Saves all the Pigs from list into an array

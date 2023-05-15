@@ -9,7 +9,7 @@ import main.GamePanel;
 
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
-    private GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public MouseInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -29,18 +29,10 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         switch (Gamestate.state) {
-            case MENU:
-                gamePanel.getGame().getMenu().mouseClicked(e);
-                break;
-            case PLAYING:
-                gamePanel.getGame().getPlaying().mouseClicked(e);
-                break;
-            case GAMEOVER:
-                gamePanel.getGame().getGameOver().mouseClicked(e);
-                break;
-            default:
-                break;
-
+            case MENU -> gamePanel.getGame().getMenu().mouseClicked(e);
+            case PLAYING -> gamePanel.getGame().getPlaying().mouseClicked(e);
+            case GAMEOVER -> gamePanel.getGame().getGameOver().mouseClicked(e);
+            default -> {}
         }
 
     }

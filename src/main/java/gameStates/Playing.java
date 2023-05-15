@@ -19,7 +19,7 @@ public class Playing extends State implements StateInterface {
     private LevelManager levelManager;
     private EnemyManager enemyManager;
 
-    private BufferedImage background;
+    private final BufferedImage background;
     private LoggerManager logger;
     private static int[][] levelData;
 
@@ -27,11 +27,11 @@ public class Playing extends State implements StateInterface {
     public Playing(Game game, LoggerManager logger) {
         super(game);
         this.logger = logger;
-        initClasses();
+        initializeClasses();
         background = LoadSave.GetSpriteAtlas(LoadSave.BACKGROUND);
     }
 
-    private void initClasses() {
+    private void initializeClasses() {
         levelManager = new LevelManager(game);
         enemyManager = new EnemyManager(this);
         player = new Player(200, 200, (int) (78 * SCALE), (int) (58 * SCALE), this);
@@ -61,12 +61,11 @@ public class Playing extends State implements StateInterface {
     public void resetGame() {
         player.resetPlayer();
         enemyManager.resetEnemyManager();
+        game.runThread = true;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1)
-            player.setAttack(true);
     }
 
     @Override
@@ -92,15 +91,9 @@ public class Playing extends State implements StateInterface {
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_A:
-                player.setLeft(false);
-                break;
-            case KeyEvent.VK_D:
-                player.setRight(false);
-                break;
-            case KeyEvent.VK_SPACE:
-                player.setJump(false);
-                break;
+            case KeyEvent.VK_A -> player.setLeft(false);
+            case KeyEvent.VK_D -> player.setRight(false);
+            case KeyEvent.VK_SPACE -> player.setJump(false);
         }
 
     }

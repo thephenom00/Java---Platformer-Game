@@ -11,8 +11,8 @@ import utilz.LoggerManager;
 
 public class Game implements Runnable {
 
-    private GameWindow gameWindow;
-    private GamePanel gamePanel;
+    private final GameWindow gameWindow;
+    private final GamePanel gamePanel;
     private Thread gameThread;
     private final int FPS = 120;
     private final int UPS = 200;
@@ -22,6 +22,8 @@ public class Game implements Runnable {
     private Menu menu;
     private GameOver gameOver;
 
+    public boolean runThread = true;
+
 
     public Game(LoggerManager logger) {
         this.logger = logger;
@@ -29,6 +31,7 @@ public class Game implements Runnable {
 
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
+        gamePanel.setFocusable(true);
         gamePanel.requestFocus();
 
         startGameLoop();
@@ -66,18 +69,12 @@ public class Game implements Runnable {
 
     public void render(Graphics g) {
         switch (Gamestate.state) {
-            case MENU:
-                menu.draw(g);
-                break;
-            case PLAYING:
-                playing.draw(g);
-                break;
-            case GAMEOVER:
-                gameOver.draw(g);
-                break;
-            default:
-                break;
+            case MENU -> menu.draw(g);
+            case PLAYING -> playing.draw(g);
+            case GAMEOVER -> gameOver.draw(g);
+            default -> {}
         }
+
     }
 
 
@@ -99,7 +96,7 @@ public class Game implements Runnable {
         double deltaU = 0;
         double deltaF = 0;
 
-        while (true) {
+        while (runThread) {
             long currentTime = System.nanoTime();
             long timeAfterOneLoop = currentTime - previousTime;
 
@@ -127,6 +124,10 @@ public class Game implements Runnable {
                 logger.log("FPS: " + frames + " | UPS: " + updates);
                 frames = 0;
                 updates = 0;
+            }
+
+            if (Gamestate.state == Gamestate.GAMEOVER) {
+                runThread = false;
             }
 
         }
