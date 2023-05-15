@@ -16,17 +16,35 @@ public class Pig extends Enemy {
     public Pig(float x, float y) {
         super(x, y, PIG_WIDTH, PIG_HEIGHT, PIG);
         createHitbox(x, y, (int)(PIG_HITBOX_WIDTH * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
-        createAttackBox();
+        createAttackBox(x, y, (int)(10 * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
     }
-
-    private void createAttackBox() {
-    }
-
 
     public void update(int[][] lvlData, Player player) {
         updateMovement(lvlData, player);
         updateAnimationTick();
+        updateAttackBox();
     }
+
+    private void createAttackBox(float x, float y, float width, float height) {
+        attackBox = new Rectangle2D.Float(x, y, width, height);
+    }
+
+    protected void drawAttackBox(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.drawRect((int) attackBox.x, (int) attackBox.y, (int) attackBox.width, (int) attackBox.height);
+    }
+
+    protected void updateAttackBox() {
+        if (runDirection == RIGHT) {
+            attackBox.x = hitbox.x + hitbox.width;
+        } else if (runDirection == LEFT) {
+            attackBox.x = hitbox.x - attackBox.width;
+        }
+        attackBox.y = hitbox.y;
+    }
+
+
+
 
     public void dead() {
         changeAction(DEAD);
@@ -52,7 +70,7 @@ public class Pig extends Enemy {
                 case RUNNING:
                     running(lvlData, player);
 
-                    if (isInAttackRange(player)) {
+                    if (attackBox.intersects(player.getHitBox())) {
                         changeAction(ATTACK);
                         player.subtractLife();
                     }

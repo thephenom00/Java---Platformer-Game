@@ -44,7 +44,8 @@ public class EnemyManager {
 
     public void draw(Graphics g) {
         drawPigs(g);
-        drawHitbox(g);
+//        drawHitbox(g);
+//        drawAttackBox(g);
     }
 
     // Saves all the Pigs from list into an array
@@ -68,6 +69,11 @@ public class EnemyManager {
     private void drawHitbox(Graphics g) {
         for (Pig onePig : pigs)
             onePig.drawHitbox(g);
+    }
+
+    private void drawAttackBox(Graphics g) {
+        for (Pig onePig : pigs)
+            onePig.drawAttackBox(g);
     }
 
     public ArrayList<Pig> getPigs() {

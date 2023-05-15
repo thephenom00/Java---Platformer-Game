@@ -4,6 +4,7 @@ import static utilz.Physics.CanMoveHere;
 import static utilz.Physics.*;
 
 import gameStates.Playing;
+import main.Game;
 import utilz.LoadSave;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -37,8 +38,8 @@ public class Player extends Entity{
     private Rectangle2D.Float jumpBox;
 
     // Mirror the player
-    private int mirrorX = 0;
-    private int mirrorWidth = 1;
+    private int flipX = 0;
+    private int flipW = 1;
 
     // GUI
     private int lives = 3;
@@ -55,8 +56,9 @@ public class Player extends Entity{
     public void update() {
         updatePosition();
         updateAnimationTick();
-        setAnimation();
         updateJumpBox();
+
+        setAnimation();
 
         checkHit();
 
@@ -64,11 +66,16 @@ public class Player extends Entity{
 
     public void draw(Graphics g) {
         // Draw the player
-        g.drawImage(animations[playerAction][aniIndex], (int) (hitbox.x - xDrawOffset) + mirrorX, (int) (hitbox.y - yDrawOffset), width * mirrorWidth, height, null);
+        g.drawImage(animations[playerAction][aniIndex],
+                (int) (hitbox.x - xDrawOffset) + flipX,
+                (int) (hitbox.y - yDrawOffset),
+                width * flipW,
+                height,
+                null);
 
         // Draw hitboxes
-        // drawHitbox(g);
-        drawJumpBox(g);
+//        drawHitbox(g);
+//        drawJumpBox(g);
 
         drawLives(g);
         drawCoins(g);
@@ -109,7 +116,7 @@ public class Player extends Entity{
             jumpBox.y = hitbox.y + hitbox.height;
         }
 
-        if (mirrorWidth == -1) {
+        if (flipW == -1) {
             jumpBox.x = hitbox.x + hitbox.width;
             jumpBox.y = hitbox.y + hitbox.height;
         }
@@ -182,14 +189,10 @@ public class Player extends Entity{
         // If right or left is clicked, speed is added
         if (left) {
             xSpeed -= playerSpeed;
-            mirrorX = width;
-            mirrorWidth = -1;
         }
 
         if (right) {
             xSpeed += playerSpeed;
-            mirrorX = 0;
-            mirrorWidth = 1;
         }
 
 
@@ -247,7 +250,7 @@ public class Player extends Entity{
         } else {
             // If player collides with wall
 
-//            hitbox.x = GetEntityXPosNextToWall(hitbox, xSpeed);
+            hitbox.x = GetEntityXPosNextToWall(hitbox, xSpeed);
 
         }
     }
@@ -341,6 +344,11 @@ public class Player extends Entity{
     public void setJump(boolean jump) {
         this.jump = jump;
     }
+
+    public Rectangle2D.Float getHitBox() {
+        return hitbox;
+    }
+
 
     public int getLives() {
         return lives;
