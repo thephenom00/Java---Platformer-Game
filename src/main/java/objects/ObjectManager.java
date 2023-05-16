@@ -28,12 +28,12 @@ public class ObjectManager {
 
     public void draw(Graphics g) {
         drawDiamonds(g);
-        drawDiamondHitbox(g);
     }
 
     private void drawDiamondHitbox(Graphics g) {
         for (Diamond oneDiamond: diamonds) {
-            oneDiamond.drawHitbox(g);
+            if(oneDiamond.isCollected == false)
+                oneDiamond.drawHitbox(g);
         }
     }
 
@@ -51,27 +51,34 @@ public class ObjectManager {
     }
 
 
-    public void update(int[][] lvlData, Player player) {
+    public void update() {
         for (Diamond oneDiamond : diamonds)
-            oneDiamond.update(lvlData, player);
+            if(oneDiamond.isCollected == false)
+                oneDiamond.update();
     }
 
     public void drawDiamonds(Graphics g) {
         for (Diamond oneDiamond : diamonds) {
-            g.drawImage(diamondArray[0][oneDiamond.getObjectIndex()],
-                    (int) oneDiamond.hitbox.x - Diamond.DIAMOND_XOFFSET,
-                    (int) oneDiamond.hitbox.y - Diamond.DIAMOND_YOFFSET + 10,
-                    DIAMOND_WIDTH,
-                    DIAMOND_HEIGHT,
-                    null);
+            if(oneDiamond.isCollected == false) {
+                g.drawImage(diamondArray[0][oneDiamond.getObjectIndex()],
+                        (int) oneDiamond.hitbox.x - Diamond.DIAMOND_XOFFSET,
+                        (int) oneDiamond.hitbox.y - Diamond.DIAMOND_YOFFSET + 10,
+                        DIAMOND_WIDTH,
+                        DIAMOND_HEIGHT,
+                        null);
+            }
+
         }
     }
 
     public void checkDiamondCollected(Rectangle2D.Float playerHitbox) {
         for (Diamond oneDiamond : diamonds) {
             if (playerHitbox.intersects(oneDiamond.hitbox)) {
-                System.out.println("touched");
+                oneDiamond.isCollected = true;
+                numberOfDiamondsToTake--;
             }
         }
     }
-    }
+
+}
+

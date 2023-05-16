@@ -46,7 +46,7 @@ public class Playing extends State implements StateInterface {
         levelManager.update();
         player.update();
         enemyManager.update(levelManager.getCurrentLevel().getLevelData(), player);
-        objectManager.update(levelManager.getCurrentLevel().getLevelData(), player);
+        objectManager.update();
     }
 
 
