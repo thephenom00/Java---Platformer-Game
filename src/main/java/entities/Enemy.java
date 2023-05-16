@@ -29,7 +29,6 @@ public abstract class Enemy extends Entity{
     // Range
     protected int yLevel;
     protected int playerYLevel;
-    protected float attackRange = TILES_SIZE;
     protected float seePlayerRange = TILES_SIZE * 5;
 
     // Is Alive

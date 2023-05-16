@@ -15,27 +15,44 @@ import static utilz.Constants.EnemyConstants.*;
 public class Pig extends Enemy {
     private static final int PIG_HITBOX_WIDTH = 14;
     private static final int PIG_HITBOX_HEIGHT = 19;
-    private Rectangle2D.Float attackBox;
+    protected Rectangle2D.Float attackBox;
+    protected Rectangle2D.Float topHitbox;
 
     public Pig (float x, float y) {
         super(x, y, PIG_WIDTH, PIG_HEIGHT, PIG);
         createHitbox(x, y, (int)(PIG_HITBOX_WIDTH * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
         createAttackBox(x, y, (int)(10 * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
+        createTopHitbox(x, y, (int)(PIG_HITBOX_WIDTH * SCALE), (int) 3 * SCALE);
     }
 
     public void update(int[][] lvlData, Player player) {
         updateMovement(lvlData, player);
         updateAnimationTick();
         updateAttackBox();
+        updateTopHitbox();
     }
 
     private void createAttackBox(float x, float y, float width, float height) {
         attackBox = new Rectangle2D.Float(x, y, width, height);
     }
 
+    private void createTopHitbox(float x, float y, float width, float one) {
+        topHitbox = new Rectangle2D.Float(x, y, width, one);
+    }
+
     protected void drawAttackBox(Graphics g) {
         g.setColor(Color.BLACK);
         g.drawRect((int) attackBox.x, (int) attackBox.y, (int) attackBox.width, (int) attackBox.height);
+    }
+
+    protected void drawTopHitbox(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.drawRect((int) topHitbox.x, (int) topHitbox.y, (int) topHitbox.width, (int) topHitbox.height);
+    }
+
+    protected void updateTopHitbox() {
+        topHitbox.x = hitbox.x;
+        topHitbox.y = hitbox.y;
     }
 
     protected void updateAttackBox() {

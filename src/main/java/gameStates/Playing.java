@@ -62,6 +62,12 @@ public class Playing extends State implements StateInterface {
         objectManager.draw(g);
     }
 
+    public boolean checkPlayerTouchesEnemy() {
+        if (enemyManager.touchPlayer(player.getHitbox()))
+            return true;
+        return false;
+    }
+
     public void checkWin () {
         if (enemyManager.numberOfPigsAlive == 0 && objectManager.numberOfDiamondsToTake == 0) {
             Gamestate.state = Gamestate.WIN;

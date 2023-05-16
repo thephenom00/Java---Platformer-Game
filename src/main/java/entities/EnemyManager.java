@@ -31,10 +31,19 @@ public class EnemyManager {
             }
     }
 
+    public boolean touchPlayer(Rectangle2D.Float playerHitbox) {
+        for (Pig onePig : pigs)
+            if (onePig.alive && onePig.hitbox.intersects(playerHitbox) && onePig.enemyAction != DEAD) {
+                return true;
+
+            }
+        return false;
+    }
+
     public void checkHit(Rectangle2D.Float jumpBox) {
         for (Pig onePig: pigs) {
             if (onePig.alive) {
-                if (jumpBox.intersects(onePig.getHitbox()) && onePig.enemyAction != DEAD) {
+                if (jumpBox.intersects(onePig.topHitbox) && onePig.enemyAction != DEAD) {
                     onePig.changeAction(DEAD);
                     playing.getPlayer().setAttack(true);
                     return;
@@ -54,6 +63,13 @@ public class EnemyManager {
         drawPigs(g);
 //        drawHitbox(g);
 //        drawAttackBox(g);
+        drawTopHitbox(g);
+    }
+
+    private void drawTopHitbox(Graphics g) {
+        for (Pig onePig : pigs)
+            if (onePig.alive)
+                onePig.drawTopHitbox(g);
     }
 
     // Saves all the Pigs from list into an array

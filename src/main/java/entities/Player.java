@@ -68,6 +68,18 @@ public class Player extends Entity{
         checkDiamondCollected();
         checkHeartCollected();
 
+        checkTouchingEnemy();
+    }
+
+    private void checkTouchingEnemy() {
+        if (playing.checkPlayerTouchesEnemy() == true){
+            if(left) {
+                left = false;
+            } else if (right) {
+                right = false;
+            }
+        }
+
     }
 
     public void draw(Graphics g) {
@@ -91,7 +103,7 @@ public class Player extends Entity{
 
         // Draw hitboxes
 //        drawHitbox(g);
-//        drawJumpBox(g);
+        drawJumpBox(g);
 
         drawLives(g);
         drawCoins(g);
