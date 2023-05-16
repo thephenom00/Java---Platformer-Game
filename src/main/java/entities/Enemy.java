@@ -140,9 +140,6 @@ public abstract class Enemy extends Entity{
                 if (enemyAction == DEAD) {
                     alive = false;
                     EnemyManager.subtractPigFromArray();
-                    if (EnemyManager.numberOfPigsAlive == 0) {
-                        Gamestate.state = Gamestate.WIN;
-                    }
                 }
             }
         }

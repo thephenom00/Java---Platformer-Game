@@ -47,6 +47,8 @@ public class Playing extends State implements StateInterface {
         player.update();
         enemyManager.update(levelManager.getCurrentLevel().getLevelData(), player);
         objectManager.update();
+
+        checkWin();
     }
 
 
@@ -57,6 +59,12 @@ public class Playing extends State implements StateInterface {
         player.draw(g);
         enemyManager.draw(g);
         objectManager.draw(g);
+    }
+
+    public void checkWin () {
+        if (enemyManager.numberOfPigsAlive == 0 && objectManager.numberOfDiamondsToTake == 0) {
+            Gamestate.state = Gamestate.WIN;
+        }
     }
 
     public void checkHit(Rectangle2D.Float jumpBox) {
@@ -70,7 +78,7 @@ public class Playing extends State implements StateInterface {
     public void resetGame() {
         player.resetPlayer();
         enemyManager.resetEnemyManager();
-//        objectManager.reset();
+        objectManager.resetObjects();
     }
 
     @Override
@@ -83,7 +91,6 @@ public class Playing extends State implements StateInterface {
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> player.setLeft(true);
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> player.setRight(true);
             case KeyEvent.VK_SPACE -> player.setJump(true);
-            case KeyEvent.VK_P -> Gamestate.state = Gamestate.WIN;
             case KeyEvent.VK_ESCAPE -> {
                 Gamestate.state = Gamestate.MENU;
                 logger.log("Switched to MENU state");
@@ -125,5 +132,7 @@ public class Playing extends State implements StateInterface {
         return player;
     }
 
-
+    public ObjectManager getObjectManager() {
+        return objectManager;
+    }
 }

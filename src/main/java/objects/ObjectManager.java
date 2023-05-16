@@ -18,7 +18,7 @@ public class ObjectManager {
     private Playing playing;
     private BufferedImage[][] diamondArray;
     private static ArrayList<Diamond> diamonds = new ArrayList<>();
-    public static int numberOfDiamondsToTake;
+    public int numberOfDiamondsToTake;
 
     public ObjectManager (Playing playing) {
         this.playing = playing;
@@ -73,11 +73,18 @@ public class ObjectManager {
 
     public void checkDiamondCollected(Rectangle2D.Float playerHitbox) {
         for (Diamond oneDiamond : diamonds) {
-            if (playerHitbox.intersects(oneDiamond.hitbox)) {
+            if (playerHitbox.intersects(oneDiamond.hitbox) && !oneDiamond.isCollected) {
                 oneDiamond.isCollected = true;
                 numberOfDiamondsToTake--;
             }
         }
+    }
+
+    public void resetObjects() {
+        for (Diamond oneDiamond : diamonds) {
+            oneDiamond.isCollected = false;
+        }
+        numberOfDiamondsToTake = diamonds.size();
     }
 
 }

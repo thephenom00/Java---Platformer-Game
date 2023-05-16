@@ -47,7 +47,7 @@ public class Player extends Entity{
 
     // GUI
     private int lives = 3;
-    private int coins = 0;
+    private int diamonds;
 
     public Player(float x, float y, int width, int height, Playing playing) {
         super(x, y, width, height);
@@ -105,7 +105,7 @@ public class Player extends Entity{
         Font coinsFont = new Font("Arial", Font.PLAIN, 16);
         g.setFont(coinsFont);
         g.setColor(Color.BLACK);
-        g.drawString("Coins to Collect: " + coins, 10, 40);
+        g.drawString("Diamonds to Collect: " + diamonds, 10, 40);
     }
 
     private void drawLives(Graphics g) {
@@ -137,6 +137,7 @@ public class Player extends Entity{
 
     private void checkDiamondCollected() {
         playing.checkDiamondCollected(hitbox);
+        diamonds = playing.getObjectManager().numberOfDiamondsToTake;
     }
 
 
@@ -387,8 +388,8 @@ public class Player extends Entity{
         return lives;
     }
 
-    public int getCoins() {
-        return coins;
+    public int getDiamonds() {
+        return diamonds;
     }
 
 }
