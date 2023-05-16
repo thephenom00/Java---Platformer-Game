@@ -11,6 +11,23 @@ public class Constants {
         public static final int DOWN = 3;
     }
 
+    public static class ObjectConstants {
+        public static final int DIAMOND = 10;
+
+        public static final int DIAMOND_WIDTH_DEFAULT = 18;
+        public static final int DIAMOND_HEIGHT_DEFAULT = 14;
+
+        public static final int DIAMOND_WIDTH = (int)(18 * SCALE);
+        public static final int DIAMOND_HEIGHT = (int)(14 * SCALE);
+
+        public static int GetSpriteAmount(int objectType) {
+            switch(objectType) {
+                case DIAMOND: return 10;
+            }
+            return 0;
+        }
+    }
+
     public static class EnemyConstants {
         public static final int PIG = 0;
         public static final int IDLE = 0;

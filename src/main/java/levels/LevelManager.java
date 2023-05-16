@@ -17,12 +17,12 @@ public class LevelManager {
 
     public LevelManager(Game game) {
         this.game = game;
-        importOutsideSprites();
+        importLevelSprites();
         levelOne = new Level(LoadSave.GetLevelData());
     }
 
     // Iterates through the img with all tiles and splits it into each tile
-    private void importOutsideSprites() {
+    private void importLevelSprites() {
         BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.LEVEL_ATLAS);
         levelSprite = new BufferedImage[40];
         for (int j = 0; j<4; j++) { // j = y

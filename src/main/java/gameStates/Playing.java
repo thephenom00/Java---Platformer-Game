@@ -10,6 +10,7 @@ import entities.EnemyManager;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
+import objects.ObjectManager;
 import utilz.LoadSave;
 import utilz.LoggerManager;
 import static utilz.Size.*;
@@ -18,6 +19,7 @@ public class Playing extends State implements StateInterface {
     private Player player;
     private LevelManager levelManager;
     private EnemyManager enemyManager;
+    private ObjectManager objectManager;
 
     private final BufferedImage background;
     private LoggerManager logger;
@@ -34,6 +36,7 @@ public class Playing extends State implements StateInterface {
     private void initializeClasses() {
         levelManager = new LevelManager(game);
         enemyManager = new EnemyManager(this);
+        objectManager = new ObjectManager(this);
         player = new Player(200, 200, (int) (78 * SCALE), (int) (58 * SCALE), this);
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
     }
@@ -43,6 +46,7 @@ public class Playing extends State implements StateInterface {
         levelManager.update();
         player.update();
         enemyManager.update(levelManager.getCurrentLevel().getLevelData(), player);
+        objectManager.update(levelManager.getCurrentLevel().getLevelData(), player);
     }
 
 
@@ -52,6 +56,7 @@ public class Playing extends State implements StateInterface {
         levelManager.draw(g);
         player.draw(g);
         enemyManager.draw(g);
+        objectManager.draw(g);
     }
 
     public void checkHit(Rectangle2D.Float jumpBox) {
@@ -61,6 +66,7 @@ public class Playing extends State implements StateInterface {
     public void resetGame() {
         player.resetPlayer();
         enemyManager.resetEnemyManager();
+//        objectManager.reset();
     }
 
     @Override

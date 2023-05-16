@@ -1,6 +1,5 @@
 package entities;
 
-import gameStates.Gamestate;
 import gameStates.Playing;
 import utilz.LoadSave;
 
@@ -20,7 +19,7 @@ public class EnemyManager {
 
     public EnemyManager(Playing playing) {
         this.playing = playing;
-        loadEnemyImgs();
+        loadPigSprites();
         getPigsFromPng();
     }
 
@@ -58,7 +57,7 @@ public class EnemyManager {
     }
 
     // Saves all the Pigs from list into an array
-    private void loadEnemyImgs() {
+    private void loadPigSprites() {
         pigArray = new BufferedImage[8][12];
         BufferedImage pigSprite = LoadSave.GetSpriteAtlas(LoadSave.PIG_SPRITE);
         for (int j = 0; j < pigArray.length; j++)
@@ -103,12 +102,6 @@ public class EnemyManager {
         return pigs;
     }
 
-
-    private void checkPigsAlive() {
-//        if (numberOfPigsAlive == 0) {
-//            Gamestate.state = Gamestate.WIN;
-//        }
-    }
 
     public static void subtractPigFromArray() {
         numberOfPigsAlive--;
