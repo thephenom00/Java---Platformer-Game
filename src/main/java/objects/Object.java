@@ -16,6 +16,7 @@ public abstract class Object {
     // Animations
     protected int aniTick, aniSpeed = 25;
     protected int aniIndex, objectType;
+    public boolean isCollected = false;
 
     // Passes variables from Player
     public Object (float x, float y, int width, int height, int objectType) {

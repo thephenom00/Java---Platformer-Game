@@ -12,6 +12,15 @@ public class Constants {
     }
 
     public static class ObjectConstants {
+        // HEART
+        public static final int HEART = 20;
+        public static final int HEART_WIDTH_DEFAULT = 18;
+        public static final int HEART_HEIGHT_DEFAULT = 14;
+
+        public static final int HEART_WIDTH = (int)(18 * SCALE);
+        public static final int HEART_HEIGHT = (int)(14 * SCALE);
+
+        // DIAMOND
         public static final int DIAMOND = 10;
 
         public static final int DIAMOND_WIDTH_DEFAULT = 18;
@@ -23,6 +32,7 @@ public class Constants {
         public static int GetSpriteAmount(int objectType) {
             switch(objectType) {
                 case DIAMOND: return 10;
+                case HEART: return 8;
             }
             return 0;
         }

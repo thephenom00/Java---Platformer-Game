@@ -16,31 +16,58 @@ import static utilz.Constants.ObjectConstants.*;
 
 public class ObjectManager {
     private Playing playing;
+
+    //Diamonds
     private BufferedImage[][] diamondArray;
     private static ArrayList<Diamond> diamonds = new ArrayList<>();
     public int numberOfDiamondsToTake;
 
+    // Hearts
+    private BufferedImage[][] heartArray;
+    private static ArrayList<Heart> hearts = new ArrayList<>();
+
     public ObjectManager (Playing playing) {
         this.playing = playing;
+
+        //Hearts
+        loadHeartsImg();
+        getHeartsFromPng();
+
+        // Diamonds
         loadDiamondImg();
         getDiamondsFromPng();
     }
 
     public void draw(Graphics g) {
         drawDiamonds(g);
+        drawHearts(g);
     }
 
-    private void drawDiamondHitbox(Graphics g) {
-        for (Diamond oneDiamond: diamonds) {
-            if(oneDiamond.isCollected == false)
-                oneDiamond.drawHitbox(g);
+    public void update() {
+        for (Heart oneHeart : hearts) {
+            if(oneHeart.isCollected == false)
+                oneHeart.update();
         }
+
+        for (Diamond oneDiamond : diamonds)
+            if(oneDiamond.isCollected == false)
+                oneDiamond.update();
     }
 
+    private void getHeartsFromPng() {
+        hearts = LoadSave.GetHearts();
+    }
 
     private void getDiamondsFromPng() {
         diamonds = LoadSave.GetDiamonds();
         numberOfDiamondsToTake = diamonds.size();
+    }
+
+    private void loadHeartsImg() {
+        heartArray = new BufferedImage[1][8];
+        BufferedImage heartSprite = LoadSave.GetSpriteAtlas(LoadSave.HEART_SPRITE);
+        for (int i = 0; i < heartArray[0].length; i++)
+            heartArray[0][i] = heartSprite.getSubimage(i * HEART_WIDTH_DEFAULT, 0, HEART_WIDTH_DEFAULT, HEART_HEIGHT_DEFAULT);
     }
 
     private void loadDiamondImg() {
@@ -50,11 +77,18 @@ public class ObjectManager {
             diamondArray[0][i] = diamondSprite.getSubimage(i * DIAMOND_WIDTH_DEFAULT, 0, DIAMOND_WIDTH_DEFAULT, DIAMOND_HEIGHT_DEFAULT);
     }
 
+    private void drawHearts(Graphics g) {
+        for (Heart oneHeart : hearts) {
+            if(oneHeart.isCollected == false) {
+                g.drawImage(heartArray[0][oneHeart.getObjectIndex()],
+                        (int) oneHeart.hitbox.x - Heart.HEART_XOFFSET,
+                        (int) oneHeart.hitbox.y - Heart.HEART_YOFFSET + 10,
+                        HEART_WIDTH,
+                        HEART_HEIGHT,
+                        null);
+            }
 
-    public void update() {
-        for (Diamond oneDiamond : diamonds)
-            if(oneDiamond.isCollected == false)
-                oneDiamond.update();
+        }
     }
 
     public void drawDiamonds(Graphics g) {
@@ -70,6 +104,21 @@ public class ObjectManager {
 
         }
     }
+
+
+    private void drawDiamondHitbox(Graphics g) {
+        for (Diamond oneDiamond: diamonds) {
+            if(oneDiamond.isCollected == false)
+                oneDiamond.drawHitbox(g);
+        }
+    }
+
+
+
+
+
+
+
 
     public void checkDiamondCollected(Rectangle2D.Float playerHitbox) {
         for (Diamond oneDiamond : diamonds) {

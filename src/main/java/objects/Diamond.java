@@ -10,7 +10,7 @@ public class Diamond extends Object{
     private static final int DIAMOND_HITBOX_HEIGHT = 10;
     public static final int DIAMOND_XOFFSET = 7;
     public static final int DIAMOND_YOFFSET = 3;
-    public boolean isCollected = false;
+
 
     public Diamond(float x, float y) {
         super(x, y, DIAMOND_WIDTH, DIAMOND_HEIGHT, DIAMOND);
@@ -21,9 +21,6 @@ public class Diamond extends Object{
         updateAnimationTick();
     }
 
-    public void setIsCollected(boolean boo) {
-        this.isCollected = boo;
-    }
 
 
 
