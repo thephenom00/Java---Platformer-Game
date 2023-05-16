@@ -22,7 +22,7 @@ public class Pig extends Enemy {
         super(x, y, PIG_WIDTH, PIG_HEIGHT, PIG);
         createHitbox(x, y, (int)(PIG_HITBOX_WIDTH * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
         createAttackBox(x, y, (int)(10 * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
-        createTopHitbox(x, y, (int)(PIG_HITBOX_WIDTH * SCALE), (int) 3 * SCALE);
+        createTopHitbox(x, y, (int)(PIG_HITBOX_WIDTH * SCALE) - 10,  3 * SCALE);
     }
 
     public void update(int[][] lvlData, Player player) {
@@ -36,8 +36,8 @@ public class Pig extends Enemy {
         attackBox = new Rectangle2D.Float(x, y, width, height);
     }
 
-    private void createTopHitbox(float x, float y, float width, float one) {
-        topHitbox = new Rectangle2D.Float(x, y, width, one);
+    private void createTopHitbox(float x, float y, float width, float height) {
+        topHitbox = new Rectangle2D.Float(x + (hitbox.width - width) / 2, y, width, height);
     }
 
     protected void drawAttackBox(Graphics g) {
@@ -51,7 +51,7 @@ public class Pig extends Enemy {
     }
 
     protected void updateTopHitbox() {
-        topHitbox.x = hitbox.x;
+        topHitbox.x = hitbox.x + (hitbox.width - topHitbox.width) / 2;
         topHitbox.y = hitbox.y;
     }
 

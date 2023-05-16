@@ -74,8 +74,8 @@ public class Playing extends State implements StateInterface {
         }
     }
 
-    public void checkHit(Rectangle2D.Float jumpBox) {
-        enemyManager.checkHit(jumpBox);
+    public void checkJumpOnHead(Rectangle2D.Float jumpBox) {
+        enemyManager.checkJumpOnHead(jumpBox);
     }
 
     public void checkDiamondCollected(Rectangle2D.Float hitbox) {

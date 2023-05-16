@@ -40,14 +40,16 @@ public class EnemyManager {
         return false;
     }
 
-    public void checkHit(Rectangle2D.Float jumpBox) {
+    public void checkJumpOnHead(Rectangle2D.Float jumpBox) {
         for (Pig onePig: pigs) {
             if (onePig.alive) {
                 if (jumpBox.intersects(onePig.topHitbox) && onePig.enemyAction != DEAD) {
                     onePig.changeAction(DEAD);
                     playing.getPlayer().setAttack(true);
+                    playing.getPlayer().shouldJump = true;
                     return;
                 }
+
             }
         }
 
@@ -63,7 +65,7 @@ public class EnemyManager {
         drawPigs(g);
 //        drawHitbox(g);
 //        drawAttackBox(g);
-        drawTopHitbox(g);
+//        drawTopHitbox(g);
     }
 
     private void drawTopHitbox(Graphics g) {

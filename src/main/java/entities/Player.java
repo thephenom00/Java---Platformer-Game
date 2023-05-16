@@ -5,7 +5,6 @@ import static utilz.Physics.*;
 
 import gameStates.Gamestate;
 import gameStates.Playing;
-import main.Game;
 import utilz.LoadSave;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -38,6 +37,8 @@ public class Player extends Entity{
     private float fallSpeedAfterCollision = 0.05f * SCALE;
     private boolean inAir = false;
 
+    public boolean shouldJump = false;
+
     //Jump box
     private Rectangle2D.Float jumpBox;
 
@@ -46,7 +47,7 @@ public class Player extends Entity{
     private int mirrorWidth = 1;
 
     // GUI
-    public int lives = 3;
+    public int lives = 200;
     private int diamonds;
 
     public Player(float x, float y, int width, int height, Playing playing) {
@@ -64,7 +65,8 @@ public class Player extends Entity{
 
         setAnimation();
 
-        checkHit();
+        // Checking
+        checkJumpOnHead();
         checkDiamondCollected();
         checkHeartCollected();
 
@@ -148,8 +150,8 @@ public class Player extends Entity{
         g.drawRect((int) jumpBox.x, (int) jumpBox.y, (int) jumpBox.width, (int) jumpBox.height);
     }
 
-    private void checkHit() {
-        playing.checkHit(jumpBox);
+    private void checkJumpOnHead() {
+        playing.checkJumpOnHead(jumpBox);
     }
 
     private void checkDiamondCollected() {
@@ -208,7 +210,7 @@ public class Player extends Entity{
     public void updatePosition(){
         moving = false;
 
-        if (jump) {
+        if (jump || shouldJump) {
             jump();
         }
 
@@ -279,6 +281,7 @@ public class Player extends Entity{
         }
 
         inAir = true;
+        shouldJump = false;
         airSpeed = jumpSpeed;
     }
 
