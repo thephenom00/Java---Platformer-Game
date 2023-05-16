@@ -15,7 +15,7 @@ import static utilz.Constants.EnemyConstants.PIG_HEIGHT;
 import static utilz.Constants.ObjectConstants.*;
 
 public class ObjectManager {
-    private Playing playing;
+    private Player player;
 
     //Diamonds
     private BufferedImage[][] diamondArray;
@@ -26,8 +26,8 @@ public class ObjectManager {
     private BufferedImage[][] heartArray;
     private static ArrayList<Heart> hearts = new ArrayList<>();
 
-    public ObjectManager (Playing playing) {
-        this.playing = playing;
+    public ObjectManager (Player player) {
+        this.player = player;
 
         //Hearts
         loadHeartsImg();
@@ -105,6 +105,13 @@ public class ObjectManager {
         }
     }
 
+    private void drawHeartHitbox(Graphics g) {
+        for (Heart oneHeart : hearts) {
+            if(oneHeart.isCollected == false)
+                oneHeart.drawHitbox(g);
+        }
+    }
+
 
     private void drawDiamondHitbox(Graphics g) {
         for (Diamond oneDiamond: diamonds) {
@@ -113,10 +120,14 @@ public class ObjectManager {
         }
     }
 
-
-
-
-
+    public void checkHeartCollected(Rectangle2D playerHitbox) {
+        for (Heart oneHeart: hearts) {
+            if (playerHitbox.intersects(oneHeart.hitbox) && !oneHeart.isCollected) {
+                oneHeart.isCollected = true;
+                player.addLife();
+            }
+        }
+    }
 
 
 
@@ -134,6 +145,11 @@ public class ObjectManager {
             oneDiamond.isCollected = false;
         }
         numberOfDiamondsToTake = diamonds.size();
+
+        for (Heart oneHeart : hearts) {
+            oneHeart.isCollected = false;
+        }
+
     }
 
 }

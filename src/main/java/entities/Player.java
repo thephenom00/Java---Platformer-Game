@@ -46,7 +46,7 @@ public class Player extends Entity{
     private int mirrorWidth = 1;
 
     // GUI
-    private int lives = 3;
+    public int lives = 3;
     private int diamonds;
 
     public Player(float x, float y, int width, int height, Playing playing) {
@@ -66,6 +66,7 @@ public class Player extends Entity{
 
         checkHit();
         checkDiamondCollected();
+        checkHeartCollected();
 
     }
 
@@ -98,6 +99,10 @@ public class Player extends Entity{
 
     public void subtractLife() {
         lives--;
+    }
+
+    public void addLife() {
+        lives++;
     }
 
     private void drawCoins(Graphics g) {
@@ -140,7 +145,9 @@ public class Player extends Entity{
         diamonds = playing.getObjectManager().numberOfDiamondsToTake;
     }
 
-
+    public void checkHeartCollected() {
+        playing.checkHeartCollected(hitbox);
+    }
 
     // Sets an animation
     public void setAnimation(){

@@ -36,9 +36,10 @@ public class Playing extends State implements StateInterface {
     private void initializeClasses() {
         levelManager = new LevelManager(game);
         enemyManager = new EnemyManager(this);
-        objectManager = new ObjectManager(this);
         player = new Player(200, 200, (int) (78 * SCALE), (int) (58 * SCALE), this);
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
+        objectManager = new ObjectManager(player);
+
     }
 
     @Override
@@ -73,6 +74,10 @@ public class Playing extends State implements StateInterface {
 
     public void checkDiamondCollected(Rectangle2D.Float hitbox) {
         objectManager.checkDiamondCollected(hitbox);
+    }
+
+    public void checkHeartCollected (Rectangle2D.Float hitbox) {
+        objectManager.checkHeartCollected(hitbox);
     }
 
     public void resetGame() {
