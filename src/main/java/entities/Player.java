@@ -32,8 +32,8 @@ public class Player extends Entity{
 
     // Jump and gravitation
     private float airSpeed = 0f; // Speed we are travelling in the air
-    private float gravity = 0.04f * SCALE; // How fast player fall down
-    private float jumpSpeed = -3.0f * SCALE;
+    private float gravity = 0.05f * SCALE; // How fast player fall down
+    private float jumpSpeed = -2.5f * SCALE;
     private float fallSpeedAfterCollision = 0.05f * SCALE;
     private boolean inAir = false;
 
@@ -104,7 +104,7 @@ public class Player extends Entity{
 
         // Draw hitboxes
 //        drawHitbox(g);
-        drawJumpBox(g);
+//        drawJumpBox(g);
 
         drawLives(g);
         drawCoins(g);
@@ -212,7 +212,7 @@ public class Player extends Entity{
         if (jumpOnHead) {
             jumpSpeed = -1.5f * SCALE;
             jump();
-            jumpSpeed = -3.0f * SCALE;
+            jumpSpeed = -2.5f * SCALE;
             jumpOnHead = false;
         }
 

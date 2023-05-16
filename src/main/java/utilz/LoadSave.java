@@ -21,7 +21,7 @@ import static utilz.Constants.ObjectConstants.*;
 public class LoadSave {
     public static final String PLAYER_ATLAS = "king.png";
     public static final String LEVEL_ATLAS = "tilesetgrass.png";
-    public static final String LEVEL_ONE_DATA = "map.png";
+    public static final String LEVEL_ONE_DATA = "letsgo.png";
     public static final String PIG_SPRITE = "pig.png";
     public static final String BACKGROUND = "background.png";
     public static final String DIAMOND_SPRITE = "diamond.png";
