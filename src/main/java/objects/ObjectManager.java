@@ -27,6 +27,13 @@ public class ObjectManager {
 
     public void draw(Graphics g) {
         drawDiamonds(g);
+        drawDiamondHitbox(g);
+    }
+
+    private void drawDiamondHitbox(Graphics g) {
+        for (Diamond oneDiamond: diamonds) {
+            oneDiamond.drawHitbox(g);
+        }
     }
 
 
@@ -51,8 +58,8 @@ public class ObjectManager {
     public void drawDiamonds(Graphics g) {
         for (Diamond oneDiamond : diamonds) {
             g.drawImage(diamondArray[0][oneDiamond.getObjectIndex()],
-                    (int) oneDiamond.x,
-                    (int) oneDiamond.y,
+                    (int) oneDiamond.hitbox.x - Diamond.DIAMOND_XOFFSET,
+                    (int) oneDiamond.hitbox.y - Diamond.DIAMOND_YOFFSET + 10,
                     DIAMOND_WIDTH,
                     DIAMOND_HEIGHT,
                     null);

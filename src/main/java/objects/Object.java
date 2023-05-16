@@ -40,13 +40,13 @@ public abstract class Object {
     }
 
     protected void drawHitbox(Graphics g) {
-        g.setColor(Color.PINK);
-        g.drawRect((int) hitbox.x, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
+        g.setColor(Color.red);
+        g.drawRect((int) hitbox.x, (int) hitbox.y + 10, (int) hitbox.width, (int) hitbox.height);
     }
 
     // Creates hitbox
     protected void createHitbox(float x, float y, float width, float height) {
-        hitbox = new Rectangle2D.Float(x, y, width, height);
+        hitbox = new Rectangle2D.Float(x, y + 10, width, height);
     }
 
 
