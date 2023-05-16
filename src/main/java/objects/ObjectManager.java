@@ -6,6 +6,7 @@ import gameStates.Playing;
 import utilz.LoadSave;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -64,5 +65,13 @@ public class ObjectManager {
                     DIAMOND_HEIGHT,
                     null);
         }
+    }
+
+    public void checkDiamondCollected(Rectangle2D.Float playerHitbox) {
+        for (Diamond oneDiamond : diamonds) {
+            if (playerHitbox.intersects(oneDiamond.hitbox)) {
+                System.out.println("touched");
+            }
         }
+    }
     }

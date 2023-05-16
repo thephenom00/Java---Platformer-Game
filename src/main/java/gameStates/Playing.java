@@ -63,6 +63,10 @@ public class Playing extends State implements StateInterface {
         enemyManager.checkHit(jumpBox);
     }
 
+    public void checkDiamondCollected(Rectangle2D.Float hitbox) {
+        objectManager.checkDiamondCollected(hitbox);
+    }
+
     public void resetGame() {
         player.resetPlayer();
         enemyManager.resetEnemyManager();

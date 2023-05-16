@@ -65,6 +65,7 @@ public class Player extends Entity{
         setAnimation();
 
         checkHit();
+        checkDiamondCollected();
 
     }
 
@@ -133,6 +134,11 @@ public class Player extends Entity{
     private void checkHit() {
         playing.checkHit(jumpBox);
     }
+
+    private void checkDiamondCollected() {
+        playing.checkDiamondCollected(hitbox);
+    }
+
 
 
     // Sets an animation
