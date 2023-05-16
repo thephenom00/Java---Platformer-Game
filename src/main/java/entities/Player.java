@@ -37,7 +37,7 @@ public class Player extends Entity{
     private float fallSpeedAfterCollision = 0.05f * SCALE;
     private boolean inAir = false;
 
-    public boolean shouldJump = false;
+    public boolean jumpOnHead = false;
 
     //Jump box
     private Rectangle2D.Float jumpBox;
@@ -64,7 +64,6 @@ public class Player extends Entity{
         updateJumpBox();
 
         setAnimation();
-
         // Checking
         checkJumpOnHead();
         checkDiamondCollected();
@@ -210,7 +209,14 @@ public class Player extends Entity{
     public void updatePosition(){
         moving = false;
 
-        if (jump || shouldJump) {
+        if (jumpOnHead) {
+            jumpSpeed = -1.5f * SCALE;
+            jump();
+            jumpSpeed = -3.0f * SCALE;
+            jumpOnHead = false;
+        }
+
+        if (jump) {
             jump();
         }
 
@@ -276,12 +282,11 @@ public class Player extends Entity{
     private void jump() {
 
         // If we are in the air, we cannot jump
-        if(inAir) {
+        if(inAir && !jumpOnHead) {
             return;
         }
 
         inAir = true;
-        shouldJump = false;
         airSpeed = jumpSpeed;
     }
 

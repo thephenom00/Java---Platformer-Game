@@ -46,7 +46,7 @@ public class EnemyManager {
                 if (jumpBox.intersects(onePig.topHitbox) && onePig.enemyAction != DEAD) {
                     onePig.changeAction(DEAD);
                     playing.getPlayer().setAttack(true);
-                    playing.getPlayer().shouldJump = true;
+                    playing.getPlayer().jumpOnHead = true;
                     return;
                 }
 
