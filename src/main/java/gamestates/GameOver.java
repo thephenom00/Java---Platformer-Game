@@ -28,7 +28,7 @@ public class GameOver extends State implements StateInterface{
         g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 24));
+        g.setFont(new Font("Arial", Font.BOLD, 40));
         String gameOverText = "GAME OVER!";
         int textWidth = g.getFontMetrics().stringWidth(gameOverText);
         int x = (GAME_WIDTH - textWidth) / 2;

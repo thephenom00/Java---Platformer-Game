@@ -27,15 +27,46 @@ public class YouWin extends State implements StateInterface{
         g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
         // Draw the winning message
-        Color winningColor = Color.GREEN; // Set your desired winning color here
-        g.setColor(winningColor);
-        g.setFont(new Font("Arial", Font.BOLD, 40));
-        String message = "Congratulations! You Win!";
-        int messageWidth = g.getFontMetrics().stringWidth(message);
-        int x = (GAME_WIDTH - messageWidth) / 2;
-        int y = GAME_HEIGHT / 2;
-        g.drawString(message, x, y);
+        Color backgroundColor = Color.BLACK;
+        Color bigTextColor = Color.YELLOW;
+        Color smallTextColor = Color.WHITE;
+        Font bigFont = new Font("Arial", Font.BOLD, 50);
+        Font smallFont = new Font("Arial", Font.PLAIN, 20);
+        String bigMessage = "Congratulations! You Win!";
+        String smallMessage = "Press ESC to return to the menu";
+
+        // Set background color
+        g.setColor(backgroundColor);
+        g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+
+        // Set big text color and font
+        g.setColor(bigTextColor);
+        g.setFont(bigFont);
+
+        // Calculate big text position
+        FontMetrics bigFontMetrics = g.getFontMetrics();
+        int bigMessageWidth = bigFontMetrics.stringWidth(bigMessage);
+        int bigX = (GAME_WIDTH - bigMessageWidth) / 2;
+        int bigY = GAME_HEIGHT / 2;
+
+        // Draw the big text
+        g.drawString(bigMessage, bigX, bigY);
+
+        // Set small text color and font
+        g.setColor(smallTextColor);
+        g.setFont(smallFont);
+
+        // Calculate small text position
+        FontMetrics smallFontMetrics = g.getFontMetrics();
+        int smallMessageWidth = smallFontMetrics.stringWidth(smallMessage);
+        int smallX = (GAME_WIDTH - smallMessageWidth) / 2;
+        int smallY = bigY + bigFontMetrics.getHeight() + 20;
+
+        // Draw the small text
+        g.drawString(smallMessage, smallX, smallY);
     }
+
+
 
 
 

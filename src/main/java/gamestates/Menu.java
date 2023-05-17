@@ -59,6 +59,7 @@ public class Menu extends State implements StateInterface {
         int buttonTextX = button.x + (button.width - fm.stringWidth(text)) / 2;
         int buttonTextY = button.y + (button.height - fm.getHeight()) / 2 + fm.getAscent();
         g.drawString(text, buttonTextX, buttonTextY);
+        // RADas
     }
 
     @Override
@@ -66,16 +67,20 @@ public class Menu extends State implements StateInterface {
         if (startButton.contains(e.getX(), e.getY())) {
             Gamestate.state = Gamestate.PLAYING;
             System.out.println("Switched to PLAYING state");
+
         } else if (loadButton.contains(e.getX(), e.getY())) {
-            // TODO: Implement load functionality
-            System.out.println("Load button clicked");
+            game.getPlaying().saveLoadGame.load();
+            System.out.println("Game Loaded");
+
         } else if (saveButton.contains(e.getX(), e.getY())) {
-            // TODO: Implement save functionality
-            System.out.println("Save button clicked");
+            game.getPlaying().saveLoadGame.save();
+            System.out.println("Game Saved");
+
         } else if (quitButton.contains(e.getX(), e.getY())) {
             System.exit(0);
         }
     }
+
 
     @Override
     public void mousePressed(MouseEvent e) {

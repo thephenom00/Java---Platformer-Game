@@ -78,7 +78,7 @@ public class Pig extends Enemy {
                 case RUNNING:
                     if (canSeePlayer(lvlData, player)) {
                         facePlayer(player);
-                   }
+                    }
 
                     if (isPlayerInAttackRange(player)) {
                         changeAction(ATTACK);
