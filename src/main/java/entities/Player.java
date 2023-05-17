@@ -9,11 +9,12 @@ import utilz.LoadSave;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import static utilz.Constants.PlayerConstants.*;
 import static utilz.Size.*;
 
-public class Player extends Entity{
+public class Player extends Entity implements Serializable {
     private BufferedImage[][] animations;
     private int aniTick, aniIndex, aniSpeed = 25;
     private int playerAction = IDLE;
@@ -47,8 +48,8 @@ public class Player extends Entity{
     private int mirrorWidth = 1;
 
     // GUI
-    public int lives = 200;
-    private int diamonds;
+    public int lives = 3;
+    private int diamondsToCollect;
 
     public Player(float x, float y, int width, int height, Playing playing) {
         super(x, y, width, height);
@@ -64,14 +65,24 @@ public class Player extends Entity{
         updateJumpBox();
 
         setAnimation();
+
         // Checking
         checkJumpOnHead();
         checkDiamondCollected();
         checkHeartCollected();
 
         checkTouchingEnemy();
+        checkOutOfBounds();
     }
 
+    // If he fells out to the hole = dead
+    private void checkOutOfBounds() {
+        if (hitbox.y == 485 * SCALE) {
+            dead = true;
+        }
+    }
+
+    // If player touches the enemy he cant move
     private void checkTouchingEnemy() {
         if (playing.checkPlayerTouchesEnemy() == true){
             if(left) {
@@ -123,7 +134,7 @@ public class Player extends Entity{
         Font coinsFont = new Font("Arial", Font.PLAIN, 16);
         g.setFont(coinsFont);
         g.setColor(Color.BLACK);
-        g.drawString("Diamonds to Collect: " + diamonds, 10, 40);
+        g.drawString("Diamonds to Collect: " + diamondsToCollect, 10, 40);
     }
 
     private void drawLives(Graphics g) {
@@ -155,7 +166,6 @@ public class Player extends Entity{
 
     private void checkDiamondCollected() {
         playing.checkDiamondCollected(hitbox);
-        diamonds = playing.getObjectManager().numberOfDiamondsToTake;
     }
 
     public void checkHeartCollected() {
@@ -189,6 +199,8 @@ public class Player extends Entity{
 
         if (dead){
             playerAction = DEAD;
+            left = false;
+            right = false;
             if (aniIndex == 3) {
                 Gamestate.state = Gamestate.GAMEOVER;
             }
@@ -244,10 +256,9 @@ public class Player extends Entity{
             facingRight = true;
         }
 
-
         if (inAir) {
             // Checks the movement up and down
-            if(CanMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
+            if (CanMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
                 // Adds the airSpeed
                 hitbox.y += airSpeed;
                 airSpeed += gravity;
@@ -259,7 +270,7 @@ public class Player extends Entity{
                 // Going down and hit the floor
                 if (airSpeed > 0) {
                     resetInAir();
-                // Hits the ceiling
+                    // Hits the ceiling
                 } else {
                     airSpeed = fallSpeedAfterCollision;
                     updateXPos(xSpeed);
@@ -267,7 +278,7 @@ public class Player extends Entity{
             }
 
         } else {
-            // If we are not in air, we fall down
+            // If we are not on the floor, we are in air
             if (!IsEntityOnFloor(hitbox, lvlData)) {
                 inAir = true;
             }
@@ -415,8 +426,24 @@ public class Player extends Entity{
         return lives;
     }
 
-    public int getDiamonds() {
-        return diamonds;
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    public float getXPosition() {
+        return hitbox.x;
+    }
+
+    public float getYPosition() {
+        return hitbox.y;
+    }
+
+    public void setDiamondsToCollect(int diamondsToCollect) {
+        this.diamondsToCollect = diamondsToCollect;
+    }
+
+    public int getDiamondsToCollect() {
+        return diamondsToCollect;
     }
 
 }
