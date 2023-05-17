@@ -6,13 +6,14 @@ import utilz.LoadSave;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static utilz.Constants.EnemyConstants.*;
 
-public class EnemyManager {
+public class EnemyManager implements Serializable {
     private final Playing playing;
-    private BufferedImage[][] pigArray;
+    private transient BufferedImage[][] pigArray;
     private static ArrayList<Pig> pigs = new ArrayList<>();
     public static int numberOfPigsAlive;
 
@@ -59,6 +60,7 @@ public class EnemyManager {
     public void getPigsFromPng() {
         pigs = LoadSave.GetPigs();
         numberOfPigsAlive = pigs.size();
+
     }
 
     public void draw(Graphics g) {
@@ -116,10 +118,13 @@ public class EnemyManager {
 
     }
 
-    public static ArrayList<Pig> getPigs() {
+    public ArrayList<Pig> getPigs() {
         return pigs;
     }
 
+    public void setPigs(ArrayList<Pig> pigs) {
+        this.pigs = pigs;
+    }
 
     public static void subtractPigFromArray() {
         numberOfPigsAlive--;
