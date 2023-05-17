@@ -11,6 +11,8 @@ import entities.Player;
 import levels.LevelManager;
 import main.Game;
 import objects.ObjectManager;
+import saveload.GameData;
+import saveload.SaveLoadGame;
 import utilz.LoadSave;
 import static utilz.Size.*;
 
@@ -19,6 +21,7 @@ public class Playing extends State implements StateInterface {
     private LevelManager levelManager;
     private EnemyManager enemyManager;
     private ObjectManager objectManager;
+    SaveLoadGame saveLoadGame = new SaveLoadGame(this);
 
     private final BufferedImage background;
     private static int[][] levelData;
@@ -33,7 +36,7 @@ public class Playing extends State implements StateInterface {
     private void initializeClasses() {
         levelManager = new LevelManager(game);
         enemyManager = new EnemyManager(this);
-        player = new Player(50, 632, (int) (78 * SCALE), (int) (58 * SCALE), this);
+        player = new Player(33 * SCALE, 420 * SCALE, (int) (78 * SCALE), (int) (58 * SCALE), this);
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
         objectManager = new ObjectManager(player);
 
@@ -99,6 +102,7 @@ public class Playing extends State implements StateInterface {
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> player.setLeft(true);
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> player.setRight(true);
             case KeyEvent.VK_SPACE -> player.setJump(true);
+            case KeyEvent.VK_P -> Gamestate.state = Gamestate.WIN;
             case KeyEvent.VK_ESCAPE -> {
                 Gamestate.state = Gamestate.MENU;
                 System.out.println("Switched to MENU state");
@@ -143,4 +147,9 @@ public class Playing extends State implements StateInterface {
     public ObjectManager getObjectManager() {
         return objectManager;
     }
+
+    public EnemyManager getEnemyManager() {
+        return enemyManager;
+    }
+
 }

@@ -15,12 +15,13 @@ public class ObjectManager {
 
     //Diamonds
     private BufferedImage[][] diamondArray;
-    private static ArrayList<Diamond> diamonds = new ArrayList<>();
+    private ArrayList<Diamond> diamonds = new ArrayList<>();
     public int numberOfDiamondsToTake;
 
     // Hearts
     private BufferedImage[][] heartArray;
-    private static ArrayList<Heart> hearts = new ArrayList<>();
+    private ArrayList<Heart> hearts = new ArrayList<>();
+
 
     public ObjectManager (Player player) {
         this.player = player;
@@ -57,6 +58,7 @@ public class ObjectManager {
     private void getDiamondsFromPng() {
         diamonds = LoadSave.GetDiamonds();
         numberOfDiamondsToTake = diamonds.size();
+        player.setDiamondsToCollect(numberOfDiamondsToTake);
     }
 
     private void loadHeartsImg() {
@@ -89,7 +91,7 @@ public class ObjectManager {
 
     public void drawDiamonds(Graphics g) {
         for (Diamond oneDiamond : diamonds) {
-            if(oneDiamond.isCollected == false) {
+            if (!oneDiamond.isCollected ) {
                 g.drawImage(diamondArray[0][oneDiamond.getObjectIndex()],
                         (int) oneDiamond.hitbox.x - Diamond.DIAMOND_XOFFSET,
                         (int) oneDiamond.hitbox.y - Diamond.DIAMOND_YOFFSET + 10,
@@ -103,7 +105,7 @@ public class ObjectManager {
 
     private void drawHeartHitbox(Graphics g) {
         for (Heart oneHeart : hearts) {
-            if(oneHeart.isCollected == false)
+            if(!oneHeart.isCollected)
                 oneHeart.drawHitbox(g);
         }
     }
@@ -111,28 +113,30 @@ public class ObjectManager {
 
     private void drawDiamondHitbox(Graphics g) {
         for (Diamond oneDiamond: diamonds) {
-            if(oneDiamond.isCollected == false)
+            if(!oneDiamond.isCollected)
                 oneDiamond.drawHitbox(g);
         }
     }
 
     public void checkHeartCollected(Rectangle2D playerHitbox) {
         for (Heart oneHeart: hearts) {
-            if (playerHitbox.intersects(oneHeart.hitbox) && !oneHeart.isCollected) {
-                oneHeart.isCollected = true;
-                player.addLife();
-            }
+            if (!oneHeart.isCollected)
+                if (playerHitbox.intersects(oneHeart.hitbox)) {
+                    oneHeart.isCollected = true;
+                    player.addLife();
+                }
         }
     }
 
-
-
     public void checkDiamondCollected(Rectangle2D.Float playerHitbox) {
         for (Diamond oneDiamond : diamonds) {
-            if (playerHitbox.intersects(oneDiamond.hitbox) && !oneDiamond.isCollected) {
-                oneDiamond.isCollected = true;
-                numberOfDiamondsToTake--;
-            }
+            if (!oneDiamond.isCollected)
+                if (playerHitbox.intersects(oneDiamond.hitbox)){
+                    oneDiamond.isCollected = true;
+                    numberOfDiamondsToTake--;
+                    player.setDiamondsToCollect(numberOfDiamondsToTake);
+                }
+
         }
     }
 
@@ -146,6 +150,32 @@ public class ObjectManager {
             oneHeart.isCollected = false;
         }
 
+    }
+
+    public ArrayList getDiamonds() {
+        return diamonds;
+    }
+
+    public ArrayList getHearts() {
+        return hearts;
+    }
+
+    public void setDiamonds(ArrayList<Diamond> diamonds) {
+        this.diamonds = diamonds;
+    }
+
+    public void setHearts(ArrayList<Heart> hearts) {
+        this.hearts = hearts;
+    }
+
+    public void setNumberOfDiamondsToTake(int diamondsToTake) {
+        this.numberOfDiamondsToTake = diamondsToTake;
+        player.setDiamondsToCollect(numberOfDiamondsToTake);
+    }
+
+
+    public int getNumberOfDiamondsToTake() {
+        return numberOfDiamondsToTake;
     }
 
 }
