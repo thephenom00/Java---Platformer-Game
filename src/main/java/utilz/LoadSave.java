@@ -114,8 +114,8 @@ public class LoadSave {
 
                 lvlData[j][i] = redValue;
             }
-            return lvlData;
-        }
+        return lvlData;
+    }
 
 }
 

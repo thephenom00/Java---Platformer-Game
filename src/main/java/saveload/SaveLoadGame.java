@@ -37,7 +37,7 @@ public class SaveLoadGame implements Serializable {
             String json = gson.toJson(data);
             writer.write(json);
 
-            System.out.println(data.diamonds);
+            System.out.println(playing.getPlayer().getHitBox().y);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,7 +2,6 @@ package main;
 
 
 import java.awt.Graphics;
-
 import gamestates.*;
 
 public class Game implements Runnable {
@@ -45,7 +44,7 @@ public class Game implements Runnable {
     }
 
     public void update() {
-            switch (Gamestate.state) {
+        switch (Gamestate.state) {
             case MENU -> menu.update();
             case PLAYING -> playing.update();
             case GAMEOVER -> gameOver.update();

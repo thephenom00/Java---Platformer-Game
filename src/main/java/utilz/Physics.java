@@ -27,9 +27,11 @@ public class Physics {
         if (x < 0 || x >= GAME_WIDTH) {
             return true;
         }
+
         if (y < 0 || y >= GAME_HEIGHT) {
             return true;
         }
+
 
         float xIndex = x / TILES_SIZE;
         float yIndex = y / TILES_SIZE;
@@ -64,7 +66,7 @@ public class Physics {
 
             return tileXPos + xOffset - 1; // -1 because the hitbox is in tile
 
-        // Colides with tile on the left
+            // Colides with tile on the left
         } else {
             // Does not compute offset, only returns the tile we are in
             return currentTile * TILES_SIZE;
@@ -83,7 +85,7 @@ public class Physics {
             int yOffset = (int)(TILES_SIZE - hitbox.height);
             return tileYPos + yOffset - 1;
 
-        // Jumping
+            // Jumping
         } else {
             return currentTile * TILES_SIZE;
         }
@@ -123,7 +125,7 @@ public class Physics {
                 }
             }
 
-        // Enemy ... Player
+            // Enemy ... Player
         } else {
             for (int i = 0; i < playerXPosition - enemyXPosition ; i++) {
                 if (isSolidHelper(enemyXPosition + i, yPosition, lvlData) == true) {

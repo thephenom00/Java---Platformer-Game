@@ -77,7 +77,7 @@ public class Player extends Entity implements Serializable {
 
     // If he fells out to the hole = dead
     private void checkOutOfBounds() {
-        if (hitbox.y == 485 * SCALE) {
+        if (hitbox.y >= 483 * SCALE) {
             dead = true;
         }
     }
@@ -131,7 +131,7 @@ public class Player extends Entity implements Serializable {
 
     private void drawCoins(Graphics g) {
         // Draws coins to collect
-        Font coinsFont = new Font("Arial", Font.PLAIN, 16);
+        Font coinsFont = new Font("Arial", Font.PLAIN, 20);
         g.setFont(coinsFont);
         g.setColor(Color.BLACK);
         g.drawString("Diamonds to Collect: " + diamondsToCollect, 10, 40);
