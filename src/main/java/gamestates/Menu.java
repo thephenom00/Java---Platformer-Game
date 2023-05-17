@@ -1,4 +1,4 @@
-package gameStates;
+package gamestates;
 
 import main.Game;
 import utilz.LoggerManager;

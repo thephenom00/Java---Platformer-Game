@@ -1,10 +1,5 @@
 package entities;
 
-import gameStates.Gamestate;
-
-import java.awt.*;
-import java.util.ArrayList;
-
 import static utilz.Constants.EnemyConstants.*;
 import static utilz.Physics.*;
 import static utilz.Constants.Directions.*;

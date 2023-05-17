@@ -3,8 +3,8 @@ package entities;
 import static utilz.Physics.CanMoveHere;
 import static utilz.Physics.*;
 
-import gameStates.Gamestate;
-import gameStates.Playing;
+import gamestates.Gamestate;
+import gamestates.Playing;
 import utilz.LoadSave;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

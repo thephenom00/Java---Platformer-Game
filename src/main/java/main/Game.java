@@ -3,7 +3,7 @@ package main;
 
 import java.awt.Graphics;
 
-import gameStates.*;
+import gamestates.*;
 import utilz.LoggerManager;
 
 public class Game implements Runnable {

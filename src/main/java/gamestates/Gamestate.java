@@ -1,4 +1,4 @@
-package gameStates;
+package gamestates;
 
 // We will not change the values
 public enum Gamestate {

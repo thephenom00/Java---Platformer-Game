@@ -1,8 +1,6 @@
 package objects;
 
-import entities.Pig;
 import entities.Player;
-import gameStates.Playing;
 import utilz.LoadSave;
 
 import java.awt.*;
@@ -10,8 +8,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import static utilz.Constants.EnemyConstants.*;
-import static utilz.Constants.EnemyConstants.PIG_HEIGHT;
 import static utilz.Constants.ObjectConstants.*;
 
 public class ObjectManager {

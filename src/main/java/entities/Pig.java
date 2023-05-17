@@ -1,7 +1,4 @@
 package entities;
-import gameStates.Gamestate;
-import gameStates.Playing;
-import main.Game;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

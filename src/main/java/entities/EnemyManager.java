@@ -1,6 +1,6 @@
 package entities;
 
-import gameStates.Playing;
+import gamestates.Playing;
 import utilz.LoadSave;
 
 import java.awt.*;

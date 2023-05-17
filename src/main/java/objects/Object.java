@@ -1,8 +1,5 @@
 package objects;
 
-import entities.EnemyManager;
-import gameStates.Gamestate;
-
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
