@@ -12,7 +12,6 @@ import levels.LevelManager;
 import main.Game;
 import objects.ObjectManager;
 import utilz.LoadSave;
-import utilz.LoggerManager;
 import static utilz.Size.*;
 
 public class Playing extends State implements StateInterface {
@@ -22,13 +21,11 @@ public class Playing extends State implements StateInterface {
     private ObjectManager objectManager;
 
     private final BufferedImage background;
-    private LoggerManager logger;
     private static int[][] levelData;
 
 
-    public Playing(Game game, LoggerManager logger) {
+    public Playing(Game game) {
         super(game);
-        this.logger = logger;
         initializeClasses();
         background = LoadSave.GetSpriteAtlas(LoadSave.BACKGROUND);
     }
@@ -104,7 +101,7 @@ public class Playing extends State implements StateInterface {
             case KeyEvent.VK_SPACE -> player.setJump(true);
             case KeyEvent.VK_ESCAPE -> {
                 Gamestate.state = Gamestate.MENU;
-                logger.log("Switched to MENU state");
+                System.out.println("Switched to MENU state");
             }
         }
     }

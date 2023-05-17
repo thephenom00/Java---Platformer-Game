@@ -4,7 +4,6 @@ package main;
 import java.awt.Graphics;
 
 import gamestates.*;
-import utilz.LoggerManager;
 
 public class Game implements Runnable {
 
@@ -14,15 +13,13 @@ public class Game implements Runnable {
     private final int FPS = 120;
     private final int UPS = 200;
 
-    private LoggerManager logger;
     private Playing playing;
     private Menu menu;
     private GameOver gameOver;
     private YouWin youwin;
 
 
-    public Game(LoggerManager logger) {
-        this.logger = logger;
+    public Game() {
         initClasses();
 
         gamePanel = new GamePanel(this);
@@ -35,8 +32,8 @@ public class Game implements Runnable {
 
 
     private void initClasses() {
-        menu = new Menu(this, logger);
-        playing = new Playing(this, logger);
+        menu = new Menu(this);
+        playing = new Playing(this);
         gameOver = new GameOver(this, playing); // RESTART
         youwin = new YouWin(this, playing); // RESTART
     }
@@ -114,7 +111,7 @@ public class Game implements Runnable {
 
             if (System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
-                logger.log("FPS: " + frames + " | UPS: " + updates);
+                System.out.println("FPS: " + frames + " | UPS: " + updates);
                 frames = 0;
                 updates = 0;
             }

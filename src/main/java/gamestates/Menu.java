@@ -1,7 +1,6 @@
 package gamestates;
 
 import main.Game;
-import utilz.LoggerManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -10,15 +9,13 @@ import java.awt.event.MouseEvent;
 import static utilz.Size.GAME_WIDTH;
 
 public class Menu extends State implements StateInterface {
-    private LoggerManager logger;
     private Rectangle startButton;
     private Rectangle loadButton;
     private Rectangle saveButton;
     private Rectangle quitButton;
 
-    public Menu(Game game, LoggerManager logger) {
+    public Menu(Game game) {
         super(game);
-        this.logger = logger;
         int buttonWidth = 200;
         int buttonHeight = 80;
         int buttonSpacing = 20;
@@ -68,13 +65,13 @@ public class Menu extends State implements StateInterface {
     public void mouseClicked(MouseEvent e) {
         if (startButton.contains(e.getX(), e.getY())) {
             Gamestate.state = Gamestate.PLAYING;
-            logger.log("Switched to PLAYING state");
+            System.out.println("Switched to PLAYING state");
         } else if (loadButton.contains(e.getX(), e.getY())) {
             // TODO: Implement load functionality
-            logger.log("Load button clicked");
+            System.out.println("Load button clicked");
         } else if (saveButton.contains(e.getX(), e.getY())) {
             // TODO: Implement save functionality
-            logger.log("Save button clicked");
+            System.out.println("Save button clicked");
         } else if (quitButton.contains(e.getX(), e.getY())) {
             System.exit(0);
         }
@@ -97,7 +94,7 @@ public class Menu extends State implements StateInterface {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.PLAYING;
-                logger.log("Switched to PLAYING state");
+                System.out.println("Switched to PLAYING state");
                 break;
         }
     }
