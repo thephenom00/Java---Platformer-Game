@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import entities.EnemyController;
 import entities.Player;
@@ -16,6 +18,8 @@ import utils.LoadSave;
 import static utils.Size.*;
 
 public class Playing extends State implements StateInterface {
+    private static final Logger logger = Logger.getLogger(Game.class.getName());
+
     private Player player;
     private LevelController levelController;
     private EnemyController enemyController;
@@ -67,7 +71,9 @@ public class Playing extends State implements StateInterface {
 
     public void checkWin () {
         if (enemyController.numberOfPigsAlive == 0 && objectController.numberOfDiamondsToTake == 0) {
-            Gamestate.state = Gamestate.WIN;
+            if (game.getLoggerState())
+                logger.log(Level.INFO, "Player Wins");
+                Gamestate.state = Gamestate.WIN;
         }
     }
 
@@ -87,6 +93,8 @@ public class Playing extends State implements StateInterface {
         player.resetPlayer();
         enemyController.resetEnemyManager();
         objectController.resetObjects();
+        if(game.getLoggerState())
+            logger.log(Level.INFO, "Game Reset");
     }
 
     @Override
@@ -102,7 +110,9 @@ public class Playing extends State implements StateInterface {
             case KeyEvent.VK_P -> Gamestate.state = Gamestate.WIN;
             case KeyEvent.VK_ESCAPE -> {
                 Gamestate.state = Gamestate.MENU;
-                System.out.println("Switched to MENU state");
+                player.resetMovement();
+                if(game.getLoggerState())
+                    logger.log(Level.INFO, "Switched to MENU state");
             }
         }
     }
@@ -131,10 +141,6 @@ public class Playing extends State implements StateInterface {
     @Override
     public void mouseMoved(MouseEvent e) {
 
-    }
-
-    public void windowFocusLost() {
-        player.resetDirBooleans();
     }
 
     public Player getPlayer() {

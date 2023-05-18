@@ -5,16 +5,21 @@ import static utils.Physics.*;
 
 import gamestates.Gamestate;
 import gamestates.Playing;
+import main.Game;
 import utils.LoadSave;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static utils.Constants.PlayerConstants.*;
 import static utils.Size.*;
 
 public class Player extends Entity implements Serializable {
+    private static final Logger logger = Logger.getLogger(Game.class.getName());
+
     private BufferedImage[][] animations;
     private int aniTick, aniIndex, aniSpeed = 25;
     private int playerAction = IDLE;
@@ -39,6 +44,7 @@ public class Player extends Entity implements Serializable {
     private boolean inAir = false;
 
     public boolean jumpOnHead = false;
+    private boolean hitLogged = false;
 
     //Jump box
     private Rectangle2D.Float jumpBox;
@@ -67,12 +73,17 @@ public class Player extends Entity implements Serializable {
         setAnimation();
 
         // Checking
+        checkMethods();
+
+    }
+
+    private void checkMethods(){
         checkJumpOnHead();
         checkDiamondCollected();
         checkHeartCollected();
-
         checkTouchingEnemy();
         checkOutOfBounds();
+        checkIfPlayerInAir();
     }
 
     // If he fells out to the hole = dead
@@ -203,6 +214,8 @@ public class Player extends Entity implements Serializable {
             right = false;
             if (aniIndex == 3) {
                 Gamestate.state = Gamestate.GAMEOVER;
+                if (playing.getGame().getLoggerState())
+                    logger.log(Level.INFO, "GAME OVER");
             }
         }
 
@@ -279,14 +292,18 @@ public class Player extends Entity implements Serializable {
 
         } else {
             // If we are not on the floor, we are in air
-            if (!IsEntityOnFloor(hitbox, lvlData)) {
-                inAir = true;
-            }
+            checkIfPlayerInAir();
             updateXPos(xSpeed); // We can move the player in x direction
             moving = true;
         }
 
 
+    }
+
+    private void checkIfPlayerInAir() {
+        if (!IsEntityOnFloor(hitbox, lvlData)) {
+            inAir = true;
+        }
     }
 
 
@@ -358,9 +375,10 @@ public class Player extends Entity implements Serializable {
         airSpeed = 0;
     }
 
-    public void resetDirBooleans() {
+    public void resetMovement() {
         left = false;
         right = false;
+        jump = false;
     }
 
     public void setAttack(boolean attacking) {
@@ -368,15 +386,20 @@ public class Player extends Entity implements Serializable {
     }
 
     public void getHit(boolean getHit) {
+        if (playing.getGame().getLoggerState()) {
+            logger.log(Level.INFO, "Player got hit");
+        }
         this.getHit = getHit;
     }
 
     public void setDeath(boolean dead) {
         this.dead = dead;
+        if (playing.getGame().getLoggerState())
+            logger.log(Level.INFO, "Player died");
     }
 
     public void resetPlayer() {
-        resetDirBooleans();
+        resetMovement();
         resetInAir();
         resetAniTick();
         dead = false;
@@ -446,12 +469,8 @@ public class Player extends Entity implements Serializable {
         return diamondsToCollect;
     }
 
-    public int[][] getLvlData() {
-        return lvlData;
-    }
-
-    public void setInAir() {
-        inAir = true;
+    public Playing getPlaying() {
+        return playing;
     }
 
 }

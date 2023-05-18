@@ -19,4 +19,5 @@ public class GameData {
 
     // ENEMY DATA
     ArrayList<Pig> pigsArray;
+    int numberOfPigsAlive;
 }

@@ -1,16 +1,20 @@
 package objects;
 
 import entities.Player;
+import main.Game;
 import utils.LoadSave;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static utils.Constants.ObjectConstants.*;
 
 public class ObjectController {
+    private static final Logger logger = Logger.getLogger(Game.class.getName());
     private Player player;
 
     //Diamonds
@@ -122,6 +126,8 @@ public class ObjectController {
         for (Heart oneHeart: hearts) {
             if (!oneHeart.isCollected)
                 if (playerHitbox.intersects(oneHeart.hitbox)) {
+                    if (player.getPlaying().getGame().getLoggerState())
+                        logger.log(Level.INFO, "Heart collected ");
                     oneHeart.isCollected = true;
                     player.addLife();
                 }
@@ -135,6 +141,8 @@ public class ObjectController {
                     oneDiamond.isCollected = true;
                     numberOfDiamondsToTake--;
                     player.setDiamondsToCollect(numberOfDiamondsToTake);
+                    if (player.getPlaying().getGame().getLoggerState())
+                        logger.log(Level.INFO, numberOfDiamondsToTake + " diamonds remaining");
                 }
 
         }

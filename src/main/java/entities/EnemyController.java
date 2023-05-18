@@ -1,6 +1,7 @@
 package entities;
 
 import gamestates.Playing;
+import main.Game;
 import utils.LoadSave;
 
 import java.awt.*;
@@ -8,10 +9,13 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static utils.Constants.EnemyConstants.*;
 
 public class EnemyController implements Serializable {
+    private static final Logger logger = Logger.getLogger(Game.class.getName());
     private final Playing playing;
     private transient BufferedImage[][] pigArray;
     private static ArrayList<Pig> pigs = new ArrayList<>();
@@ -46,6 +50,11 @@ public class EnemyController implements Serializable {
             if (onePig.alive) {
                 if (jumpBox.intersects(onePig.topHitbox) && onePig.enemyAction != DEAD) {
                     onePig.changeAction(DEAD);
+                    numberOfPigsAlive--;
+                    if (playing.getGame().getLoggerState()) {
+                        logger.log(Level.INFO, numberOfPigsAlive + " pigs remaining");
+                    }
+
                     playing.getPlayer().setAttack(true);
                     playing.getPlayer().jumpOnHead = true;
                     return;
@@ -126,8 +135,12 @@ public class EnemyController implements Serializable {
         this.pigs = pigs;
     }
 
-    public static void subtractPigFromArray() {
-        numberOfPigsAlive--;
+    public int getNumberOfPigsAlive() {
+        return numberOfPigsAlive;
+    }
+
+    public void setNumberOfPigsAlive(int numberOfPigsAlive) {
+        this.numberOfPigsAlive = numberOfPigsAlive;
     }
 
 

@@ -1,7 +1,10 @@
 package entities;
 
+import main.Game;
+
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.logging.Logger;
 
 import static utils.Constants.Directions.*;
 import static utils.Size.*;
@@ -10,6 +13,7 @@ import static utils.Constants.EnemyConstants.*;
 
 
 public class Pig extends Enemy {
+    private static final Logger logger = Logger.getLogger(Game.class.getName());
     private static final int PIG_HITBOX_WIDTH = 14;
     private static final int PIG_HITBOX_HEIGHT = 19;
     protected Rectangle2D.Float attackBox;
@@ -84,7 +88,7 @@ public class Pig extends Enemy {
                         changeAction(ATTACK);
                     }
 
-                    running(lvlData, player);
+                    running(lvlData);
                     break;
 
                 case ATTACK:

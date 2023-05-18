@@ -79,7 +79,7 @@ public abstract class Enemy extends Entity{
         aniTick = 0;
     }
 
-    protected void running(int[][] lvlData, Player player) {
+    protected void running(int[][] lvlData) {
         float xSpeed = 0;
         if (runDirection == LEFT) {
             xSpeed = -enemySpeed;
@@ -133,7 +133,6 @@ public abstract class Enemy extends Entity{
 
                 if (enemyAction == DEAD) {
                     alive = false;
-                    EnemyController.subtractPigFromArray();
                 }
             }
         }

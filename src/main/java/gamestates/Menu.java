@@ -6,11 +6,14 @@ import main.Game;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import static utils.Physics.*;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static utils.Size.GAME_WIDTH;
+import static utils.Size.SCALE;
 
 public class Menu extends State implements StateInterface {
+    private static final Logger logger = Logger.getLogger(Game.class.getName());
+
     private Rectangle startButton;
     private Rectangle loadButton;
     private Rectangle saveButton;
@@ -19,9 +22,9 @@ public class Menu extends State implements StateInterface {
     private boolean gameSaved = false;
     public Menu(Game game) {
         super(game);
-        int buttonWidth = 200;
-        int buttonHeight = 80;
-        int buttonSpacing = 20;
+        int buttonWidth = (int) (133 * SCALE);
+        int buttonHeight = (int) (53 * SCALE);
+        int buttonSpacing = (int) (13 * SCALE);
         int buttonX = GAME_WIDTH / 2 - buttonWidth / 2;
         int startY = 200;
         startButton = new Rectangle(buttonX, startY, buttonWidth, buttonHeight);
@@ -36,10 +39,8 @@ public class Menu extends State implements StateInterface {
 
     @Override
     public void draw(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-
         // Draw start button
-        drawButton(g, startButton, "START GAME");
+        drawButton(g, startButton, "PLAY");
 
         // Draw load button
         drawButton(g, loadButton, "LOAD");
@@ -83,21 +84,28 @@ public class Menu extends State implements StateInterface {
     public void mouseClicked(MouseEvent e) {
         if (startButton.contains(e.getX(), e.getY())) {
             Gamestate.state = Gamestate.PLAYING;
-            System.out.println("Switched to PLAYING state");
             gameSaved = false;
+            if (game.getLoggerState())
+                logger.log(Level.INFO,"Switched to PLAYING state");
 
         } else if (loadButton.contains(e.getX(), e.getY())) {
             game.getPlaying().saveLoadGame.load();
             Gamestate.state = Gamestate.PLAYING;
             gameSaved = false;
+            if (game.getLoggerState())
+                logger.log(Level.INFO,"GAME LOADED");
 
         } else if (saveButton.contains(e.getX(), e.getY())) {
             game.getPlaying().saveLoadGame.save();
             gameSaved = true;
+            if (game.getLoggerState())
+                logger.log(Level.INFO,"GAME SAVED");
 
         } else if (quitButton.contains(e.getX(), e.getY())) {
             System.exit(0);
             gameSaved = false;
+            if (game.getLoggerState())
+                logger.log(Level.INFO,"QUIT GAME");
         }
     }
 
@@ -119,9 +127,9 @@ public class Menu extends State implements StateInterface {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.PLAYING;
-                System.out.println("Switched to PLAYING state");
+                if (game.getLoggerState())
+                    logger.log(Level.INFO,"Switched to PLAYING state");
                 gameSaved = false;
-                break;
         }
     }
 

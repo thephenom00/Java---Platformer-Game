@@ -3,8 +3,6 @@ package saveload;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import gamestates.Playing;
-import objects.Diamond;
-import objects.Heart;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -21,7 +19,7 @@ public class SaveLoadGame implements Serializable {
     }
 
     public void save() {
-        try (FileWriter writer = new FileWriter("src/main/java/utils/save.json")) {
+        try (FileWriter writer = new FileWriter("src/main/java/res/save.json")) {
             GameData data = new GameData();
             data.xPosition = playing.getPlayer().getXPosition();
             data.yPosition = playing.getPlayer().getYPosition();
@@ -33,6 +31,7 @@ public class SaveLoadGame implements Serializable {
             data.heartsArray = playing.getObjectManager().getHearts();
 
             data.pigsArray = playing.getEnemyManager().getPigs();
+            data.numberOfPigsAlive = playing.getEnemyManager().getNumberOfPigsAlive();
 
             String json = gson.toJson(data);
             writer.write(json);
@@ -45,7 +44,7 @@ public class SaveLoadGame implements Serializable {
 
     public void load() {
         try {
-            String json = new String(Files.readAllBytes(Paths.get("src/main/java/utils/save.json")));
+            String json = new String(Files.readAllBytes(Paths.get("src/main/java/res/save.json")));
             GameData data = gson.fromJson(json, GameData.class);
 
 
@@ -60,6 +59,7 @@ public class SaveLoadGame implements Serializable {
             playing.getObjectManager().setHearts(new ArrayList<>(data.heartsArray));
 
             playing.getEnemyManager().setPigs(new ArrayList<>(data.pigsArray));
+            playing.getEnemyManager().setNumberOfPigsAlive(data.numberOfPigsAlive);
 
         } catch (Exception e) {
             e.printStackTrace();

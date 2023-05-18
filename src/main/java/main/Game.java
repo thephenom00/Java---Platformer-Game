@@ -2,7 +2,6 @@ package main;
 
 
 import java.awt.Graphics;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import gamestates.*;
@@ -35,8 +34,7 @@ public class Game implements Runnable {
         gamePanel.requestFocus();
 
         startGameLoop();
-        if (loggerEnabled == true)
-            logger.log(Level.INFO, "Hello");
+
     }
 
 
@@ -120,7 +118,8 @@ public class Game implements Runnable {
 
             if (System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
-                System.out.println("FPS: " + frames + " | UPS: " + updates);
+//                if (loggerEnabled == true && Gamestate.state == Gamestate.PLAYING)
+//                    logger.log(INFO,"FPS: " + frames + " | UPS: " + updates);
                 frames = 0;
                 updates = 0;
             }
@@ -133,7 +132,7 @@ public class Game implements Runnable {
     // If we leave the window, movement stops
     public void windowFocusLost() {
         if (Gamestate.state == Gamestate.PLAYING)
-            playing.getPlayer().resetDirBooleans();
+            playing.getPlayer().resetMovement();
     }
 
     public Menu getMenu() {
@@ -148,8 +147,11 @@ public class Game implements Runnable {
         return gameOver;
     }
 
-    public YouWin getYouWin(){
+    public YouWin getYouWin() {
         return youwin;
+    }
+    public boolean getLoggerState() {
+        return loggerEnabled;
     }
 
 }
