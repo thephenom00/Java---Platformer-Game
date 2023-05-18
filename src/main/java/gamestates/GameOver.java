@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-import static utilz.Size.*;
+import static utils.Size.*;
 
 public class GameOver extends State implements StateInterface{
     private Game game;

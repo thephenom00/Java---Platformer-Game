@@ -1,7 +1,7 @@
 package entities;
 
 import gamestates.Playing;
-import utilz.LoadSave;
+import utils.LoadSave;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -9,16 +9,16 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static utilz.Constants.EnemyConstants.*;
+import static utils.Constants.EnemyConstants.*;
 
-public class EnemyManager implements Serializable {
+public class EnemyController implements Serializable {
     private final Playing playing;
     private transient BufferedImage[][] pigArray;
     private static ArrayList<Pig> pigs = new ArrayList<>();
     public static int numberOfPigsAlive;
 
 
-    public EnemyManager(Playing playing) {
+    public EnemyController(Playing playing) {
         this.playing = playing;
         loadPigSprites();
         getPigsFromPng();

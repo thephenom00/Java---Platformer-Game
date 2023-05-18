@@ -1,6 +1,6 @@
-package utilz;
+package utils;
 
-import static utilz.Size.*;
+import static utils.Size.*;
 
 public class Constants {
 

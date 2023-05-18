@@ -1,18 +1,18 @@
 package entities;
 
-import static utilz.Physics.CanMoveHere;
-import static utilz.Physics.*;
+import static utils.Physics.CanMoveHere;
+import static utils.Physics.*;
 
 import gamestates.Gamestate;
 import gamestates.Playing;
-import utilz.LoadSave;
+import utils.LoadSave;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
-import static utilz.Constants.PlayerConstants.*;
-import static utilz.Size.*;
+import static utils.Constants.PlayerConstants.*;
+import static utils.Size.*;
 
 public class Player extends Entity implements Serializable {
     private BufferedImage[][] animations;
@@ -444,6 +444,14 @@ public class Player extends Entity implements Serializable {
 
     public int getDiamondsToCollect() {
         return diamondsToCollect;
+    }
+
+    public int[][] getLvlData() {
+        return lvlData;
+    }
+
+    public void setInAir() {
+        inAir = true;
     }
 
 }

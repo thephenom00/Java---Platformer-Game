@@ -4,11 +4,9 @@ import entities.Pig;
 import objects.Diamond;
 import objects.Heart;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class GameData implements Serializable {
+public class GameData {
     // PLAYER DATA
     float xPosition;
     float yPosition;

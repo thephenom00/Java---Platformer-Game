@@ -1,8 +1,6 @@
-package utilz;
+package utils;
 
-import entities.Enemy;
-
-import static utilz.Size.*;
+import static utils.Size.*;
 
 import java.awt.geom.Rectangle2D;
 

@@ -1,21 +1,21 @@
 package levels;
 import main.Game;
-import utilz.LoadSave;
+import utils.LoadSave;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import static utilz.Size.*;
+import static utils.Size.*;
 
 
 
-public class LevelManager {
+public class LevelController {
     // Saves each tile to the array
     private BufferedImage[] levelSprite;
 
     private Game game;
     private Level levelOne;
 
-    public LevelManager(Game game) {
+    public LevelController(Game game) {
         this.game = game;
         importLevelSprites();
         levelOne = new Level(LoadSave.GetLevelData());

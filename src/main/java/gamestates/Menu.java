@@ -1,12 +1,14 @@
 package gamestates;
 
+import entities.Player;
 import main.Game;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import static utils.Physics.*;
 
-import static utilz.Size.GAME_WIDTH;
+import static utils.Size.GAME_WIDTH;
 
 public class Menu extends State implements StateInterface {
     private Rectangle startButton;
@@ -14,6 +16,7 @@ public class Menu extends State implements StateInterface {
     private Rectangle saveButton;
     private Rectangle quitButton;
 
+    private boolean gameSaved = false;
     public Menu(Game game) {
         super(game);
         int buttonWidth = 200;
@@ -46,6 +49,20 @@ public class Menu extends State implements StateInterface {
 
         // Draw quit button
         drawButton(g, quitButton, "QUIT");
+
+        if (gameSaved) {
+            drawGameSavedText(g);
+        }
+    }
+
+    private void drawGameSavedText(Graphics g) {
+        Font savedFont = new Font("Arial", Font.BOLD, 32);
+        g.setFont(savedFont);
+        g.setColor(Color.GREEN);
+        String savedText = "GAME SAVED";
+        int savedTextX = GAME_WIDTH / 2 - g.getFontMetrics(savedFont).stringWidth(savedText) / 2;
+        int savedTextY = 100; // Adjust the y-coordinate to position the text
+        g.drawString(savedText, savedTextX, savedTextY);
     }
 
     private void drawButton(Graphics g, Rectangle button, String text) {
@@ -67,17 +84,20 @@ public class Menu extends State implements StateInterface {
         if (startButton.contains(e.getX(), e.getY())) {
             Gamestate.state = Gamestate.PLAYING;
             System.out.println("Switched to PLAYING state");
+            gameSaved = false;
 
         } else if (loadButton.contains(e.getX(), e.getY())) {
             game.getPlaying().saveLoadGame.load();
-            System.out.println("Game Loaded");
+            Gamestate.state = Gamestate.PLAYING;
+            gameSaved = false;
 
         } else if (saveButton.contains(e.getX(), e.getY())) {
             game.getPlaying().saveLoadGame.save();
-            System.out.println("Game Saved");
+            gameSaved = true;
 
         } else if (quitButton.contains(e.getX(), e.getY())) {
             System.exit(0);
+            gameSaved = false;
         }
     }
 
@@ -100,6 +120,7 @@ public class Menu extends State implements StateInterface {
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.PLAYING;
                 System.out.println("Switched to PLAYING state");
+                gameSaved = false;
                 break;
         }
     }

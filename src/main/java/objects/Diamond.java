@@ -1,9 +1,7 @@
 package objects;
 
-import entities.Player;
-
-import static utilz.Constants.ObjectConstants.*;
-import static utilz.Size.*;
+import static utils.Constants.ObjectConstants.*;
+import static utils.Size.*;
 
 public class Diamond extends Object{
     private static final int DIAMOND_HITBOX_WIDTH = 12;

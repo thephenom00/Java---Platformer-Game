@@ -1,6 +1,6 @@
 package objects;
-import static utilz.Constants.ObjectConstants.*;
-import static utilz.Size.*;
+import static utils.Constants.ObjectConstants.*;
+import static utils.Size.*;
 
 public class Heart extends Object{
     private static final int HEART_HITBOX_WIDTH = 12;

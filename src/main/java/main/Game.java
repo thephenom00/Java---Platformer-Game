@@ -2,9 +2,15 @@ package main;
 
 
 import java.awt.Graphics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import gamestates.*;
 
+import static java.util.logging.Level.INFO;
+
 public class Game implements Runnable {
+    private static final Logger logger = Logger.getLogger(Game.class.getName());
 
     private final GameWindow gameWindow;
     private final GamePanel gamePanel;
@@ -16,10 +22,12 @@ public class Game implements Runnable {
     private Menu menu;
     private GameOver gameOver;
     private YouWin youwin;
+    private boolean loggerEnabled;
 
 
-    public Game() {
+    public Game(boolean loggerEnabled) {
         initClasses();
+        this.loggerEnabled = loggerEnabled;
 
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
@@ -27,6 +35,8 @@ public class Game implements Runnable {
         gamePanel.requestFocus();
 
         startGameLoop();
+        if (loggerEnabled == true)
+            logger.log(Level.INFO, "Hello");
     }
 
 

@@ -21,7 +21,7 @@ public class SaveLoadGame implements Serializable {
     }
 
     public void save() {
-        try (FileWriter writer = new FileWriter("save.json")) {
+        try (FileWriter writer = new FileWriter("src/main/java/utils/save.json")) {
             GameData data = new GameData();
             data.xPosition = playing.getPlayer().getXPosition();
             data.yPosition = playing.getPlayer().getYPosition();
@@ -37,7 +37,6 @@ public class SaveLoadGame implements Serializable {
             String json = gson.toJson(data);
             writer.write(json);
 
-            System.out.println(playing.getPlayer().getHitBox().y);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +45,7 @@ public class SaveLoadGame implements Serializable {
 
     public void load() {
         try {
-            String json = new String(Files.readAllBytes(Paths.get("save.json")));
+            String json = new String(Files.readAllBytes(Paths.get("src/main/java/utils/save.json")));
             GameData data = gson.fromJson(json, GameData.class);
 
 
@@ -61,8 +60,6 @@ public class SaveLoadGame implements Serializable {
             playing.getObjectManager().setHearts(new ArrayList<>(data.heartsArray));
 
             playing.getEnemyManager().setPigs(new ArrayList<>(data.pigsArray));
-
-            System.out.println(data.diamonds);
 
         } catch (Exception e) {
             e.printStackTrace();

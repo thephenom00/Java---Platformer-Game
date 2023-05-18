@@ -3,7 +3,7 @@ package objects;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-import static utilz.Constants.ObjectConstants.*;
+import static utils.Constants.ObjectConstants.*;
 
 public abstract class Object {
     protected float x, y;

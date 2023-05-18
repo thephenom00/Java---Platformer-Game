@@ -3,10 +3,10 @@ package entities;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-import static utilz.Constants.Directions.*;
-import static utilz.Size.*;
+import static utils.Constants.Directions.*;
+import static utils.Size.*;
 
-import static utilz.Constants.EnemyConstants.*;
+import static utils.Constants.EnemyConstants.*;
 
 
 public class Pig extends Enemy {

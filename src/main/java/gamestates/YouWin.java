@@ -5,7 +5,7 @@ import main.Game;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import static utilz.Size.*;
+import static utils.Size.*;
 
 public class YouWin extends State implements StateInterface{
     private Playing playing;

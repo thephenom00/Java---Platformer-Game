@@ -5,7 +5,7 @@ import inputs.MouseInputs;
 import javax.swing.*;
 import java.awt.*;
 
-import static utilz.Size.*;
+import static utils.Size.*;
 
 public class GamePanel extends JPanel {
     private MouseInputs mouseInputs;

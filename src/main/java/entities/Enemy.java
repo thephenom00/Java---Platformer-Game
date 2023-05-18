@@ -1,9 +1,9 @@
 package entities;
 
-import static utilz.Constants.EnemyConstants.*;
-import static utilz.Physics.*;
-import static utilz.Constants.Directions.*;
-import static utilz.Size.*;
+import static utils.Constants.EnemyConstants.*;
+import static utils.Physics.*;
+import static utils.Constants.Directions.*;
+import static utils.Size.*;
 
 
 public abstract class Enemy extends Entity{
@@ -133,7 +133,7 @@ public abstract class Enemy extends Entity{
 
                 if (enemyAction == DEAD) {
                     alive = false;
-                    EnemyManager.subtractPigFromArray();
+                    EnemyController.subtractPigFromArray();
                 }
             }
         }

@@ -1,4 +1,4 @@
-package utilz;
+package utils;
 
 import entities.Pig;
 import objects.Diamond;
@@ -13,10 +13,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static utilz.Size.*;
+import static utils.Size.*;
 
-import static utilz.Constants.EnemyConstants.PIG;
-import static utilz.Constants.ObjectConstants.*;
+import static utils.Constants.EnemyConstants.PIG;
+import static utils.Constants.ObjectConstants.*;
 
 public class LoadSave {
     public static final String PLAYER_ATLAS = "king.png";
@@ -37,7 +37,7 @@ public class LoadSave {
         InputStream is = null;
         BufferedImage img = null;
         try {
-            is = new FileInputStream("res/" + png);
+            is = new FileInputStream("src/main/java/res/" + png);
             img = ImageIO.read(is);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Failed to load sprite atlas: " + png, e);

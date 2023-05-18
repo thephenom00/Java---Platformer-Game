@@ -1,16 +1,16 @@
 package objects;
 
 import entities.Player;
-import utilz.LoadSave;
+import utils.LoadSave;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import static utilz.Constants.ObjectConstants.*;
+import static utils.Constants.ObjectConstants.*;
 
-public class ObjectManager {
+public class ObjectController {
     private Player player;
 
     //Diamonds
@@ -23,7 +23,7 @@ public class ObjectManager {
     private ArrayList<Heart> hearts = new ArrayList<>();
 
 
-    public ObjectManager (Player player) {
+    public ObjectController(Player player) {
         this.player = player;
 
         //Hearts

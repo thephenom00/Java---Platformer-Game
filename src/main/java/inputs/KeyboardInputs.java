@@ -44,7 +44,7 @@ public class KeyboardInputs implements KeyListener {
             case PLAYING -> gamePanel.getGame().getPlaying().keyPressed(e);
             case GAMEOVER -> gamePanel.getGame().getGameOver().keyPressed(e);
             case WIN -> gamePanel.getGame().getYouWin().keyPressed(e);
-            default -> { /* Handle unknown state or perform default action */ }
+            default -> {}
         };
     }
 
