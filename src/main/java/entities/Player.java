@@ -1,5 +1,6 @@
 package entities;
 
+import static utils.Constants.Directions.*;
 import static utils.Physics.CanMoveHere;
 import static utils.Physics.*;
 
@@ -20,42 +21,59 @@ import static utils.Size.*;
 public class Player extends Entity implements Serializable {
     private static final Logger logger = Logger.getLogger(Game.class.getName());
 
+    // Animation
     private BufferedImage[][] animations;
-    private int aniTick, aniIndex, aniSpeed = 25;
+    private int aniTick;
+    private int aniIndex;
+    private int aniSpeed = 25;
+
+    // Player Actions
     private int playerAction = IDLE;
-    private boolean moving = false, attacking = false, getHit = false, dead = false;
-    private boolean left, right, jump;
-    private float playerSpeed = 1.0f * SCALE;
+    private boolean moving = false;
+    private boolean attacking = false;
+    private boolean getHit = false;
+    private boolean dead = false;
+
+    // Movement
+    private boolean left;
+    private boolean right;
+    private boolean jump;
+    private float playerSpeed = SCALE;
+
+    // Level Data
     private int[][] lvlData;
     private Playing playing;
 
-    // Offset for hitbox
+    // Hitbox Offset
     private float xDrawOffsetRight = 23 * SCALE;
     private float xDrawOffsetLeft = 38 * SCALE;
     private float yDrawOffset = 17 * SCALE;
 
+    // Direction
     private Boolean facingRight = true;
 
-    // Jump and gravitation
-    private float airSpeed = 0f; // Speed we are travelling in the air
-    private float gravity = 0.05f * SCALE; // How fast player fall down
-    private float jumpSpeed = -2.5f * SCALE;
-    private float fallSpeedAfterCollision = 0.05f * SCALE;
+    // Jump and Gravity
+    private float airSpeed = 0f; // Speed of moving in the air
+    private float gravity = 0.05f * SCALE; // Speed of falling down
+    private float jumpSpeed = -2.6f * SCALE;
     private boolean inAir = false;
 
+    // Jump on Head
     public boolean jumpOnHead = false;
-    private boolean hitLogged = false;
 
-    //Jump box
+    // Jump Box
     private Rectangle2D.Float jumpBox;
 
-    // Mirror the player
+    // Mirror
     private int mirrorX = 0;
     private int mirrorWidth = 1;
 
     // GUI
     public int lives = 3;
     private int diamondsToCollect;
+
+    // Enemy
+    public int enemyDirection;
 
     public Player(float x, float y, int width, int height, Playing playing) {
         super(x, y, width, height);
@@ -128,8 +146,8 @@ public class Player extends Entity implements Serializable {
 //        drawHitbox(g);
 //        drawJumpBox(g);
 
-        drawLives(g);
-        drawCoins(g);
+        drawLivesText(g);
+        drawCoinsText(g);
     }
 
     public void subtractLife() {
@@ -140,7 +158,7 @@ public class Player extends Entity implements Serializable {
         lives++;
     }
 
-    private void drawCoins(Graphics g) {
+    private void drawCoinsText(Graphics g) {
         // Draws coins to collect
         Font coinsFont = new Font("Arial", Font.PLAIN, 20);
         g.setFont(coinsFont);
@@ -148,7 +166,7 @@ public class Player extends Entity implements Serializable {
         g.drawString("Diamonds to Collect: " + diamondsToCollect, 10, 40);
     }
 
-    private void drawLives(Graphics g) {
+    private void drawLivesText(Graphics g) {
         // Draws lives text
         Font font = new Font("Arial", Font.PLAIN,  20);
         g.setFont(font);
@@ -235,9 +253,10 @@ public class Player extends Entity implements Serializable {
         moving = false;
 
         if (jumpOnHead) {
+            float originalJumpSpeed = jumpSpeed;
             jumpSpeed = -1.5f * SCALE;
             jump();
-            jumpSpeed = -2.5f * SCALE;
+            jumpSpeed = originalJumpSpeed;
             jumpOnHead = false;
         }
 
@@ -270,22 +289,19 @@ public class Player extends Entity implements Serializable {
         }
 
         if (inAir) {
-            // Checks the movement up and down
+            // If player moving downwards
             if (CanMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
-                // Adds the airSpeed
                 hitbox.y += airSpeed;
                 airSpeed += gravity;
                 updateXPos(xSpeed); // We can move to the left and right
 
-                // If we cant move up, we are either on the floor or we touched the ceiling
             } else {
-                hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, airSpeed);
                 // Going down and hit the floor
                 if (airSpeed > 0) {
-                    resetInAir();
-                    // Hits the ceiling
+                    inAir = false;
+                    airSpeed = 0;
                 } else {
-                    airSpeed = fallSpeedAfterCollision;
+                    airSpeed = 0;
                     updateXPos(xSpeed);
                 }
             }
@@ -298,6 +314,14 @@ public class Player extends Entity implements Serializable {
         }
 
 
+    }
+
+    private void updateXPos(float xSpeed) {
+
+        // If player is on the ground and tile is not solid, moves
+        if(CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
+            hitbox.x += xSpeed;
+        }
     }
 
     private void checkIfPlayerInAir() {
@@ -318,19 +342,6 @@ public class Player extends Entity implements Serializable {
         airSpeed = jumpSpeed;
     }
 
-
-    private void updateXPos(float xSpeed) {
-
-        // If player is on the ground and tile is not solid, moves
-        if(CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
-            hitbox.x += xSpeed;
-        } else {
-            // If player collides with wall
-
-            hitbox.x = GetEntityXPosNextToWall(hitbox, xSpeed);
-
-        }
-    }
 
     // Method for update the Animation Tick
     private void updateAnimationTick() {
@@ -371,8 +382,7 @@ public class Player extends Entity implements Serializable {
     }
 
     private void resetInAir() {
-        inAir = false;
-        airSpeed = 0;
+
     }
 
     public void resetMovement() {
@@ -386,10 +396,16 @@ public class Player extends Entity implements Serializable {
     }
 
     public void getHit(boolean getHit) {
+        this.getHit = getHit;
         if (playing.getGame().getLoggerState()) {
             logger.log(Level.INFO, "Player got hit");
         }
-        this.getHit = getHit;
+
+        if (playerAction != DEAD)
+            if (enemyDirection == LEFT)
+                hitbox.x -= 25;
+            else
+                hitbox.x += 25;
     }
 
     public void setDeath(boolean dead) {
@@ -400,7 +416,6 @@ public class Player extends Entity implements Serializable {
 
     public void resetPlayer() {
         resetMovement();
-        resetInAir();
         resetAniTick();
         dead = false;
         moving = false;
@@ -408,7 +423,8 @@ public class Player extends Entity implements Serializable {
         getHit = false;
         playerAction = IDLE;
         lives = 3;
-
+        inAir = false;
+        airSpeed = 0;
 
         hitbox.x = x;
         hitbox.y = y;
@@ -471,6 +487,10 @@ public class Player extends Entity implements Serializable {
 
     public Playing getPlaying() {
         return playing;
+    }
+
+    public void enemyDirection(int direction) {
+        this.enemyDirection = direction;
     }
 
 }

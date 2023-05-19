@@ -6,9 +6,7 @@ public class Constants {
 
     public static class Directions {
         public static final int LEFT = 0;
-        public static final int UP = 1;
-        public static final int RIGHT = 2;
-        public static final int DOWN = 3;
+        public static final int RIGHT = 1;
     }
 
     public static class ObjectConstants {
@@ -22,7 +20,6 @@ public class Constants {
 
         // DIAMOND
         public static final int DIAMOND = 10;
-
         public static final int DIAMOND_WIDTH_DEFAULT = 18;
         public static final int DIAMOND_HEIGHT_DEFAULT = 14;
 

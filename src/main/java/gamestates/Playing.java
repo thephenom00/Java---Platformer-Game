@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import entities.Enemy;
 import entities.EnemyController;
 import entities.Player;
 import levels.LevelController;
@@ -24,10 +25,10 @@ public class Playing extends State implements StateInterface {
     private LevelController levelController;
     private EnemyController enemyController;
     private ObjectController objectController;
+
     SaveLoadGame saveLoadGame = new SaveLoadGame(this);
 
     private final BufferedImage background;
-
 
     public Playing(Game game) {
         super(game);

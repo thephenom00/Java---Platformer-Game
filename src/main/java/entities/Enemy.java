@@ -20,7 +20,6 @@ public abstract class Enemy extends Entity{
     protected int mirrorX = 0;
     protected int mirrorWidth = 1;
 
-
     // Range
     protected int yLevel;
     protected int playerYLevel;
@@ -172,6 +171,10 @@ public abstract class Enemy extends Entity{
 
     public boolean isAlive() {
         return alive;
+    }
+
+    public int getRunDirection() {
+        return runDirection;
     }
 }
 

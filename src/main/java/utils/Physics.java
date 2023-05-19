@@ -30,7 +30,6 @@ public class Physics {
             return true;
         }
 
-
         float xIndex = x / TILES_SIZE;
         float yIndex = y / TILES_SIZE;
 
@@ -47,28 +46,6 @@ public class Physics {
             return true;
         }
         return false;
-    }
-
-
-    public static float GetEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
-        // In which tile we are located
-        int currentTile = (int) (hitbox.x / TILES_SIZE);
-
-        // Colides with tile on the right
-        if(xSpeed > 0) {
-            // Value in pixels
-            int tileXPos = currentTile * TILES_SIZE;
-
-            // Space between our position and the wall
-            int xOffset = (int)(TILES_SIZE - hitbox.width);
-
-            return tileXPos + xOffset - 1; // -1 because the hitbox is in tile
-
-            // Colides with tile on the left
-        } else {
-            // Does not compute offset, only returns the tile we are in
-            return currentTile * TILES_SIZE;
-        }
     }
 
 
