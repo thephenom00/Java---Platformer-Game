@@ -19,6 +19,8 @@ public class Menu extends State implements StateInterface {
     private Rectangle saveButton;
     private Rectangle quitButton;
 
+    private Image logoImage;
+
     private boolean gameSaved = false;
     public Menu(Game game) {
         super(game);
@@ -26,11 +28,14 @@ public class Menu extends State implements StateInterface {
         int buttonHeight = (int) (53 * SCALE);
         int buttonSpacing = (int) (13 * SCALE);
         int buttonX = GAME_WIDTH / 2 - buttonWidth / 2;
-        int startY = 200;
+        int startY = 320;
         startButton = new Rectangle(buttonX, startY, buttonWidth, buttonHeight);
         loadButton = new Rectangle(buttonX, startY + buttonHeight + buttonSpacing, buttonWidth, buttonHeight);
         saveButton = new Rectangle(buttonX, startY + (buttonHeight + buttonSpacing) * 2, buttonWidth, buttonHeight);
         quitButton = new Rectangle(buttonX, startY + (buttonHeight + buttonSpacing) * 3, buttonWidth, buttonHeight);
+        logoImage = Toolkit.getDefaultToolkit().getImage("src/main/java/res/logo.png");
+        int logoSize = (int) (128 * SCALE);  // Calculate the scaled size of the logo
+        logoImage = logoImage.getScaledInstance(logoSize, logoSize, Image.SCALE_SMOOTH);  // Scale the logo image
     }
 
     @Override
@@ -39,6 +44,10 @@ public class Menu extends State implements StateInterface {
 
     @Override
     public void draw(Graphics g) {
+        int logoX = GAME_WIDTH / 2 - (logoImage.getWidth(null) / 2);  // Adjusted logo position to be centered horizontally
+        int logoY = 100;  // Adjusted logo position vertically
+        g.drawImage(logoImage, logoX, logoY, null);
+
         // Draw start button
         drawButton(g, startButton, "PLAY");
 
@@ -59,10 +68,10 @@ public class Menu extends State implements StateInterface {
     private void drawGameSavedText(Graphics g) {
         Font savedFont = new Font("Arial", Font.BOLD, 32);
         g.setFont(savedFont);
-        g.setColor(Color.GREEN);
+        g.setColor(Color.BLACK);
         String savedText = "GAME SAVED";
         int savedTextX = GAME_WIDTH / 2 - g.getFontMetrics(savedFont).stringWidth(savedText) / 2;
-        int savedTextY = 100; // Adjust the y-coordinate to position the text
+        int savedTextY = 75;
         g.drawString(savedText, savedTextX, savedTextY);
     }
 

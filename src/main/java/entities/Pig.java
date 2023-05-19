@@ -19,7 +19,7 @@ public class Pig extends Enemy {
     protected Rectangle2D.Float topHitbox;
 
     public Pig (float x, float y) {
-        super(x, y, PIG_WIDTH, PIG_HEIGHT, PIG);
+        super(x, y, PIG_WIDTH, PIG_HEIGHT);
         createHitbox(x, y, (int)(PIG_HITBOX_WIDTH * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
         createAttackBox(x, y, (int)(10 * SCALE), (int) (PIG_HITBOX_HEIGHT * SCALE));
         createTopHitbox(x, y, (int)(PIG_HITBOX_WIDTH * SCALE) - 10,  3 * SCALE);

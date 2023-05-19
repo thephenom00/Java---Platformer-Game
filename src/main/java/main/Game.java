@@ -2,9 +2,14 @@ package main;
 
 
 import java.awt.Graphics;
+import java.io.IOException;
 import java.util.logging.Logger;
 
+import audio.AudioController;
 import gamestates.*;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import static java.util.logging.Level.INFO;
 
@@ -21,6 +26,7 @@ public class Game implements Runnable {
     private Menu menu;
     private GameOver gameOver;
     private YouWin youwin;
+    private AudioController audioController;
     private boolean loggerEnabled;
 
 
@@ -34,6 +40,8 @@ public class Game implements Runnable {
         gamePanel.requestFocus();
 
         startGameLoop();
+
+        createAudio();
 
     }
 
@@ -123,10 +131,15 @@ public class Game implements Runnable {
                 frames = 0;
                 updates = 0;
             }
-
-
         }
+    }
 
+    private void createAudio() {
+        try {
+            audioController = new AudioController();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
     // If we leave the window, movement stops

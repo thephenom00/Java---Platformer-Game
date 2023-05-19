@@ -7,7 +7,7 @@ import static utils.Size.*;
 
 
 public abstract class Enemy extends Entity{
-    protected int aniIndex, enemyAction, enemyType;
+    protected int aniIndex, enemyAction;
     protected int aniTick, aniSpeed = 25;
     protected boolean firstUpdate = true;
     protected boolean inAir;
@@ -28,9 +28,8 @@ public abstract class Enemy extends Entity{
     // Is Alive
     protected boolean alive = true;
 
-    public Enemy(float x, float y, int width, int height, int enemyType) {
+    public Enemy(float x, float y, int width, int height) {
         super(x, y, width, height);
-        this.enemyType = enemyType;
         createHitbox(x, y, width, height);
     }
 
@@ -124,7 +123,7 @@ public abstract class Enemy extends Entity{
             aniIndex++;
 
             // If all the sprites were displayed, reset
-            if (aniIndex >= GetSpriteAmount(enemyType, enemyAction)) {
+            if (aniIndex >= GetSpriteAmount(enemyAction)) {
                 aniIndex = 0;
                 if (enemyAction == ATTACK) {
                     enemyAction = IDLE;

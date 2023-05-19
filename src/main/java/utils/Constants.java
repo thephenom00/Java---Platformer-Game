@@ -50,36 +50,24 @@ public class Constants {
         public static final int PIG_WIDTH_DEFAULT = 38;
         public static final int PIG_HEIGHT_DEFAULT = 28;
 
-        public static final int PIG_WIDTH = (int)(PIG_WIDTH_DEFAULT * SCALE);
-        public static final int PIG_HEIGHT = (int)(PIG_HEIGHT_DEFAULT * SCALE);
+        public static final int PIG_WIDTH = (int) (PIG_WIDTH_DEFAULT * SCALE);
+        public static final int PIG_HEIGHT = (int) (PIG_HEIGHT_DEFAULT * SCALE);
 
         public static final int PIG_XOFFSET = (int) (13 * SCALE);
         public static final int PIG_YOFFSET = (int) (8 * SCALE);
 
-        public static int GetSpriteAmount(int enemyType, int enemyAction) {
-            switch(enemyType) {
-                case PIG:
-                    switch (enemyAction) {
-                        case IDLE:
-                            return 12;
-                        case RUNNING:
-                            return 6;
-                        case ATTACK:
-                            return 5;
-                        case HIT:
-                            return 2;
-                        case FALLING:
-                        case JUMP:
-                        case GROUND:
-                            return 1;
-                        case DEAD:
-                            return 4;
-                    }
-            }
-            return 0;
+        public static int GetSpriteAmount(int enemyAction) {
+            return switch (enemyAction) {
+                case IDLE -> 12;
+                case RUNNING -> 6;
+                case ATTACK -> 5;
+                case HIT -> 2;
+                case FALLING, JUMP, GROUND -> 1;
+                case DEAD -> 4;
+                default -> 0;
+            };
         }
     }
-
 
     public static class PlayerConstants {
         public static final int IDLE = 0;

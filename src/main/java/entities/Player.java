@@ -317,7 +317,6 @@ public class Player extends Entity implements Serializable {
     }
 
     private void updateXPos(float xSpeed) {
-
         // If player is on the ground and tile is not solid, moves
         if(CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
             hitbox.x += xSpeed;
@@ -397,6 +396,7 @@ public class Player extends Entity implements Serializable {
 
     public void getHit(boolean getHit) {
         this.getHit = getHit;
+        jump = false;
         if (playing.getGame().getLoggerState()) {
             logger.log(Level.INFO, "Player got hit");
         }
