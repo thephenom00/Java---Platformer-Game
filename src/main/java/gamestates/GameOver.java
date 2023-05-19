@@ -27,21 +27,26 @@ public class GameOver extends State implements StateInterface{
         g.setColor(new Color(0, 0, 0, 200));
         g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 40));
         String gameOverText = "GAME OVER!";
+        g.setFont(new Font("Arial", Font.BOLD, 60));
         int textWidth = g.getFontMetrics().stringWidth(gameOverText);
         int x = (GAME_WIDTH - textWidth) / 2;
-        int y = GAME_HEIGHT / 2;
+        int y = GAME_HEIGHT / 2 - 50;
+        g.setColor(Color.WHITE);
         g.drawString(gameOverText, x, y);
 
-
-        String pressEscText = "Press ESC to get to MENU";
-        int pressEscTextWidth = g.getFontMetrics().stringWidth(pressEscText);
-        int x2 = (GAME_WIDTH - pressEscTextWidth) / 2;
-        int y2 = y + 50; // Adjust the vertical position as needed
+        String pressEscText = "Press ESC to go to MENU";
+        int x2 = (GAME_WIDTH - textWidth) / 2;
+        int y2 = y + 80;
+        g.setFont(new Font("Arial", Font.BOLD, 30));
         g.drawString(pressEscText, x2, y2);
+
+        String restartText = "Press R to restart the game";
+        int x3 = (GAME_WIDTH - textWidth) / 2;
+        int y3 = y2 + 50;
+        g.drawString(restartText, x3, y3);
     }
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -68,6 +73,10 @@ public class GameOver extends State implements StateInterface{
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.MENU;
+                playing.resetGame();
+                break;
+            case KeyEvent.VK_R:
+                Gamestate.state = Gamestate.PLAYING;
                 playing.resetGame();
                 break;
         }

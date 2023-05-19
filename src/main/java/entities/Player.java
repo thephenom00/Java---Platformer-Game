@@ -81,6 +81,7 @@ public class Player extends Entity implements Serializable {
         loadAnimations();
         createHitbox(x, y,16 * SCALE, 26 * SCALE);
         createJumpBox(x, y, 16 * SCALE, 1 * SCALE);
+
     }
 
     public void update() {
@@ -402,10 +403,21 @@ public class Player extends Entity implements Serializable {
         }
 
         if (playerAction != DEAD)
-            if (enemyDirection == LEFT)
+            if (enemyDirection == LEFT) {
                 hitbox.x -= 25;
-            else
+            }
+
+            if (enemyDirection == RIGHT) {
                 hitbox.x += 25;
+            }
+
+            if (enemyDirection == LEFT && hitbox.x - 25 < 0) {
+                hitbox.x = 0;
+            }
+
+        if (enemyDirection == RIGHT && hitbox.x + 25 > GAME_WIDTH) {
+            hitbox.x = GAME_WIDTH - hitbox.width;
+        }
     }
 
     public void setDeath(boolean dead) {
@@ -456,6 +468,14 @@ public class Player extends Entity implements Serializable {
         this.jump = jump;
     }
 
+    public boolean isJump() {
+        return jump;
+    }
+
+    public boolean isAttacking() {
+        return attacking;
+    }
+
     public Rectangle2D.Float getHitBox() {
         return hitbox;
     }
@@ -493,4 +513,9 @@ public class Player extends Entity implements Serializable {
         this.enemyDirection = direction;
     }
 
+    private void testing() {
+        this.playerSpeed = 2f;
+        this.jumpSpeed = -3.0f;
+        this.lives = 400;
+    }
 }

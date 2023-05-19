@@ -1,4 +1,6 @@
 package objects;
+import java.awt.geom.Rectangle2D;
+
 import static utils.Constants.ObjectConstants.*;
 import static utils.Size.*;
 
@@ -14,5 +16,16 @@ public class Heart extends Object{
 
     public void update() {
         updateAnimationTick();
+    }
+
+    public Rectangle2D.Float getHitbox(){
+        return hitbox;
+    }
+    public boolean playerCollectedHeart(Rectangle2D.Float playerHitbox) {
+        if (playerHitbox.intersects(getHitbox())) {
+            isCollected = true;
+            return true;
+        }
+        return false;
     }
 }

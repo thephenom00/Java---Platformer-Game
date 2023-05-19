@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import entities.Enemy;
 import entities.EnemyController;
 import entities.Player;
 import levels.LevelController;
@@ -92,7 +91,7 @@ public class Playing extends State implements StateInterface {
 
     public void resetGame() {
         player.resetPlayer();
-        enemyController.resetEnemyManager();
+        enemyController.resetEnemyController();
         objectController.resetObjects();
         if(game.getLoggerState())
             logger.log(Level.INFO, "Game Reset");

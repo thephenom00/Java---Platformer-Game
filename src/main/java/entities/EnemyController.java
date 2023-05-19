@@ -51,15 +51,15 @@ public class EnemyController implements Serializable {
                 if (jumpBox.intersects(onePig.topHitbox) && onePig.enemyAction != DEAD) {
                     onePig.changeAction(DEAD);
                     numberOfPigsAlive--;
+
                     if (playing.getGame().getLoggerState()) {
                         logger.log(Level.INFO, numberOfPigsAlive + " pigs remaining");
                     }
 
                     playing.getPlayer().setAttack(true);
                     playing.getPlayer().jumpOnHead = true;
-                    return;
-                }
 
+                }
             }
         }
 
@@ -119,7 +119,7 @@ public class EnemyController implements Serializable {
 
     }
 
-    public void resetEnemyManager() {
+    public void resetEnemyController() {
         for (Pig onePig : pigs){
             onePig.resetEnemy();
         }

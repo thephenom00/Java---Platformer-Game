@@ -28,7 +28,7 @@ public class Menu extends State implements StateInterface {
         int buttonHeight = (int) (53 * SCALE);
         int buttonSpacing = (int) (13 * SCALE);
         int buttonX = GAME_WIDTH / 2 - buttonWidth / 2;
-        int startY = 320;
+        int startY = (int) (213 * SCALE);
         startButton = new Rectangle(buttonX, startY, buttonWidth, buttonHeight);
         loadButton = new Rectangle(buttonX, startY + buttonHeight + buttonSpacing, buttonWidth, buttonHeight);
         saveButton = new Rectangle(buttonX, startY + (buttonHeight + buttonSpacing) * 2, buttonWidth, buttonHeight);
@@ -44,8 +44,8 @@ public class Menu extends State implements StateInterface {
 
     @Override
     public void draw(Graphics g) {
-        int logoX = GAME_WIDTH / 2 - (logoImage.getWidth(null) / 2);  // Adjusted logo position to be centered horizontally
-        int logoY = 100;  // Adjusted logo position vertically
+        int logoX = GAME_WIDTH / 2 - (logoImage.getWidth(null) / 2);
+        int logoY = 100;
         g.drawImage(logoImage, logoX, logoY, null);
 
         // Draw start button

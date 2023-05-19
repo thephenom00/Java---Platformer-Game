@@ -41,8 +41,7 @@ public class Game implements Runnable {
 
         startGameLoop();
 
-        createAudio();
-
+//        createAudio();
     }
 
 

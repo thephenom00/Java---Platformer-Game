@@ -1,5 +1,7 @@
 package objects;
 
+import java.awt.geom.Rectangle2D;
+
 import static utils.Constants.ObjectConstants.*;
 import static utils.Size.*;
 
@@ -17,6 +19,22 @@ public class Diamond extends Object{
 
     public void update() {
         updateAnimationTick();
+    }
+
+    public float getDiamondXPosition() {
+        return getHitbox().x;
+    }
+
+    public float getDiamondYPosition() {
+        return getHitbox().y;
+    }
+
+    public boolean playerCollectedDiamond(Rectangle2D.Float playerHitbox) {
+        if (playerHitbox.intersects(getHitbox())) {
+            isCollected = true;
+            return true;
+        }
+        return false;
     }
 
 
