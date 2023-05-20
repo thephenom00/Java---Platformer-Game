@@ -1,6 +1,5 @@
 package main;
 
-
 import java.awt.Graphics;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -27,21 +26,30 @@ public class Game implements Runnable {
     private GameOver gameOver;
     private YouWin youwin;
     private AudioController audioController;
+
     private boolean loggerEnabled;
 
-
     public Game(boolean loggerEnabled) {
-        initClasses();
         this.loggerEnabled = loggerEnabled;
-
+        initClasses();
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
-
         startGameLoop();
+        playMusic();
+    }
 
-//        createAudio();
+    private void playMusic() {
+        try {
+            audioController.playClip("src/main/java/audio/clash.wav");
+        } catch (UnsupportedAudioFileException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -50,6 +58,7 @@ public class Game implements Runnable {
         playing = new Playing(this);
         gameOver = new GameOver(this, playing); // RESTART
         youwin = new YouWin(this, playing); // RESTART
+        audioController = new AudioController();
     }
 
     // Starts the thread
@@ -60,14 +69,22 @@ public class Game implements Runnable {
 
     public void update() {
         switch (Gamestate.state) {
-            case MENU -> menu.update();
-            case PLAYING -> playing.update();
-            case GAMEOVER -> gameOver.update();
-            case WIN -> youwin.update();
-            default -> { }
-        };
-    }
+            case MENU -> {
+                menu.update();
+            }
+            case PLAYING -> {
+                playing.update();
+            }
+            case GAMEOVER -> {
+                gameOver.update();
+            }
+            case WIN -> {
+                youwin.update();
+            }
+            default -> {}
+        }
 
+    }
 
 
     public void render(Graphics g) {
@@ -78,15 +95,10 @@ public class Game implements Runnable {
             case WIN -> youwin.draw(g);
             default -> {}
         }
-
     }
 
-
-    // FPS takes care of rendering (player, enemies)
-    // UPS takes care of movement
     @Override
     public void run() {
-
         // Divide second into 120 parts
         double timePerFrame = 1000000000.0 / FPS;
         double timePerUpdate = 1000000000.0 / UPS;
@@ -125,23 +137,12 @@ public class Game implements Runnable {
 
             if (System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
-//                if (loggerEnabled == true && Gamestate.state == Gamestate.PLAYING)
-//                    logger.log(INFO,"FPS: " + frames + " | UPS: " + updates);
                 frames = 0;
                 updates = 0;
             }
         }
     }
 
-    private void createAudio() {
-        try {
-            audioController = new AudioController();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // If we leave the window, movement stops
     public void windowFocusLost() {
         if (Gamestate.state == Gamestate.PLAYING)
             playing.getPlayer().resetMovement();
@@ -166,4 +167,7 @@ public class Game implements Runnable {
         return loggerEnabled;
     }
 
+    public AudioController getAudioController() {
+        return audioController;
+    }
 }

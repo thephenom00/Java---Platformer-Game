@@ -92,8 +92,8 @@ public class Pig extends Enemy {
                 case ATTACK:
                     if (aniIndex == 3 && isPlayerInAttackRange(player)) {
                         playerGetHit(player);
-                        break;
                     }
+                    break;
 
 
             }
@@ -106,6 +106,7 @@ public class Pig extends Enemy {
     }
 
     protected void playerGetHit(Player player) {
+        player.enemyYPosition(getYPosition());
         player.enemyDirection(runDirection);
         player.getHit(true);
         player.subtractLife();

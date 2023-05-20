@@ -93,7 +93,7 @@ public class YouWin extends State implements StateInterface{
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            Gamestate.state = Gamestate.MENU;
+            changeState(Gamestate.MENU, true);
             playing.resetGame();
         }
     }

@@ -5,9 +5,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import audio.AudioController;
 import entities.EnemyController;
 import entities.Player;
 import levels.LevelController;
@@ -15,6 +17,10 @@ import main.Game;
 import objects.ObjectController;
 import saveload.SaveLoadGame;
 import utils.LoadSave;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import static utils.Size.*;
 
 public class Playing extends State implements StateInterface {
@@ -29,7 +35,7 @@ public class Playing extends State implements StateInterface {
 
     private final BufferedImage background;
 
-    public Playing(Game game) {
+    public Playing(Game game){
         super(game);
         initializeClasses();
         background = LoadSave.GetSpriteAtlas(LoadSave.BACKGROUND);
@@ -71,9 +77,10 @@ public class Playing extends State implements StateInterface {
 
     public void checkWin () {
         if (enemyController.numberOfPigsAlive == 0 && objectController.numberOfDiamondsToTake == 0) {
-            if (game.getLoggerState())
+            if (game.getLoggerState()) {
                 logger.log(Level.INFO, "Player Wins");
-                Gamestate.state = Gamestate.WIN;
+                changeState(Gamestate.WIN, true);
+            }
         }
     }
 
@@ -107,9 +114,9 @@ public class Playing extends State implements StateInterface {
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> player.setLeft(true);
             case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> player.setRight(true);
             case KeyEvent.VK_SPACE -> player.setJump(true);
-            case KeyEvent.VK_P -> Gamestate.state = Gamestate.WIN;
+            case KeyEvent.VK_P -> changeState(Gamestate.WIN, true);
             case KeyEvent.VK_ESCAPE -> {
-                Gamestate.state = Gamestate.MENU;
+                changeState(Gamestate.MENU, false);
                 player.resetMovement();
                 if(game.getLoggerState())
                     logger.log(Level.INFO, "Switched to MENU state");

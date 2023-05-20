@@ -1,11 +1,15 @@
 package gamestates;
 
+import audio.AudioController;
 import entities.Player;
 import main.Game;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static utils.Size.GAME_WIDTH;
@@ -20,7 +24,6 @@ public class Menu extends State implements StateInterface {
     private Rectangle quitButton;
 
     private Image logoImage;
-
     private boolean gameSaved = false;
     public Menu(Game game) {
         super(game);
@@ -92,14 +95,14 @@ public class Menu extends State implements StateInterface {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (startButton.contains(e.getX(), e.getY())) {
-            Gamestate.state = Gamestate.PLAYING;
+            changeState(Gamestate.PLAYING, false);
             gameSaved = false;
             if (game.getLoggerState())
                 logger.log(Level.INFO,"Switched to PLAYING state");
 
         } else if (loadButton.contains(e.getX(), e.getY())) {
             game.getPlaying().saveLoadGame.load();
-            Gamestate.state = Gamestate.PLAYING;
+            changeState(Gamestate.PLAYING, false);
             gameSaved = false;
             if (game.getLoggerState())
                 logger.log(Level.INFO,"GAME LOADED");
@@ -135,7 +138,7 @@ public class Menu extends State implements StateInterface {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
-                Gamestate.state = Gamestate.PLAYING;
+                changeState(Gamestate.PLAYING, false);
                 if (game.getLoggerState())
                     logger.log(Level.INFO,"Switched to PLAYING state");
                 gameSaved = false;

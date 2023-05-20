@@ -1,5 +1,6 @@
 package entities;
 
+import audio.AudioController;
 import gamestates.Playing;
 import levels.LevelController;
 import main.Game;
@@ -52,10 +53,10 @@ public class PlayerTest {
 
     @Test
     public void testPlayerInitialization() {
-        assertEquals(0, player.getXPosition(), 0);
-        assertEquals(0, player.getYPosition(), 0);
+        assertEquals(33, player.getXPosition(), 0);
+        assertEquals(420, player.getYPosition(), 0);
         assertEquals(3, player.getLives(), 0);
-        assertEquals(0, player.getDiamondsToCollect());
+        assertEquals(8, player.getDiamondsToCollect());
         assertFalse(player.isLeft());
         assertFalse(player.isRight());
     }

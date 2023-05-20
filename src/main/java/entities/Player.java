@@ -74,6 +74,7 @@ public class Player extends Entity implements Serializable {
 
     // Enemy
     public int enemyDirection;
+    public float enemyYPosition;
 
     public Player(float x, float y, int width, int height, Playing playing) {
         super(x, y, width, height);
@@ -232,7 +233,7 @@ public class Player extends Entity implements Serializable {
             left = false;
             right = false;
             if (aniIndex == 3) {
-                Gamestate.state = Gamestate.GAMEOVER;
+                playing.changeState(Gamestate.GAMEOVER, true);
                 if (playing.getGame().getLoggerState())
                     logger.log(Level.INFO, "GAME OVER");
             }
@@ -381,9 +382,6 @@ public class Player extends Entity implements Serializable {
             inAir = true;
     }
 
-    private void resetInAir() {
-
-    }
 
     public void resetMovement() {
         left = false;
@@ -402,7 +400,7 @@ public class Player extends Entity implements Serializable {
             logger.log(Level.INFO, "Player got hit");
         }
 
-        if (playerAction != DEAD)
+        if (!jump) {
             if (enemyDirection == LEFT) {
                 hitbox.x -= 25;
             }
@@ -415,9 +413,12 @@ public class Player extends Entity implements Serializable {
                 hitbox.x = 0;
             }
 
-        if (enemyDirection == RIGHT && hitbox.x + 25 > GAME_WIDTH) {
-            hitbox.x = GAME_WIDTH - hitbox.width;
+            if (enemyDirection == RIGHT && hitbox.x + 25 > GAME_WIDTH) {
+                hitbox.x = GAME_WIDTH - hitbox.width;
+            }
         }
+
+
     }
 
     public void setDeath(boolean dead) {
@@ -511,6 +512,10 @@ public class Player extends Entity implements Serializable {
 
     public void enemyDirection(int direction) {
         this.enemyDirection = direction;
+    }
+
+    public void enemyYPosition(float y) {
+        this.enemyYPosition = y;
     }
 
     private void testing() {

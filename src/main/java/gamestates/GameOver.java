@@ -72,12 +72,13 @@ public class GameOver extends State implements StateInterface{
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
-                Gamestate.state = Gamestate.MENU;
+                changeState(Gamestate.MENU, true);
                 playing.resetGame();
                 break;
+
             case KeyEvent.VK_R:
-                Gamestate.state = Gamestate.PLAYING;
                 playing.resetGame();
+                changeState(Gamestate.PLAYING, true);
                 break;
         }
     }
