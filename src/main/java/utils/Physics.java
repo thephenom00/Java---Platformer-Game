@@ -8,16 +8,10 @@ public class Physics {
     // Checks if the movement is possible
     public static boolean CanMoveHere(float x, float y, float width, float height, int[][] lvlData) {
         // Calls isSolid method with each corner as a parameter
-        if(!isSolid(x,y,lvlData)) {
-            if(!isSolid(x+width, y+height, lvlData)) {
-                if (!isSolid(x+width,y, lvlData)) {
-                    if (!isSolid(x, y+height, lvlData)){
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return !isSolid(x, y, lvlData) &&
+                !isSolid(x + width, y + height, lvlData) &&
+                !isSolid(x + width, y, lvlData) &&
+                !isSolid(x, y + height, lvlData);
     }
 
     private static boolean isSolid(float x, float y, int[][] lvlData) {
@@ -33,7 +27,7 @@ public class Physics {
         float xIndex = x / TILES_SIZE;
         float yIndex = y / TILES_SIZE;
 
-        return isSolidHelper((int)xIndex, (int)yIndex, lvlData);
+        return isSolidHelper((int) xIndex, (int) yIndex, lvlData);
     }
 
     public static boolean isSolidHelper (int xIndex, int yIndex, int[][] lvlData) {

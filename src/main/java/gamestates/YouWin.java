@@ -4,29 +4,21 @@ import main.Game;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import static utils.Size.*;
 
-public class YouWin extends State implements StateInterface{
+public class YouWin extends State{
     private Playing playing;
     public YouWin(Game game, Playing playing) {
         super(game);
         this.playing = playing;
     }
 
-    @Override
-    public void update() {
-
-    }
 
 
-    @Override
     public void draw(Graphics g) {
-        // Clear the screen
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-        // Draw the winning message
         Color backgroundColor = Color.BLACK;
         Color bigTextColor = Color.YELLOW;
         Color smallTextColor = Color.WHITE;
@@ -35,7 +27,6 @@ public class YouWin extends State implements StateInterface{
         String bigMessage = "Congratulations! You Win!";
         String smallMessage = "Press ESC to return to the menu";
 
-        // Set background color
         g.setColor(backgroundColor);
         g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
@@ -62,35 +53,11 @@ public class YouWin extends State implements StateInterface{
         int smallX = (GAME_WIDTH - smallMessageWidth) / 2;
         int smallY = bigY + bigFontMetrics.getHeight() + 20;
 
-        // Draw the small text
         g.drawString(smallMessage, smallX, smallY);
     }
 
 
 
-
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             changeState(Gamestate.MENU, true);
@@ -98,8 +65,4 @@ public class YouWin extends State implements StateInterface{
         }
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 }

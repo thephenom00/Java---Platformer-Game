@@ -24,7 +24,7 @@ public class State {
                 Gamestate.state = Gamestate.MENU;
                 if(music) {
                     try {
-                        game.getAudioController().playClip("src/main/java/audio/clash.wav");
+                        game.getAudioController().playClip("src/main/java/audio/megalovania.wav");
                     } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -36,7 +36,7 @@ public class State {
                 Gamestate.state = Gamestate.PLAYING;
                 if (music) {
                     try {
-                        game.getAudioController().playClip("src/main/java/audio/clash.wav");
+                        game.getAudioController().playClip("src/main/java/audio/megalovania.wav");
                     } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
                         throw new RuntimeException(ex);
                     }

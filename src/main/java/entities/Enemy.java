@@ -9,8 +9,7 @@ import static utils.Size.*;
 public abstract class Enemy extends Entity{
     protected int aniIndex, enemyAction;
     protected int aniTick, aniSpeed = 25;
-    protected boolean firstUpdate = true;
-    protected boolean inAir;
+    protected boolean startForTheFirstTime = true;
     protected float fallSpeed;
     protected float gravity = 0.04f * SCALE;
     protected float enemySpeed = 0.3f * SCALE;
@@ -34,7 +33,10 @@ public abstract class Enemy extends Entity{
     }
 
 
-
+    /**
+     * If player is on the left or right, enemy will turn to him
+     * @param player Player object
+     */
     protected void facePlayer(Player player) {
 
         // Enemy ... Player
@@ -46,7 +48,12 @@ public abstract class Enemy extends Entity{
         }
     }
 
-    // Checks if player is in the range of enemy
+    /**
+     * Checks if the enemy can run towards player
+     * @param lvlData game world
+     * @param player  player object
+     * @return true if the player is in range and visible to the enemy, false otherwise
+     */
     protected boolean canSeePlayer(int[][] lvlData, Player player) {
         playerYLevel = (int) (player.getHitbox().y / TILES_SIZE);
 
@@ -60,8 +67,12 @@ public abstract class Enemy extends Entity{
         return false;
     }
 
+    /**
+     * Checks if the player in the range of the enemy
+     * @param player the player object
+     * @return true if the player is in the range of the enemy, false otherwise
+     */
     protected boolean isPlayerInRange(Player player) {
-
         int EnemyPlayerDistance = (int) Math.abs(hitbox.x - player.hitbox.x);
         if (EnemyPlayerDistance <= seePlayerRange) {
             return true;
@@ -70,15 +81,22 @@ public abstract class Enemy extends Entity{
 
     }
 
-
+    /**
+     * If action is changed, resets the animation tick
+     * @param enemyAction new action of enemy
+     */
     protected void changeAction(int enemyAction) {
         this.enemyAction = enemyAction;
         aniIndex = 0;
         aniTick = 0;
     }
 
+    /**
+     * Handles logic of running of an enemy
+     * @param lvlData game world
+     */
     protected void running(int[][] lvlData) {
-        float xSpeed = 0;
+        float xSpeed;
         if (runDirection == LEFT) {
             xSpeed = -enemySpeed;
         } else {
@@ -86,36 +104,42 @@ public abstract class Enemy extends Entity{
         }
 
         //Checks if CanMoveHere and if there is an edge
-        if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData))
+        if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
             if (isFloor(hitbox, xSpeed, lvlData)) {
                 hitbox.x += xSpeed;
                 return;
             }
+        }
 
         // If all the IFs above will fail, we change direction
-        changeDirection();
-
-    }
-
-    protected void firstUpdateCheck(int[][] lvlData) {
-        // If is not on floor = in air
-        if (!IsEntityOnFloor(hitbox, lvlData))
-            inAir = true;
-        firstUpdate = false;
-    }
-
-    protected void updateInAir(int[][] lvlData) {
-        if (CanMoveHere(hitbox.x, hitbox.y + fallSpeed, hitbox.width, hitbox.height, lvlData)) {
-            hitbox.y += fallSpeed;
-            fallSpeed += gravity;
+        if (runDirection == LEFT) {
+            runDirection = RIGHT;
         } else {
-            inAir = false;
-            hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, fallSpeed);
-            yLevel = (int) (hitbox.y / TILES_SIZE); // Saves the Y position of enemy
+            runDirection = LEFT;
         }
     }
 
-    // Method for update the Animation Tick
+    /**
+     * If the game starts for the first time, enemies will fall on the floor
+     * @param lvlData
+     */
+    protected void fallIfGameIsStarted(int[][] lvlData) {
+        if (startForTheFirstTime) {
+            if (!IsEntityOnFloor(hitbox, lvlData)) {
+                if (CanMoveHere(hitbox.x, hitbox.y + fallSpeed, hitbox.width, hitbox.height, lvlData)) {
+                    hitbox.y += fallSpeed;
+                    fallSpeed += gravity;
+                }
+            } else {
+                yLevel = (int) (hitbox.y / TILES_SIZE); // Saves the Y position of enemy
+                startForTheFirstTime = false;
+            }
+        }
+    }
+
+    /**
+     * Updates the aniTick and handles reseting the animations
+     */
     protected void updateAnimationTick() {
         aniTick ++;
         if (aniTick >= aniSpeed) {
@@ -136,18 +160,13 @@ public abstract class Enemy extends Entity{
         }
     }
 
-    protected void changeDirection() {
-        if (runDirection == LEFT) {
-            runDirection = RIGHT;
-        } else {
-            runDirection = LEFT;
-        }
-    }
-
+    /**
+     * If player win the game, the whole enemy class has to be reset
+     */
     public void resetEnemy() {
         hitbox.x = x;
         hitbox.y = y;
-        firstUpdate = true;
+        startForTheFirstTime = true;
         changeAction(IDLE);
         alive = true;
         fallSpeed = 0;
@@ -155,7 +174,6 @@ public abstract class Enemy extends Entity{
         mirrorX = 0;
     }
 
-    // We draw it in enemyHandler
     public int getAniIndex() {
         return aniIndex;
     }
@@ -164,17 +182,6 @@ public abstract class Enemy extends Entity{
         return enemyAction;
     }
 
-    public int getYPosition() {
-        return yLevel;
-    }
-
-    public boolean isAlive() {
-        return alive;
-    }
-
-    public int getRunDirection() {
-        return runDirection;
-    }
 }
 
 

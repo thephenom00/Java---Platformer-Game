@@ -8,21 +8,17 @@ import java.awt.event.MouseEvent;
 
 import static utils.Size.*;
 
-public class GameOver extends State implements StateInterface{
-    private Game game;
+/**
+ * GameOver will be displayed when player will lose all his lives
+ */
+public class GameOver extends State {
     private Playing playing;
     public GameOver(Game game, Playing playing) {
         super(game);
-        this.game = game;
         this.playing = playing;
     }
 
-    @Override
-    public void update() {
 
-    }
-
-    @Override
     public void draw(Graphics g) {
         g.setColor(new Color(0, 0, 0, 200));
         g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -48,27 +44,7 @@ public class GameOver extends State implements StateInterface{
     }
 
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
 
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
@@ -81,10 +57,5 @@ public class GameOver extends State implements StateInterface{
                 changeState(Gamestate.PLAYING, true);
                 break;
         }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
     }
 }

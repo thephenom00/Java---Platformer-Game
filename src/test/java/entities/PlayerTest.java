@@ -10,11 +10,12 @@ import objects.ObjectController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utils.LoadSave;
+import utils.Size;
 
 import java.awt.geom.Rectangle2D;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static utils.Constants.ObjectConstants.DIAMOND;
+import static utils.Constants.ObjectConstants.*;
 import static utils.Size.SCALE;
 
 
@@ -25,6 +26,7 @@ public class PlayerTest {
     private LoadSave loadSave;
     private LevelController levelController;
     private ObjectController objectController;
+    private Size size;
 
     public void movePlayer(float xCoordinate, float yCoordinate) {
         player.getHitBox().x = xCoordinate;
@@ -40,14 +42,16 @@ public class PlayerTest {
 
     @BeforeEach
     public void setUp() {
-        game = new Game(false);
+        game = new Game(false, false);
         playing = new Playing(game);
-        player = new Player(33 * SCALE,420 * SCALE,100,100, playing);
+        player = new Player(33,420,100,100, playing);
         loadSave = new LoadSave();
         levelController = new LevelController(game);
         objectController = new ObjectController(player);
+        size = new Size();
 
         player.loadLvlData(levelController.getCurrentLevel().getLevelData());
+        size.setScale();
 
     }
 
@@ -65,9 +69,9 @@ public class PlayerTest {
     public void testPlayerMovement() {
         // Test for going right
         player.setRight(true);
-        playerUpdate();
+        playerUpdate(); // updates 10x
         player.setRight(false);
-        assertEquals(42, player.getHitBox().x);
+        assertEquals(43, player.getHitBox().x);
 
         // Test for jump
         float currentYPosition = player.getYPosition();
@@ -110,6 +114,4 @@ public class PlayerTest {
         assertFalse(player.isLeft());
         assertFalse(player.isRight());
     }
-
-
 }

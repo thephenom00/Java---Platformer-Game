@@ -9,17 +9,19 @@ import gamestates.*;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import main.GamePanel;
+import main.GameWindow;
 
-import static java.util.logging.Level.INFO;
 
 public class Game implements Runnable {
     private static final Logger logger = Logger.getLogger(Game.class.getName());
 
-    private final GameWindow gameWindow;
-    private final GamePanel gamePanel;
+    private GameWindow gameWindow;
+    private GamePanel gamePanel;
     private Thread gameThread;
     private final int FPS = 120;
     private final int UPS = 200;
+    private boolean windowEnabled;
 
     private Playing playing;
     private Menu menu;
@@ -29,20 +31,25 @@ public class Game implements Runnable {
 
     private boolean loggerEnabled;
 
-    public Game(boolean loggerEnabled) {
+    public Game(boolean loggerEnabled, boolean windowEnabled) {
+        this.windowEnabled = windowEnabled;
         this.loggerEnabled = loggerEnabled;
         initClasses();
-        gamePanel = new GamePanel(this);
-        gameWindow = new GameWindow(gamePanel);
-        gamePanel.setFocusable(true);
-        gamePanel.requestFocus();
+
+        if (windowEnabled) {
+            gamePanel = new GamePanel(this);
+            gameWindow = new GameWindow(gamePanel);
+            gamePanel.setFocusable(true);
+            gamePanel.requestFocus();
+            playMusic();
+        }
+
         startGameLoop();
-        playMusic();
     }
 
     private void playMusic() {
         try {
-            audioController.playClip("src/main/java/audio/clash.wav");
+            audioController.playClip("src/main/java/audio/megalovania.wav");
         } catch (UnsupportedAudioFileException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -69,21 +76,10 @@ public class Game implements Runnable {
 
     public void update() {
         switch (Gamestate.state) {
-            case MENU -> {
-                menu.update();
-            }
             case PLAYING -> {
                 playing.update();
             }
-            case GAMEOVER -> {
-                gameOver.update();
-            }
-            case WIN -> {
-                youwin.update();
-            }
-            default -> {}
         }
-
     }
 
 
@@ -124,7 +120,9 @@ public class Game implements Runnable {
             // has to be incremented till time = timePerFrame
             // if the time is equal (or more) to timePerFrame, we repaint
             if (deltaF >= 1) {
-                gamePanel.repaint(); // Going to gamePanel and back here to render()
+                if (windowEnabled) {
+                    gamePanel.repaint(); // Going to gamePanel and back here to render()
+                }
                 frames++;
                 deltaF--;
             }

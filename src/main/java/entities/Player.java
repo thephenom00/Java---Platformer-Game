@@ -18,6 +18,9 @@ import java.util.logging.Logger;
 import static utils.Constants.PlayerConstants.*;
 import static utils.Size.*;
 
+/**
+ * Handles player movement, animation, collision detection
+ */
 public class Player extends Entity implements Serializable {
     private static final Logger logger = Logger.getLogger(Game.class.getName());
 
@@ -29,10 +32,10 @@ public class Player extends Entity implements Serializable {
 
     // Player Actions
     private int playerAction = IDLE;
-    private boolean moving = false;
+    private boolean running = false;
     private boolean attacking = false;
     private boolean getHit = false;
-    private boolean dead = false;
+    public boolean dead = false;
 
     // Movement
     private boolean left;
@@ -74,57 +77,40 @@ public class Player extends Entity implements Serializable {
 
     // Enemy
     public int enemyDirection;
-    public float enemyYPosition;
 
+    /**
+     * @param x        x-coordinate of the player
+     * @param y        y-coordinate of the player
+     * @param width    width of the players hitbox
+     * @param height   height of the players hitbox
+     * @param playing  playing state
+     */
     public Player(float x, float y, int width, int height, Playing playing) {
         super(x, y, width, height);
         this.playing = playing;
-        loadAnimations();
+        loadPlayerSprites();
         createHitbox(x, y,16 * SCALE, 26 * SCALE);
         createJumpBox(x, y, 16 * SCALE, 1 * SCALE);
-
     }
 
+    /**
+     * Updates player position and animation, checks collisions with tiles
+     */
     public void update() {
         updatePosition();
         updateAnimationTick();
         updateJumpBox();
-
         setAnimation();
 
         // Checking
         checkMethods();
-
     }
 
-    private void checkMethods(){
-        checkJumpOnHead();
-        checkDiamondCollected();
-        checkHeartCollected();
-        checkTouchingEnemy();
-        checkOutOfBounds();
-        checkIfPlayerInAir();
-    }
 
-    // If he fells out to the hole = dead
-    private void checkOutOfBounds() {
-        if (hitbox.y >= 483 * SCALE) {
-            dead = true;
-        }
-    }
-
-    // If player touches the enemy he cant move
-    private void checkTouchingEnemy() {
-        if (playing.checkPlayerTouchesEnemy() == true){
-            if(left) {
-                left = false;
-            } else if (right) {
-                right = false;
-            }
-        }
-
-    }
-
+    /**
+     * Draws player, coins and hearts on the canvas
+     * @param g
+     */
     public void draw(Graphics g) {
         // Draw the player
         if (facingRight) {
@@ -143,21 +129,12 @@ public class Player extends Entity implements Serializable {
                     null);
         }
 
-
         // Draw hitboxes
 //        drawHitbox(g);
 //        drawJumpBox(g);
 
         drawLivesText(g);
         drawCoinsText(g);
-    }
-
-    public void subtractLife() {
-        lives--;
-    }
-
-    public void addLife() {
-        lives++;
     }
 
     private void drawCoinsText(Graphics g) {
@@ -176,19 +153,27 @@ public class Player extends Entity implements Serializable {
         g.drawString("Lives: " + lives, 10, 20);
     }
 
+    public void createJumpBox(float x, float y, float width, float height) {
+        jumpBox = new Rectangle2D.Float(x, y, width, height);
+    }
 
     private void updateJumpBox() {
         jumpBox.x = hitbox.x;
         jumpBox.y = hitbox.y + hitbox.height;
     }
 
-    public void createJumpBox(float x, float y, float width, float height) {
-        jumpBox = new Rectangle2D.Float(x, y, width, height);
-    }
-
     public void drawJumpBox(Graphics g) {
         g.setColor(Color.BLACK);
         g.drawRect((int) jumpBox.x, (int) jumpBox.y, (int) jumpBox.width, (int) jumpBox.height);
+    }
+
+    private void checkMethods(){
+        checkJumpOnHead();
+        checkDiamondCollected();
+        checkHeartCollected();
+        checkTouchingEnemy();
+        checkOutOfBounds();
+        checkIfPlayerInAir();
     }
 
     private void checkJumpOnHead() {
@@ -203,14 +188,49 @@ public class Player extends Entity implements Serializable {
         playing.checkHeartCollected(hitbox);
     }
 
-    // Sets an animation
-    public void setAnimation(){
-        int startAni = playerAction;
+    /**
+     * If player is in the air, he falls
+     */
+    private void checkIfPlayerInAir() {
+        if (!IsEntityOnFloor(hitbox, lvlData)) {
+            inAir = true;
+        }
+    }
 
-        if (!moving) {
-            playerAction = IDLE;
-        } else {
+    /**
+     * If player falls in a hole, dead variable is set to true
+     */
+    private void checkOutOfBounds() {
+        if (hitbox.y >= 483 * SCALE) {
+            dead = true;
+        }
+    }
+
+    /**
+     * If player touches the enemy, he cant move
+     */
+    private void checkTouchingEnemy() {
+        if (playing.checkPlayerTouchesEnemy(getHitbox()) == true){
+            if(left) {
+                left = false;
+            } else if (right) {
+                right = false;
+            }
+        }
+
+    }
+
+    /**
+     * Sets the animation according to the situation
+     * Resets aniTick, after getting all displayed
+     */
+    public void setAnimation(){
+        int firstAnimation = playerAction;
+
+        if (running) {
             playerAction = RUNNING;
+        } else {
+            playerAction = IDLE;
         }
 
         if (inAir) {
@@ -228,7 +248,7 @@ public class Player extends Entity implements Serializable {
             playerAction = HIT;
         }
 
-        if (dead){
+        if (dead) {
             playerAction = DEAD;
             left = false;
             right = false;
@@ -239,8 +259,7 @@ public class Player extends Entity implements Serializable {
             }
         }
 
-
-        if (startAni != playerAction) {
+        if (firstAnimation != playerAction) {
             resetAniTick();
         }
 
@@ -251,8 +270,11 @@ public class Player extends Entity implements Serializable {
         aniIndex = 0;
     }
 
+    /**
+     * Handles player position according to his movement in the air or not
+     */
     public void updatePosition(){
-        moving = false;
+        running = false;
 
         if (jumpOnHead) {
             float originalJumpSpeed = jumpSpeed;
@@ -266,72 +288,61 @@ public class Player extends Entity implements Serializable {
             jump();
         }
 
-        // If the player does not do any movement, go out of the function
+
+        // Player is on the ground
         if (!inAir) {
-            if (!left && !right || (left && right)) {
-                return;
+            if (!left && !right || left && right) {
+                return;  // No movement, so we exit the method
+            }
+
+            moveHorizontally();
+
+            running = true;
+
+        // Player jumped
+        } else {
+            // Player is in the air
+            moveHorizontally();
+
+            // Check if player can move up
+            if (CanMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
+                hitbox.y += airSpeed;
+                airSpeed += gravity;
+            } else {
+                // Player reached the ground
+                inAir = false;
+                airSpeed = 0;
             }
         }
+    }
 
+    private void moveHorizontally() {
         float xSpeed = 0;
 
-        // If right or left is clicked, speed is added
         if (left) {
-            xSpeed -= playerSpeed;
+            xSpeed = -playerSpeed;
             mirrorX = width;
             mirrorWidth = -1;
             facingRight = false;
         }
 
         if (right) {
-            xSpeed += playerSpeed;
+            xSpeed = playerSpeed;
             mirrorX = 0;
             mirrorWidth = 1;
             facingRight = true;
         }
 
-        if (inAir) {
-            // If player moving downwards
-            if (CanMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
-                hitbox.y += airSpeed;
-                airSpeed += gravity;
-                updateXPos(xSpeed); // We can move to the left and right
 
-            } else {
-                // Going down and hit the floor
-                if (airSpeed > 0) {
-                    inAir = false;
-                    airSpeed = 0;
-                } else {
-                    airSpeed = 0;
-                    updateXPos(xSpeed);
-                }
-            }
-
-        } else {
-            // If we are not on the floor, we are in air
-            checkIfPlayerInAir();
-            updateXPos(xSpeed); // We can move the player in x direction
-            moving = true;
-        }
-
-
-    }
-
-    private void updateXPos(float xSpeed) {
-        // If player is on the ground and tile is not solid, moves
-        if(CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
+        // Check if player can move left and right
+        if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
             hitbox.x += xSpeed;
         }
     }
 
-    private void checkIfPlayerInAir() {
-        if (!IsEntityOnFloor(hitbox, lvlData)) {
-            inAir = true;
-        }
-    }
-
-
+    /**
+     * Makes the player jump by changing players y speed.
+     */
     private void jump() {
 
         // If we are in the air, we cannot jump
@@ -343,15 +354,16 @@ public class Player extends Entity implements Serializable {
         airSpeed = jumpSpeed;
     }
 
-
-    // Method for update the Animation Tick
+    /**
+     * Handles all the animations and resets after finishing
+     */
     private void updateAnimationTick() {
-        aniTick ++;
+        aniTick++;
         if (aniTick >= aniSpeed) {
             aniTick = 0;
             aniIndex++;
 
-            // If all the sprites were displayed - reset
+            // If all the sprites were displayed - reset, also end the hit and attack animation
             if (aniIndex >= GetSpriteAmount(playerAction)) {
                 aniIndex = 0;
                 attacking = false;
@@ -360,12 +372,15 @@ public class Player extends Entity implements Serializable {
         }
     }
 
-    private void loadAnimations() {
+    /**
+     * Loads all sprites from the img
+     */
+    private void loadPlayerSprites() {
         animations = new BufferedImage[8][11];
 
         BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
-        // Iterates through every sprite
+        // Iterates through every single sprite
         for (int j = 0; j < animations.length; j++) {
             for(int i = 0 ; i < animations[j].length; i++){
                 animations[j][i] = img.getSubimage(i*78, j*58,78,58);
@@ -376,12 +391,7 @@ public class Player extends Entity implements Serializable {
 
     public void loadLvlData(int[][]lvlData){
         this.lvlData = lvlData;
-
-        // If the player spawns in the air, he falls
-        if(!IsEntityOnFloor(hitbox, lvlData))
-            inAir = true;
     }
-
 
     public void resetMovement() {
         left = false;
@@ -393,14 +403,20 @@ public class Player extends Entity implements Serializable {
         this.attacking = attacking;
     }
 
+    /**
+     * Handles the knockback to a player
+     * @param getHit boolean, if player gets hit or not
+     */
     public void getHit(boolean getHit) {
         this.getHit = getHit;
         jump = false;
+
         if (playing.getGame().getLoggerState()) {
             logger.log(Level.INFO, "Player got hit");
         }
 
-        if (!jump) {
+        // Knock-back
+        if (!inAir) {
             if (enemyDirection == LEFT) {
                 hitbox.x -= 25;
             }
@@ -421,17 +437,14 @@ public class Player extends Entity implements Serializable {
 
     }
 
-    public void setDeath(boolean dead) {
-        this.dead = dead;
-        if (playing.getGame().getLoggerState())
-            logger.log(Level.INFO, "Player died");
-    }
-
+    /**
+     * After winning the game, whole player has to be updated
+     */
     public void resetPlayer() {
         resetMovement();
         resetAniTick();
         dead = false;
-        moving = false;
+        running = false;
         attacking = false;
         getHit = false;
         playerAction = IDLE;
@@ -442,27 +455,23 @@ public class Player extends Entity implements Serializable {
         hitbox.x = x;
         hitbox.y = y;
 
-        if (!IsEntityOnFloor(hitbox, lvlData)) {
-            inAir = true;
-        }
-    }
-
-
-
-    public boolean isLeft() {
-        return left;
+        checkIfPlayerInAir();
     }
 
     public void setLeft(boolean left) {
         this.left = left;
     }
 
-    public boolean isRight() {
-        return right;
+    public boolean isLeft() {
+        return left;
     }
 
     public void setRight(boolean right) {
         this.right = right;
+    }
+
+    public boolean isRight() {
+        return right;
     }
 
     public void setJump(boolean jump) {
@@ -481,21 +490,20 @@ public class Player extends Entity implements Serializable {
         return hitbox;
     }
 
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
 
     public int getLives() {
         return lives;
     }
 
-    public void setLives(int lives) {
-        this.lives = lives;
+    public void addLife() {
+        lives++;
     }
 
-    public float getXPosition() {
-        return hitbox.x;
-    }
-
-    public float getYPosition() {
-        return hitbox.y;
+    public void subtractLife() {
+        lives--;
     }
 
     public void setDiamondsToCollect(int diamondsToCollect) {
@@ -510,17 +518,21 @@ public class Player extends Entity implements Serializable {
         return playing;
     }
 
+    public float getXPosition() {
+        return hitbox.x;
+    }
+
+    public float getYPosition() {
+        return hitbox.y;
+    }
+
     public void enemyDirection(int direction) {
         this.enemyDirection = direction;
     }
 
-    public void enemyYPosition(float y) {
-        this.enemyYPosition = y;
-    }
-
     private void testing() {
         this.playerSpeed = 2f;
-        this.jumpSpeed = -3.0f;
+        this.jumpSpeed = -4.0f;
         this.lives = 400;
     }
 }

@@ -14,6 +14,9 @@ import java.util.logging.Logger;
 
 import static utils.Constants.EnemyConstants.*;
 
+/**
+ * Class manages drawing, behaviour and interactions with player
+ */
 public class EnemyController implements Serializable {
     private static final Logger logger = Logger.getLogger(Game.class.getName());
     private final Playing playing;
@@ -28,7 +31,11 @@ public class EnemyController implements Serializable {
         getPigsFromPng();
     }
 
-    // Updates all pigs in our arraylist
+    /**
+     * Updates the state of all the pigs in the enemy array
+     * @param lvlData the game world
+     * @param player  the player object
+     */
     public void update(int[][] lvlData, Player player) {
         for (Pig onePig : pigs)
             if (onePig.alive) {
@@ -36,6 +43,12 @@ public class EnemyController implements Serializable {
             }
     }
 
+
+    /**
+     * Checks if any pig touches the players hitbox
+     * @param playerHitbox the players hitbox
+     * @return true if any pig touches the player, false otherwise
+     */
     public boolean touchPlayer(Rectangle2D.Float playerHitbox) {
         for (Pig onePig : pigs)
             if (onePig.alive && onePig.hitbox.intersects(playerHitbox) && onePig.enemyAction != DEAD) {
@@ -45,6 +58,11 @@ public class EnemyController implements Serializable {
         return false;
     }
 
+    /**
+     * Checks if any pig is hit on the head by the players jump
+     *
+     * @param jumpBox the hitbox of the players jump
+     */
     public void checkJumpOnHead(Rectangle2D.Float jumpBox) {
         for (Pig onePig: pigs) {
             if (onePig.alive) {
@@ -65,7 +83,9 @@ public class EnemyController implements Serializable {
 
     }
 
-    // Gets all the pigs from the Level array and stores to list
+    /**
+     * Gets all the pigs from the Level array and stores into a list
+     */
     public void getPigsFromPng() {
         pigs = LoadSave.GetPigs();
         numberOfPigsAlive = pigs.size();
@@ -119,12 +139,14 @@ public class EnemyController implements Serializable {
 
     }
 
+    /**
+     * In case of winning, reset all the enemies
+     */
     public void resetEnemyController() {
         for (Pig onePig : pigs){
             onePig.resetEnemy();
         }
         numberOfPigsAlive = pigs.size();
-
     }
 
     public ArrayList<Pig> getPigs() {
