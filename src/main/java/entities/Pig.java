@@ -112,7 +112,7 @@ public class Pig extends Enemy {
         player.subtractLife();
         changeAction(IDLE);
         if (player.getLives() == 0) {
-            player.dead = true;
+            player.setDead();
         }
     }
 

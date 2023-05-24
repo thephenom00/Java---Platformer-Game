@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Graphics;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import audio.AudioController;
@@ -9,8 +10,6 @@ import gamestates.*;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import main.GamePanel;
-import main.GameWindow;
 
 
 public class Game implements Runnable {
@@ -21,7 +20,6 @@ public class Game implements Runnable {
     private Thread gameThread;
     private final int FPS = 120;
     private final int UPS = 200;
-    private boolean windowEnabled;
 
     private Playing playing;
     private Menu menu;
@@ -31,22 +29,26 @@ public class Game implements Runnable {
 
     private boolean loggerEnabled;
 
-    public Game(boolean loggerEnabled, boolean windowEnabled) {
-        this.windowEnabled = windowEnabled;
+    /**
+     * Takes care of the rendering and updating the whole game using threads
+     * @param loggerEnabled boolean, controls if the log information should be displayed
+     */
+    public Game(boolean loggerEnabled) {
         this.loggerEnabled = loggerEnabled;
-        initClasses();
+        initializeClasses();
 
-        if (windowEnabled) {
-            gamePanel = new GamePanel(this);
-            gameWindow = new GameWindow(gamePanel);
-            gamePanel.setFocusable(true);
-            gamePanel.requestFocus();
-            playMusic();
-        }
+        gamePanel = new GamePanel(this);
+        gameWindow = new GameWindow(gamePanel);
+        gamePanel.setFocusable(true);
+        gamePanel.requestFocus();
+        playMusic();
 
         startGameLoop();
     }
 
+    /**
+     * music is played
+     */
     private void playMusic() {
         try {
             audioController.playClip("src/main/java/audio/megalovania.wav");
@@ -60,7 +62,7 @@ public class Game implements Runnable {
     }
 
 
-    private void initClasses() {
+    private void initializeClasses() {
         menu = new Menu(this);
         playing = new Playing(this);
         gameOver = new GameOver(this, playing); // RESTART
@@ -68,12 +70,17 @@ public class Game implements Runnable {
         audioController = new AudioController();
     }
 
-    // Starts the thread
+    /**
+     * starts the game loop thread.
+     */
     private void startGameLoop() {
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    /**
+     * takes care of movement of entities
+     */
     public void update() {
         switch (Gamestate.state) {
             case PLAYING -> {
@@ -82,8 +89,11 @@ public class Game implements Runnable {
         }
     }
 
-
-    public void render(Graphics g) {
+    /**
+     * takes care of drawing entities and objects on the scene
+     * @param g
+     */
+    public void draw(Graphics g) {
         switch (Gamestate.state) {
             case MENU -> menu.draw(g);
             case PLAYING -> playing.draw(g);
@@ -93,16 +103,17 @@ public class Game implements Runnable {
         }
     }
 
+    /**
+     * Frames take care of drawing the player, enemy
+     * Updates take care of movement of player, enemy
+     */
     @Override
     public void run() {
-        // Divide second into 120 parts
-        double timePerFrame = 1000000000.0 / FPS;
+        double timePerDraw = 1000000000.0 / FPS;
         double timePerUpdate = 1000000000.0 / UPS;
 
         long previousTime = System.nanoTime();
 
-        int frames = 0;
-        int updates = 0;
         long lastCheck = System.currentTimeMillis();
 
         double deltaU = 0;
@@ -113,35 +124,32 @@ public class Game implements Runnable {
             long timeAfterOneLoop = currentTime - previousTime;
 
             // deltaF is incremented by time which passed after one loop
-            deltaF += timeAfterOneLoop / timePerFrame;
+            deltaF += timeAfterOneLoop / timePerDraw;
             deltaU += timeAfterOneLoop / timePerUpdate;
             previousTime = currentTime;
 
-            // has to be incremented till time = timePerFrame
-            // if the time is equal (or more) to timePerFrame, we repaint
+            // has to be incremented till time = timePerDraw
+            // if the time is equal (or more) to timePerDraw, we repaint
             if (deltaF >= 1) {
-                if (windowEnabled) {
-                    gamePanel.repaint(); // Going to gamePanel and back here to render()
-                }
-                frames++;
+                gamePanel.repaint(); // Going to gamePanel and back here to render()
                 deltaF--;
             }
 
             if (deltaU >= 1) {
                 update(); // Updates players movement, enemy movement etc.
-                updates++;
                 deltaU--;
             }
 
-            if (System.currentTimeMillis() - lastCheck >= 1000) {
-                lastCheck = System.currentTimeMillis();
-                frames = 0;
-                updates = 0;
-            }
         }
     }
 
+    /**
+     * In case of player will switch to different window, the movement will reset
+     */
     public void windowFocusLost() {
+        if(loggerEnabled){
+            logger.log(Level.INFO, "You left the game");
+        }
         if (Gamestate.state == Gamestate.PLAYING)
             playing.getPlayer().resetMovement();
     }
@@ -168,4 +176,5 @@ public class Game implements Runnable {
     public AudioController getAudioController() {
         return audioController;
     }
+
 }

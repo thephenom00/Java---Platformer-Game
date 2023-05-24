@@ -19,19 +19,25 @@ import static utils.Constants.EnemyConstants.PIG;
 import static utils.Constants.ObjectConstants.*;
 
 public class LoadSave {
-    public static final String PLAYER_ATLAS = "king.png";
-    public static final String LEVEL_ATLAS = "tilesetgrass.png";
-    public static final String LEVEL_ONE_DATA = "letsgo.png";
+    public static final String PLAYER_SPRITES = "king.png";
     public static final String PIG_SPRITE = "pig.png";
-    public static final String BACKGROUND = "background.png";
     public static final String DIAMOND_SPRITE = "diamond.png";
     public static final String HEART_SPRITE = "heart.png";
 
-    public static final BufferedImage levelOne = GetSpriteAtlas(LEVEL_ONE_DATA);
+    public static final String BACKGROUND = "background.png";
+    public static final String LEVEL_SPRITES = "tiles.png";
+    public static final String LEVEL_DATA = "level_data.png";
+
+    public static final BufferedImage levelOne = GetSpriteAtlas(LEVEL_DATA);
 
     private static final Logger logger = Logger.getLogger(LoadSave.class.getName());
 
-    // Loads Player Sprites
+    /**
+     * Loads a sprite atlas image from PNG
+     *
+     * @param png the file path of the PNG sprite atlas
+     * @return the loaded BufferedImage representing the sprite atlas
+     */
     public static BufferedImage GetSpriteAtlas(String png){
 
         InputStream is = null;
@@ -54,6 +60,11 @@ public class LoadSave {
         return img;
     }
 
+    /**
+     * Gets the positions of all Pigs from the level data
+     *
+     * @return an ArrayList of Pig objects representing the positions of all Pigs in the level
+     */
     public static ArrayList<Pig> GetPigs() {
         ArrayList<Pig> list = new ArrayList<>();
 
@@ -69,6 +80,12 @@ public class LoadSave {
         return list;
     }
 
+    /**
+     * gets the positions of all diamonds from the level data.
+     *
+     * @return list of diamonds with each x and y position
+     */
+
     public static ArrayList<Diamond> GetDiamonds() {
         ArrayList<Diamond> list = new ArrayList<>();
 
@@ -83,6 +100,11 @@ public class LoadSave {
         return list;
     }
 
+    /**
+     * gets the positions of all hearts from the level data.
+     *
+     * @return list of hearts with each x and y position
+     */
     public static ArrayList<Heart> GetHearts() {
         ArrayList<Heart> list = new ArrayList<>();
 
@@ -99,7 +121,11 @@ public class LoadSave {
 
 
 
-    // Loads LevelData
+    /**
+     * gets red value of each pixel and stores it into an array
+     *
+     * @return 2D array of integers representing the level map
+     */
     public static int[][] GetLevelData() {
         int[][] lvlData = new int[TILES_IN_HEIGHT][TILES_IN_WIDTH];
 

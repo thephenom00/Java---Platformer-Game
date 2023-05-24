@@ -2,7 +2,6 @@ package gamestates;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
@@ -22,7 +21,7 @@ import static utils.Size.*;
 /**
  * The game itself, handles gameplay, object collection or interactions with enemies
  */
-public class Playing extends State implements StateInterface {
+public class Playing extends State {
     private static final Logger logger = Logger.getLogger(Game.class.getName());
 
     private Player player;
@@ -47,22 +46,19 @@ public class Playing extends State implements StateInterface {
         levelController = new LevelController(game);
         enemyController = new EnemyController(this);
         player = new Player(33 * SCALE, 420 * SCALE, (int) (78 * SCALE), (int) (58 * SCALE), this);
-        player.loadLvlData(levelController.getCurrentLevel().getLevelData());
+        player.loadLvlData(levelController.getLevel());
         objectController = new ObjectController(player);
     }
 
-    @Override
     public void update() {
-        levelController.update();
         player.update();
-        enemyController.update(levelController.getCurrentLevel().getLevelData(), player);
+        enemyController.update(levelController.getLevel(), player);
         objectController.update();
 
         checkWin();
     }
 
 
-    @Override
     public void draw(Graphics g) {
         g.drawImage(background, 0, 0, GAME_WIDTH, GAME_HEIGHT, null);
         levelController.draw(g);
@@ -131,11 +127,7 @@ public class Playing extends State implements StateInterface {
             logger.log(Level.INFO, "Game Reset");
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
 
-    @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A, KeyEvent.VK_LEFT -> player.setLeft(true);
@@ -152,7 +144,6 @@ public class Playing extends State implements StateInterface {
     }
 
 
-    @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A -> player.setLeft(false);
@@ -162,31 +153,20 @@ public class Playing extends State implements StateInterface {
 
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-
     public Player getPlayer() {
         return player;
     }
 
-    public ObjectController getObjectManager() {
+    public ObjectController getObjectController() {
         return objectController;
     }
 
-    public EnemyController getEnemyManager() {
+    public EnemyController getEnemyController() {
         return enemyController;
+    }
+
+    public LevelController getLevelController() {
+        return levelController;
     }
 
 }

@@ -13,17 +13,20 @@ import java.util.logging.Logger;
 
 import static utils.Constants.ObjectConstants.*;
 
+/**
+ * class manages the diamonds and hearts in the game
+ */
 public class ObjectController {
     private static final Logger logger = Logger.getLogger(Game.class.getName());
     private Player player;
 
     //Diamonds
-    private BufferedImage[][] diamondArray;
+    private BufferedImage[][] diamondSprites;
     private ArrayList<Diamond> diamonds = new ArrayList<>();
     public int numberOfDiamondsToTake;
 
     // Hearts
-    private BufferedImage[][] heartArray;
+    private BufferedImage[][] heartSprites;
     private ArrayList<Heart> hearts = new ArrayList<>();
 
 
@@ -32,11 +35,11 @@ public class ObjectController {
 
         //Hearts
         loadHeartsImg();
-        getHeartsFromPng();
+        getHeartArray();
 
         // Diamonds
         loadDiamondImg();
-        getDiamondsFromPng();
+        getDiamondArray();
     }
 
     public void draw(Graphics g) {
@@ -55,34 +58,46 @@ public class ObjectController {
                 oneDiamond.update();
     }
 
-    private void getHeartsFromPng() {
+    /**
+     * retrieves the hearts from png
+     */
+    private void getHeartArray() {
         hearts = LoadSave.GetHearts();
     }
 
-    private void getDiamondsFromPng() {
+    /**
+     * retrieves diamonds from png
+     */
+    private void getDiamondArray() {
         diamonds = LoadSave.GetDiamonds();
         numberOfDiamondsToTake = diamonds.size();
         player.setDiamondsToCollect(numberOfDiamondsToTake);
     }
 
+    /**
+     * loads the heart images from the sprite atlas and saves to heartSprites
+     */
     private void loadHeartsImg() {
-        heartArray = new BufferedImage[1][8];
+        heartSprites = new BufferedImage[1][8];
         BufferedImage heartSprite = LoadSave.GetSpriteAtlas(LoadSave.HEART_SPRITE);
-        for (int i = 0; i < heartArray[0].length; i++)
-            heartArray[0][i] = heartSprite.getSubimage(i * HEART_WIDTH_DEFAULT, 0, HEART_WIDTH_DEFAULT, HEART_HEIGHT_DEFAULT);
+        for (int i = 0; i < heartSprites[0].length; i++)
+            heartSprites[0][i] = heartSprite.getSubimage(i * HEART_WIDTH_DEFAULT, 0, HEART_WIDTH_DEFAULT, HEART_HEIGHT_DEFAULT);
     }
 
+    /**
+     * loads the diamond images from the sprite atlas and saves to diamondSprites
+     */
     private void loadDiamondImg() {
-        diamondArray = new BufferedImage[1][10];
+        diamondSprites = new BufferedImage[1][10];
         BufferedImage diamondSprite = LoadSave.GetSpriteAtlas(LoadSave.DIAMOND_SPRITE);
-        for (int i = 0; i < diamondArray[0].length; i++)
-            diamondArray[0][i] = diamondSprite.getSubimage(i * DIAMOND_WIDTH_DEFAULT, 0, DIAMOND_WIDTH_DEFAULT, DIAMOND_HEIGHT_DEFAULT);
+        for (int i = 0; i < diamondSprites[0].length; i++)
+            diamondSprites[0][i] = diamondSprite.getSubimage(i * DIAMOND_WIDTH_DEFAULT, 0, DIAMOND_WIDTH_DEFAULT, DIAMOND_HEIGHT_DEFAULT);
     }
 
     private void drawHearts(Graphics g) {
         for (Heart oneHeart : hearts) {
             if(oneHeart.isCollected == false) {
-                g.drawImage(heartArray[0][oneHeart.getObjectIndex()],
+                g.drawImage(heartSprites[0][oneHeart.getObjectIndex()],
                         (int) oneHeart.hitbox.x - Heart.HEART_XOFFSET,
                         (int) oneHeart.hitbox.y - Heart.HEART_YOFFSET + 10,
                         HEART_WIDTH,
@@ -96,7 +111,7 @@ public class ObjectController {
     public void drawDiamonds(Graphics g) {
         for (Diamond oneDiamond : diamonds) {
             if (!oneDiamond.isCollected ) {
-                g.drawImage(diamondArray[0][oneDiamond.getObjectIndex()],
+                g.drawImage(diamondSprites[0][oneDiamond.getObjectIndex()],
                         (int) oneDiamond.hitbox.x - Diamond.DIAMOND_XOFFSET,
                         (int) oneDiamond.hitbox.y - Diamond.DIAMOND_YOFFSET + 10,
                         DIAMOND_WIDTH,
@@ -122,6 +137,10 @@ public class ObjectController {
         }
     }
 
+    /**
+     * Method checks if the player collected heart
+     * @param playerHitbox
+     */
     public void checkHeartCollected(Rectangle2D playerHitbox) {
         for (Heart oneHeart: hearts) {
             if (!oneHeart.isCollected)
@@ -134,6 +153,10 @@ public class ObjectController {
         }
     }
 
+    /**
+     * Method checks if the player collected diamond
+     * @param playerHitbox
+     */
     public void checkDiamondCollected(Rectangle2D.Float playerHitbox) {
         for (Diamond oneDiamond : diamonds) {
             if (!oneDiamond.isCollected)
@@ -148,6 +171,9 @@ public class ObjectController {
         }
     }
 
+    /**
+     * In case of player winning the game, all objects has to be reset
+     */
     public void resetObjects() {
         for (Diamond oneDiamond : diamonds) {
             oneDiamond.isCollected = false;

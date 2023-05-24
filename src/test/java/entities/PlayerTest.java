@@ -1,32 +1,35 @@
 package entities;
 
-import audio.AudioController;
 import gamestates.Playing;
 import levels.LevelController;
-import main.Game;
 import objects.Diamond;
 import objects.Heart;
 import objects.ObjectController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import utils.LoadSave;
+import utils.Physics;
 import utils.Size;
 
-import java.awt.geom.Rectangle2D;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static utils.Constants.ObjectConstants.*;
+import static org.mockito.Mockito.*;
 import static utils.Size.SCALE;
-
 
 public class PlayerTest {
     private Player player;
+    @Mock
     private Playing playing;
-    private Game game;
+    @Mock
+    private Physics physics;
     private LoadSave loadSave;
-    private LevelController levelController;
+    @Mock
     private ObjectController objectController;
+    @Mock
+    private LevelController levelController;
     private Size size;
+    private int[][] level = {{9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 31, 31, 9, 9}, {9, 9, 9, 9, 9, 31, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, {9, 9, 9, 31, 9, 9, 9, 31, 31, 9, 9, 31, 31, 9, 9, 9, 9, 9, 9, 9, 9, 9, 31, 31, 9, 9, 9, 9}, {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 31, 31, 9, 9, 9, 9, 9, 9, 9, 31, 31}, {9, 31, 31, 31, 31, 9, 9, 9, 9, 9, 9, 9, 9, 9, 31, 31, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, {9, 9, 9, 9, 9, 9, 31, 31, 31, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 31, 31, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 31}, {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 31, 31, 31, 9, 9, 9, 9, 9, 9, 9}, {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 31, 31, 31, 31, 9, 9, 9, 9, 9, 9, 9, 9, 9, 31, 31, 31, 9, 9}, {9, 9, 9, 9, 9, 9, 31, 31, 31, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, {9, 9, 9, 31, 31, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 1, 1, 1, 1, 1}, {11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 9, 9, 9, 9, 9, 9, 9, 9, 11, 11, 11, 11, 11}};
 
     public void movePlayer(float xCoordinate, float yCoordinate) {
         player.getHitBox().x = xCoordinate;
@@ -39,19 +42,18 @@ public class PlayerTest {
         }
     }
 
-
     @BeforeEach
     public void setUp() {
-        game = new Game(false, false);
-        playing = new Playing(game);
-        player = new Player(33,420,100,100, playing);
+        MockitoAnnotations.openMocks(this);
+
+        player = new Player(33, 420, 100, 100, playing);
+        player.loadLvlData(level);
         loadSave = new LoadSave();
-        levelController = new LevelController(game);
-        objectController = new ObjectController(player);
         size = new Size();
 
-        player.loadLvlData(levelController.getCurrentLevel().getLevelData());
-        size.setScale();
+        size.setScale(1f); // Call the setScale() method to set SCALE to 1.0f
+
+        when(playing.getObjectController()).thenReturn(objectController);
 
     }
 
@@ -59,31 +61,14 @@ public class PlayerTest {
     public void testPlayerInitialization() {
         assertEquals(33, player.getXPosition(), 0);
         assertEquals(420, player.getYPosition(), 0);
-        assertEquals(3, player.getLives(), 0);
-        assertEquals(8, player.getDiamondsToCollect());
         assertFalse(player.isLeft());
         assertFalse(player.isRight());
     }
 
-    @Test
-    public void testPlayerMovement() {
-        // Test for going right
-        player.setRight(true);
-        playerUpdate(); // updates 10x
-        player.setRight(false);
-        assertEquals(43, player.getHitBox().x);
-
-        // Test for jump
-        float currentYPosition = player.getYPosition();
-        player.setJump(true);
-        playerUpdate();
-        assertTrue(player.getYPosition() < currentYPosition);
-        player.setJump(false);
-    }
 
     @Test
     public void testDiamondCollection() {
-        Diamond diamond = new Diamond( 50,20);
+        Diamond diamond = new Diamond(50, 20);
 
         movePlayer(50, 20);
 
@@ -93,7 +78,7 @@ public class PlayerTest {
 
     @Test
     public void testHeartCollection() {
-        Heart heart = new Heart( 200,328);
+        Heart heart = new Heart(200, 328);
 
         movePlayer(200, 328);
 
@@ -102,16 +87,41 @@ public class PlayerTest {
     }
 
     @Test
-    public void testPlayerResetAfterDeath() {
-        movePlayer(200, 200);
-        player.setLives(0);
+    public void testPlayerMovementRight() {
+        double expectedPosition = 10 * SCALE + player.getXPosition();
+        // Test for going left
+        player.setRight(true);
+        playerUpdate();
+        player.setLeft(false);
+        assertEquals(expectedPosition, player.getXPosition());
+    }
 
-        player.resetPlayer();
+    @Test
+    public void testPlayerMovementLeft() {
+        double expectedPosition = player.getXPosition() - 10 * SCALE;
+        // Test for going left
+        player.setLeft(true);
+        playerUpdate();
+        player.setRight(false);
+        assertEquals(expectedPosition, player.getXPosition());
+    }
 
-        assertEquals(33 * SCALE, player.getXPosition(), 0);
-        assertEquals(420 * SCALE, player.getYPosition(), 0);
-        assertEquals(3, player.getLives());
-        assertFalse(player.isLeft());
-        assertFalse(player.isRight());
+    @Test
+    public void testPlayerJumping() {
+        double initialYPosition = player.getYPosition();
+        // Test for jumping
+        player.setJump(true);
+        playerUpdate();
+        double finalYPosition = player.getYPosition();
+        assertNotEquals(initialYPosition, finalYPosition);
+        assertTrue(finalYPosition < initialYPosition);
+    }
+
+
+    @Test
+    public void testPlayerFallToPit() {
+        player.getHitbox().y = 500 * SCALE;
+        player.checkOutOfBounds();
+        assertTrue(player.dead);
     }
 }

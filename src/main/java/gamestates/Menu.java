@@ -9,6 +9,10 @@ import java.util.logging.Logger;
 import static utils.Size.GAME_WIDTH;
 import static utils.Size.SCALE;
 
+/**
+ * represents the main menu state of the game.
+ * player cant start a new game, load or saved game,
+ */
 public class Menu extends State {
     private static final Logger logger = Logger.getLogger(Game.class.getName());
 
@@ -59,6 +63,11 @@ public class Menu extends State {
         }
     }
 
+    /**
+     * Draws the "Game Saved" text on the screen
+     * when the button is clicked
+     * @param g The Graphics object used for drawing.
+     */
     private void drawGameSavedText(Graphics g) {
         Font savedFont = new Font("Arial", Font.BOLD, 32);
         g.setFont(savedFont);

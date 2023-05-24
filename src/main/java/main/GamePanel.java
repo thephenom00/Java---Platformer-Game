@@ -29,11 +29,9 @@ public class GamePanel extends JPanel {
         setPreferredSize(size);
     }
 
-    public void updateGame() {}
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        game.render(g);
+        game.draw(g);
     }
 
     public Game getGame() {

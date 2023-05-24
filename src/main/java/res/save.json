@@ -1,551 +1,551 @@
 {
-  "xPosition": 277.0,
-  "yPosition": 325.99997,
-  "diamonds": 8,
-  "lives": 3,
+  "xPosition": 708.5,
+  "yPosition": 248.7029,
+  "diamonds": 3,
+  "lives": 5,
   "diamondsArray": [
     {
-      "x": 736.0,
-      "y": 96.0,
-      "width": 18,
-      "height": 14,
+      "x": 1104.0,
+      "y": 144.0,
+      "width": 27,
+      "height": 21,
       "hitbox": {
-        "x": 736.0,
-        "y": 106.0,
-        "width": 12.0,
-        "height": 10.0
+        "x": 1104.0,
+        "y": 154.0,
+        "width": 18.0,
+        "height": 15.0
       },
-      "aniTick": 5,
+      "aniTick": 24,
       "aniSpeed": 25,
-      "aniIndex": 1,
+      "aniIndex": 0,
       "objectType": 10,
       "isCollected": false
     },
     {
-      "x": 832.0,
-      "y": 128.0,
-      "width": 18,
-      "height": 14,
+      "x": 1248.0,
+      "y": 192.0,
+      "width": 27,
+      "height": 21,
       "hitbox": {
-        "x": 832.0,
-        "y": 138.0,
-        "width": 12.0,
-        "height": 10.0
+        "x": 1248.0,
+        "y": 202.0,
+        "width": 18.0,
+        "height": 15.0
       },
-      "aniTick": 5,
+      "aniTick": 24,
       "aniSpeed": 25,
-      "aniIndex": 1,
+      "aniIndex": 0,
       "objectType": 10,
       "isCollected": false
     },
     {
-      "x": 480.0,
-      "y": 160.0,
-      "width": 18,
-      "height": 14,
+      "x": 720.0,
+      "y": 240.0,
+      "width": 27,
+      "height": 21,
       "hitbox": {
-        "x": 480.0,
-        "y": 170.0,
-        "width": 12.0,
-        "height": 10.0
+        "x": 720.0,
+        "y": 250.0,
+        "width": 18.0,
+        "height": 15.0
       },
-      "aniTick": 5,
+      "aniTick": 20,
       "aniSpeed": 25,
-      "aniIndex": 1,
+      "aniIndex": 3,
       "objectType": 10,
-      "isCollected": false
+      "isCollected": true
+    },
+    {
+      "x": 1296.0,
+      "y": 336.0,
+      "width": 27,
+      "height": 21,
+      "hitbox": {
+        "x": 1296.0,
+        "y": 346.0,
+        "width": 18.0,
+        "height": 15.0
+      },
+      "aniTick": 12,
+      "aniSpeed": 25,
+      "aniIndex": 0,
+      "objectType": 10,
+      "isCollected": true
     },
     {
       "x": 864.0,
-      "y": 224.0,
-      "width": 18,
-      "height": 14,
+      "y": 384.0,
+      "width": 27,
+      "height": 21,
       "hitbox": {
         "x": 864.0,
-        "y": 234.0,
-        "width": 12.0,
-        "height": 10.0
+        "y": 394.0,
+        "width": 18.0,
+        "height": 15.0
       },
-      "aniTick": 5,
+      "aniTick": 18,
+      "aniSpeed": 25,
+      "aniIndex": 8,
+      "objectType": 10,
+      "isCollected": true
+    },
+    {
+      "x": 1200.0,
+      "y": 432.0,
+      "width": 27,
+      "height": 21,
+      "hitbox": {
+        "x": 1200.0,
+        "y": 442.0,
+        "width": 18.0,
+        "height": 15.0
+      },
+      "aniTick": 10,
+      "aniSpeed": 25,
+      "aniIndex": 7,
+      "objectType": 10,
+      "isCollected": true
+    },
+    {
+      "x": 288.0,
+      "y": 480.0,
+      "width": 27,
+      "height": 21,
+      "hitbox": {
+        "x": 288.0,
+        "y": 490.0,
+        "width": 18.0,
+        "height": 15.0
+      },
+      "aniTick": 12,
       "aniSpeed": 25,
       "aniIndex": 1,
       "objectType": 10,
-      "isCollected": false
+      "isCollected": true
     },
     {
-      "x": 576.0,
-      "y": 256.0,
-      "width": 18,
-      "height": 14,
+      "x": 1200.0,
+      "y": 624.0,
+      "width": 27,
+      "height": 21,
       "hitbox": {
-        "x": 576.0,
-        "y": 266.0,
-        "width": 12.0,
-        "height": 10.0
+        "x": 1200.0,
+        "y": 634.0,
+        "width": 18.0,
+        "height": 15.0
       },
-      "aniTick": 5,
+      "aniTick": 24,
       "aniSpeed": 25,
-      "aniIndex": 1,
-      "objectType": 10,
-      "isCollected": false
-    },
-    {
-      "x": 800.0,
-      "y": 288.0,
-      "width": 18,
-      "height": 14,
-      "hitbox": {
-        "x": 800.0,
-        "y": 298.0,
-        "width": 12.0,
-        "height": 10.0
-      },
-      "aniTick": 5,
-      "aniSpeed": 25,
-      "aniIndex": 1,
-      "objectType": 10,
-      "isCollected": false
-    },
-    {
-      "x": 192.0,
-      "y": 320.0,
-      "width": 18,
-      "height": 14,
-      "hitbox": {
-        "x": 192.0,
-        "y": 330.0,
-        "width": 12.0,
-        "height": 10.0
-      },
-      "aniTick": 5,
-      "aniSpeed": 25,
-      "aniIndex": 1,
-      "objectType": 10,
-      "isCollected": false
-    },
-    {
-      "x": 800.0,
-      "y": 416.0,
-      "width": 18,
-      "height": 14,
-      "hitbox": {
-        "x": 800.0,
-        "y": 426.0,
-        "width": 12.0,
-        "height": 10.0
-      },
-      "aniTick": 5,
-      "aniSpeed": 25,
-      "aniIndex": 1,
+      "aniIndex": 0,
       "objectType": 10,
       "isCollected": false
     }
   ],
   "heartsArray": [
     {
-      "x": 352.0,
-      "y": 96.0,
-      "width": 18,
-      "height": 14,
+      "x": 528.0,
+      "y": 144.0,
+      "width": 27,
+      "height": 21,
       "hitbox": {
-        "x": 352.0,
-        "y": 106.0,
-        "width": 12.0,
-        "height": 10.0
+        "x": 528.0,
+        "y": 154.0,
+        "width": 18.0,
+        "height": 15.0
       },
-      "aniTick": 5,
+      "aniTick": 8,
       "aniSpeed": 25,
-      "aniIndex": 7,
+      "aniIndex": 1,
       "objectType": 20,
-      "isCollected": false
+      "isCollected": true
     },
     {
-      "x": 576.0,
-      "y": 128.0,
-      "width": 18,
-      "height": 14,
+      "x": 864.0,
+      "y": 192.0,
+      "width": 27,
+      "height": 21,
       "hitbox": {
-        "x": 576.0,
-        "y": 138.0,
-        "width": 12.0,
-        "height": 10.0
+        "x": 864.0,
+        "y": 202.0,
+        "width": 18.0,
+        "height": 15.0
       },
-      "aniTick": 5,
+      "aniTick": 2,
       "aniSpeed": 25,
-      "aniIndex": 7,
+      "aniIndex": 0,
       "objectType": 20,
-      "isCollected": false
+      "isCollected": true
     },
     {
-      "x": 416.0,
-      "y": 288.0,
-      "width": 18,
-      "height": 14,
+      "x": 624.0,
+      "y": 432.0,
+      "width": 27,
+      "height": 21,
       "hitbox": {
-        "x": 416.0,
-        "y": 298.0,
-        "width": 12.0,
-        "height": 10.0
+        "x": 624.0,
+        "y": 442.0,
+        "width": 18.0,
+        "height": 15.0
       },
-      "aniTick": 5,
+      "aniTick": 11,
       "aniSpeed": 25,
-      "aniIndex": 7,
+      "aniIndex": 3,
       "objectType": 20,
-      "isCollected": false
+      "isCollected": true
     }
   ],
   "pigsArray": [
     {
       "attackBox": {
-        "x": 219.89972,
-        "y": 108.0,
-        "width": 10.0,
-        "height": 19.0
+        "x": 385.20044,
+        "y": 163.5,
+        "width": 15.0,
+        "height": 28.0
       },
       "topHitbox": {
-        "x": 234.89972,
-        "y": 108.0,
-        "width": 4.0,
-        "height": 3.0
-      },
-      "aniIndex": 1,
-      "enemyAction": 1,
-      "aniTick": 5,
-      "aniSpeed": 25,
-      "startForTheFirstTime": false,
-      "fallSpeed": 1.0000001,
-      "gravity": 0.04,
-      "enemySpeed": 0.3,
-      "runDirection": 0,
-      "mirrorX": 0,
-      "mirrorWidth": 1,
-      "yLevel": 3,
-      "playerYLevel": 10,
-      "seePlayerRange": 160.0,
-      "alive": true,
-      "x": 256.0,
-      "y": 96.0,
-      "width": 38,
-      "height": 28,
-      "hitbox": {
-        "x": 229.89972,
-        "y": 108.0,
-        "width": 14.0,
-        "height": 19.0
-      }
-    },
-    {
-      "attackBox": {
-        "x": 55.500015,
-        "y": 172.0,
-        "width": 10.0,
-        "height": 19.0
-      },
-      "topHitbox": {
-        "x": 70.500015,
-        "y": 172.0,
-        "width": 4.0,
-        "height": 3.0
-      },
-      "aniIndex": 1,
-      "enemyAction": 1,
-      "aniTick": 5,
-      "aniSpeed": 25,
-      "startForTheFirstTime": false,
-      "fallSpeed": 1.0000001,
-      "gravity": 0.04,
-      "enemySpeed": 0.3,
-      "runDirection": 0,
-      "mirrorX": 0,
-      "mirrorWidth": 1,
-      "yLevel": 5,
-      "playerYLevel": 10,
-      "seePlayerRange": 160.0,
-      "alive": true,
-      "x": 64.0,
-      "y": 160.0,
-      "width": 38,
-      "height": 28,
-      "hitbox": {
-        "x": 65.500015,
-        "y": 172.0,
-        "width": 14.0,
-        "height": 19.0
-      }
-    },
-    {
-      "attackBox": {
-        "x": 487.79895,
-        "y": 172.0,
-        "width": 10.0,
-        "height": 19.0
-      },
-      "topHitbox": {
-        "x": 478.79895,
-        "y": 172.0,
-        "width": 4.0,
-        "height": 3.0
-      },
-      "aniIndex": 1,
-      "enemyAction": 1,
-      "aniTick": 5,
-      "aniSpeed": 25,
-      "startForTheFirstTime": false,
-      "fallSpeed": 1.0000001,
-      "gravity": 0.04,
-      "enemySpeed": 0.3,
-      "runDirection": 1,
-      "mirrorX": 0,
-      "mirrorWidth": 1,
-      "yLevel": 5,
-      "playerYLevel": 10,
-      "seePlayerRange": 160.0,
-      "alive": true,
-      "x": 448.0,
-      "y": 160.0,
-      "width": 38,
-      "height": 28,
-      "hitbox": {
-        "x": 473.79895,
-        "y": 172.0,
-        "width": 14.0,
-        "height": 19.0
-      }
-    },
-    {
-      "attackBox": {
-        "x": 359.79895,
-        "y": 236.0,
-        "width": 10.0,
-        "height": 19.0
-      },
-      "topHitbox": {
-        "x": 350.79895,
-        "y": 236.0,
-        "width": 4.0,
-        "height": 3.0
-      },
-      "aniIndex": 1,
-      "enemyAction": 1,
-      "aniTick": 5,
-      "aniSpeed": 25,
-      "startForTheFirstTime": false,
-      "fallSpeed": 1.0000001,
-      "gravity": 0.04,
-      "enemySpeed": 0.3,
-      "runDirection": 1,
-      "mirrorX": 0,
-      "mirrorWidth": 1,
-      "yLevel": 7,
-      "playerYLevel": 10,
-      "seePlayerRange": 160.0,
-      "alive": true,
-      "x": 320.0,
-      "y": 224.0,
-      "width": 38,
-      "height": 28,
-      "hitbox": {
-        "x": 345.79895,
-        "y": 236.0,
-        "width": 14.0,
-        "height": 19.0
-      }
-    },
-    {
-      "attackBox": {
-        "x": 620.80005,
-        "y": 268.0,
-        "width": 10.0,
-        "height": 19.0
-      },
-      "topHitbox": {
-        "x": 611.80005,
-        "y": 268.0,
-        "width": 4.0,
-        "height": 3.0
-      },
-      "aniIndex": 1,
-      "enemyAction": 1,
-      "aniTick": 5,
-      "aniSpeed": 25,
-      "startForTheFirstTime": false,
-      "fallSpeed": 1.0000001,
-      "gravity": 0.04,
-      "enemySpeed": 0.3,
-      "runDirection": 1,
-      "mirrorX": 0,
-      "mirrorWidth": 1,
-      "yLevel": 8,
-      "playerYLevel": 10,
-      "seePlayerRange": 160.0,
-      "alive": true,
-      "x": 608.0,
-      "y": 256.0,
-      "width": 38,
-      "height": 28,
-      "hitbox": {
-        "x": 606.80005,
-        "y": 268.0,
-        "width": 14.0,
-        "height": 19.0
-      }
-    },
-    {
-      "attackBox": {
-        "x": 780.80005,
-        "y": 300.0,
-        "width": 10.0,
-        "height": 19.0
-      },
-      "topHitbox": {
-        "x": 771.80005,
-        "y": 300.0,
-        "width": 4.0,
-        "height": 3.0
-      },
-      "aniIndex": 1,
-      "enemyAction": 1,
-      "aniTick": 5,
-      "aniSpeed": 25,
-      "startForTheFirstTime": false,
-      "fallSpeed": 1.0000001,
-      "gravity": 0.04,
-      "enemySpeed": 0.3,
-      "runDirection": 1,
-      "mirrorX": 0,
-      "mirrorWidth": 1,
-      "yLevel": 9,
-      "playerYLevel": 10,
-      "seePlayerRange": 160.0,
-      "alive": true,
-      "x": 768.0,
-      "y": 288.0,
-      "width": 38,
-      "height": 28,
-      "hitbox": {
-        "x": 766.80005,
-        "y": 300.0,
-        "width": 14.0,
-        "height": 19.0
-      }
-    },
-    {
-      "attackBox": {
-        "x": 228.2998,
-        "y": 332.0,
-        "width": 10.0,
-        "height": 19.0
-      },
-      "topHitbox": {
-        "x": 243.2998,
-        "y": 332.0,
-        "width": 4.0,
-        "height": 3.0
+        "x": 405.20044,
+        "y": 163.5,
+        "width": 11.0,
+        "height": 4.5
       },
       "aniIndex": 0,
       "enemyAction": 7,
       "aniTick": 0,
       "aniSpeed": 25,
       "startForTheFirstTime": false,
-      "fallSpeed": 1.0000001,
-      "gravity": 0.04,
-      "enemySpeed": 0.3,
+      "fallSpeed": 1.5599995,
+      "gravity": 0.06,
+      "enemySpeed": 0.45000002,
+      "runDirection": 0,
+      "mirrorX": 0,
+      "mirrorWidth": 1,
+      "yLevel": 3,
+      "playerYLevel": 2,
+      "seePlayerRange": 240.0,
+      "alive": false,
+      "x": 384.0,
+      "y": 144.0,
+      "width": 57,
+      "height": 42,
+      "hitbox": {
+        "x": 400.20044,
+        "y": 163.5,
+        "width": 21.0,
+        "height": 28.0
+      }
+    },
+    {
+      "attackBox": {
+        "x": 198.8992,
+        "y": 259.5,
+        "width": 15.0,
+        "height": 28.0
+      },
+      "topHitbox": {
+        "x": 218.8992,
+        "y": 259.5,
+        "width": 11.0,
+        "height": 4.5
+      },
+      "aniIndex": 0,
+      "enemyAction": 7,
+      "aniTick": 0,
+      "aniSpeed": 25,
+      "startForTheFirstTime": false,
+      "fallSpeed": 1.5599995,
+      "gravity": 0.06,
+      "enemySpeed": 0.45000002,
+      "runDirection": 0,
+      "mirrorX": 0,
+      "mirrorWidth": 1,
+      "yLevel": 5,
+      "playerYLevel": 4,
+      "seePlayerRange": 240.0,
+      "alive": false,
+      "x": 96.0,
+      "y": 240.0,
+      "width": 57,
+      "height": 42,
+      "hitbox": {
+        "x": 213.8992,
+        "y": 259.5,
+        "width": 21.0,
+        "height": 28.0
+      }
+    },
+    {
+      "attackBox": {
+        "x": 748.8015,
+        "y": 259.5,
+        "width": 15.0,
+        "height": 28.0
+      },
+      "topHitbox": {
+        "x": 732.8015,
+        "y": 259.5,
+        "width": 11.0,
+        "height": 4.5
+      },
+      "aniIndex": 0,
+      "enemyAction": 7,
+      "aniTick": 0,
+      "aniSpeed": 25,
+      "startForTheFirstTime": false,
+      "fallSpeed": 1.5599995,
+      "gravity": 0.06,
+      "enemySpeed": 0.45000002,
+      "runDirection": 1,
+      "mirrorX": 0,
+      "mirrorWidth": 1,
+      "yLevel": 5,
+      "playerYLevel": 4,
+      "seePlayerRange": 240.0,
+      "alive": false,
+      "x": 672.0,
+      "y": 240.0,
+      "width": 57,
+      "height": 42,
+      "hitbox": {
+        "x": 727.8015,
+        "y": 259.5,
+        "width": 21.0,
+        "height": 28.0
+      }
+    },
+    {
+      "attackBox": {
+        "x": 560.8516,
+        "y": 355.5,
+        "width": 15.0,
+        "height": 28.0
+      },
+      "topHitbox": {
+        "x": 544.8516,
+        "y": 355.5,
+        "width": 11.0,
+        "height": 4.5
+      },
+      "aniIndex": 0,
+      "enemyAction": 7,
+      "aniTick": 0,
+      "aniSpeed": 25,
+      "startForTheFirstTime": false,
+      "fallSpeed": 1.5599995,
+      "gravity": 0.06,
+      "enemySpeed": 0.45000002,
+      "runDirection": 1,
+      "mirrorX": 0,
+      "mirrorWidth": 1,
+      "yLevel": 7,
+      "playerYLevel": 7,
+      "seePlayerRange": 240.0,
+      "alive": false,
+      "x": 480.0,
+      "y": 336.0,
+      "width": 57,
+      "height": 42,
+      "hitbox": {
+        "x": 539.8516,
+        "y": 355.5,
+        "width": 21.0,
+        "height": 28.0
+      }
+    },
+    {
+      "attackBox": {
+        "x": 971.70105,
+        "y": 403.5,
+        "width": 15.0,
+        "height": 28.0
+      },
+      "topHitbox": {
+        "x": 955.70105,
+        "y": 403.5,
+        "width": 11.0,
+        "height": 4.5
+      },
+      "aniIndex": 0,
+      "enemyAction": 7,
+      "aniTick": 0,
+      "aniSpeed": 25,
+      "startForTheFirstTime": false,
+      "fallSpeed": 1.5599995,
+      "gravity": 0.06,
+      "enemySpeed": 0.45000002,
+      "runDirection": 1,
+      "mirrorX": 0,
+      "mirrorWidth": 1,
+      "yLevel": 8,
+      "playerYLevel": 7,
+      "seePlayerRange": 240.0,
+      "alive": false,
+      "x": 912.0,
+      "y": 384.0,
+      "width": 57,
+      "height": 42,
+      "hitbox": {
+        "x": 950.70105,
+        "y": 403.5,
+        "width": 21.0,
+        "height": 28.0
+      }
+    },
+    {
+      "attackBox": {
+        "x": 1117.2021,
+        "y": 451.5,
+        "width": 15.0,
+        "height": 28.0
+      },
+      "topHitbox": {
+        "x": 1137.2021,
+        "y": 451.5,
+        "width": 11.0,
+        "height": 4.5
+      },
+      "aniIndex": 0,
+      "enemyAction": 7,
+      "aniTick": 0,
+      "aniSpeed": 25,
+      "startForTheFirstTime": false,
+      "fallSpeed": 1.5599995,
+      "gravity": 0.06,
+      "enemySpeed": 0.45000002,
+      "runDirection": 0,
+      "mirrorX": 0,
+      "mirrorWidth": 1,
+      "yLevel": 9,
+      "playerYLevel": 9,
+      "seePlayerRange": 240.0,
+      "alive": false,
+      "x": 1152.0,
+      "y": 432.0,
+      "width": 57,
+      "height": 42,
+      "hitbox": {
+        "x": 1132.2021,
+        "y": 451.5,
+        "width": 21.0,
+        "height": 28.0
+      }
+    },
+    {
+      "attackBox": {
+        "x": 286.64777,
+        "y": 499.5,
+        "width": 15.0,
+        "height": 28.0
+      },
+      "topHitbox": {
+        "x": 306.64777,
+        "y": 499.5,
+        "width": 11.0,
+        "height": 4.5
+      },
+      "aniIndex": 0,
+      "enemyAction": 7,
+      "aniTick": 0,
+      "aniSpeed": 25,
+      "startForTheFirstTime": false,
+      "fallSpeed": 1.5599995,
+      "gravity": 0.06,
+      "enemySpeed": 0.45000002,
       "runDirection": 0,
       "mirrorX": 0,
       "mirrorWidth": 1,
       "yLevel": 10,
       "playerYLevel": 9,
-      "seePlayerRange": 160.0,
+      "seePlayerRange": 240.0,
       "alive": false,
-      "x": 256.0,
-      "y": 320.0,
-      "width": 38,
-      "height": 28,
+      "x": 384.0,
+      "y": 480.0,
+      "width": 57,
+      "height": 42,
       "hitbox": {
-        "x": 238.2998,
-        "y": 332.0,
-        "width": 14.0,
-        "height": 19.0
+        "x": 301.64777,
+        "y": 499.5,
+        "width": 21.0,
+        "height": 28.0
       }
     },
     {
       "attackBox": {
-        "x": 179.50583,
-        "y": 428.0,
-        "width": 10.0,
-        "height": 19.0
+        "x": 311.54193,
+        "y": 643.5,
+        "width": 15.0,
+        "height": 28.0
       },
       "topHitbox": {
-        "x": 194.50583,
-        "y": 428.0,
-        "width": 4.0,
-        "height": 3.0
+        "x": 331.54193,
+        "y": 643.5,
+        "width": 11.0,
+        "height": 4.5
       },
-      "aniIndex": 1,
-      "enemyAction": 1,
-      "aniTick": 5,
+      "aniIndex": 0,
+      "enemyAction": 7,
+      "aniTick": 0,
       "aniSpeed": 25,
       "startForTheFirstTime": false,
-      "fallSpeed": 1.0000001,
-      "gravity": 0.04,
-      "enemySpeed": 0.3,
+      "fallSpeed": 1.5599995,
+      "gravity": 0.06,
+      "enemySpeed": 0.45000002,
       "runDirection": 0,
       "mirrorX": 0,
       "mirrorWidth": 1,
       "yLevel": 13,
-      "playerYLevel": 10,
-      "seePlayerRange": 160.0,
-      "alive": true,
-      "x": 416.0,
-      "y": 416.0,
-      "width": 38,
-      "height": 28,
+      "playerYLevel": 12,
+      "seePlayerRange": 240.0,
+      "alive": false,
+      "x": 624.0,
+      "y": 624.0,
+      "width": 57,
+      "height": 42,
       "hitbox": {
-        "x": 189.50583,
-        "y": 428.0,
-        "width": 14.0,
-        "height": 19.0
+        "x": 326.54193,
+        "y": 643.5,
+        "width": 21.0,
+        "height": 28.0
       }
     },
     {
       "attackBox": {
-        "x": 848.6012,
-        "y": 428.0,
-        "width": 10.0,
-        "height": 19.0
+        "x": 1297.2021,
+        "y": 643.5,
+        "width": 15.0,
+        "height": 28.0
       },
       "topHitbox": {
-        "x": 839.6012,
-        "y": 428.0,
-        "width": 4.0,
-        "height": 3.0
+        "x": 1281.2021,
+        "y": 643.5,
+        "width": 11.0,
+        "height": 4.5
       },
-      "aniIndex": 1,
+      "aniIndex": 4,
       "enemyAction": 1,
-      "aniTick": 5,
+      "aniTick": 24,
       "aniSpeed": 25,
       "startForTheFirstTime": false,
-      "fallSpeed": 1.0000001,
-      "gravity": 0.04,
-      "enemySpeed": 0.3,
+      "fallSpeed": 1.5599995,
+      "gravity": 0.06,
+      "enemySpeed": 0.45000002,
       "runDirection": 1,
       "mirrorX": 0,
       "mirrorWidth": 1,
       "yLevel": 13,
-      "playerYLevel": 10,
-      "seePlayerRange": 160.0,
+      "playerYLevel": 5,
+      "seePlayerRange": 240.0,
       "alive": true,
-      "x": 864.0,
-      "y": 416.0,
-      "width": 38,
-      "height": 28,
+      "x": 1296.0,
+      "y": 624.0,
+      "width": 57,
+      "height": 42,
       "hitbox": {
-        "x": 834.6012,
-        "y": 428.0,
-        "width": 14.0,
-        "height": 19.0
+        "x": 1276.2021,
+        "y": 643.5,
+        "width": 21.0,
+        "height": 28.0
       }
     }
   ],
-  "numberOfPigsAlive": 8
+  "numberOfPigsAlive": 1
 }

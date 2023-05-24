@@ -25,13 +25,13 @@ public class SaveLoadGame implements Serializable {
             data.yPosition = playing.getPlayer().getYPosition();
 
             data.lives = playing.getPlayer().getLives();
-            data.diamonds = playing.getObjectManager().getNumberOfDiamondsToTake();
+            data.diamonds = playing.getObjectController().getNumberOfDiamondsToTake();
 
-            data.diamondsArray = playing.getObjectManager().getDiamonds();
-            data.heartsArray = playing.getObjectManager().getHearts();
+            data.diamondsArray = playing.getObjectController().getDiamonds();
+            data.heartsArray = playing.getObjectController().getHearts();
 
-            data.pigsArray = playing.getEnemyManager().getPigs();
-            data.numberOfPigsAlive = playing.getEnemyManager().getNumberOfPigsAlive();
+            data.pigsArray = playing.getEnemyController().getPigs();
+            data.numberOfPigsAlive = playing.getEnemyController().getNumberOfPigsAlive();
 
             String json = gson.toJson(data);
             writer.write(json);
@@ -53,13 +53,13 @@ public class SaveLoadGame implements Serializable {
             playing.getPlayer().getHitBox().y = data.yPosition;
 
             playing.getPlayer().setLives(data.lives);
-            playing.getObjectManager().setNumberOfDiamondsToTake(data.diamonds);
+            playing.getObjectController().setNumberOfDiamondsToTake(data.diamonds);
 
-            playing.getObjectManager().setDiamonds(new ArrayList<>(data.diamondsArray));
-            playing.getObjectManager().setHearts(new ArrayList<>(data.heartsArray));
+            playing.getObjectController().setDiamonds(new ArrayList<>(data.diamondsArray));
+            playing.getObjectController().setHearts(new ArrayList<>(data.heartsArray));
 
-            playing.getEnemyManager().setPigs(new ArrayList<>(data.pigsArray));
-            playing.getEnemyManager().setNumberOfPigsAlive(data.numberOfPigsAlive);
+            playing.getEnemyController().setPigs(new ArrayList<>(data.pigsArray));
+            playing.getEnemyController().setNumberOfPigsAlive(data.numberOfPigsAlive);
 
         } catch (Exception e) {
             e.printStackTrace();

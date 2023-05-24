@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -200,7 +201,7 @@ public class Player extends Entity implements Serializable {
     /**
      * If player falls in a hole, dead variable is set to true
      */
-    private void checkOutOfBounds() {
+    protected void checkOutOfBounds() {
         if (hitbox.y >= 483 * SCALE) {
             dead = true;
         }
@@ -378,7 +379,7 @@ public class Player extends Entity implements Serializable {
     private void loadPlayerSprites() {
         animations = new BufferedImage[8][11];
 
-        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
+        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_SPRITES);
 
         // Iterates through every single sprite
         for (int j = 0; j < animations.length; j++) {
@@ -528,6 +529,10 @@ public class Player extends Entity implements Serializable {
 
     public void enemyDirection(int direction) {
         this.enemyDirection = direction;
+    }
+
+    public void setDead() {
+        this.dead = true;
     }
 
     private void testing() {
