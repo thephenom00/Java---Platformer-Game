@@ -83,9 +83,9 @@ public class Playing extends State {
      */
     public void checkWin () {
         if (enemyController.numberOfPigsAlive == 0 && objectController.numberOfDiamondsToTake == 0) {
+            changeState(Gamestate.WIN, true);
             if (game.getLoggerState()) {
                 logger.log(Level.INFO, "Player Wins");
-                changeState(Gamestate.WIN, true);
             }
         }
     }
@@ -137,7 +137,7 @@ public class Playing extends State {
             case KeyEvent.VK_ESCAPE -> {
                 changeState(Gamestate.MENU, false);
                 player.resetMovement();
-                if(game.getLoggerState())
+                if (game.getLoggerState())
                     logger.log(Level.INFO, "Switched to MENU state");
             }
         }

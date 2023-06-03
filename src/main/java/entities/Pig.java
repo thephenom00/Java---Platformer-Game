@@ -69,7 +69,6 @@ public class Pig extends Enemy {
      * @param player player class
      */
     public void updateAction(int[][] lvlData, Player player) {
-
             switch (enemyAction) {
                 case IDLE:
                     changeAction(RUNNING);

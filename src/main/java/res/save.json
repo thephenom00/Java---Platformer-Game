@@ -1,8 +1,8 @@
 {
-  "xPosition": 708.5,
-  "yPosition": 248.7029,
-  "diamonds": 3,
-  "lives": 5,
+  "xPosition": 710.0,
+  "yPosition": 248.92627,
+  "diamonds": 6,
+  "lives": 4,
   "diamondsArray": [
     {
       "x": 1104.0,
@@ -15,9 +15,9 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 24,
+      "aniTick": 21,
       "aniSpeed": 25,
-      "aniIndex": 0,
+      "aniIndex": 9,
       "objectType": 10,
       "isCollected": false
     },
@@ -32,9 +32,9 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 24,
+      "aniTick": 21,
       "aniSpeed": 25,
-      "aniIndex": 0,
+      "aniIndex": 9,
       "objectType": 10,
       "isCollected": false
     },
@@ -49,9 +49,9 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 20,
+      "aniTick": 24,
       "aniSpeed": 25,
-      "aniIndex": 3,
+      "aniIndex": 4,
       "objectType": 10,
       "isCollected": true
     },
@@ -66,11 +66,11 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 12,
+      "aniTick": 21,
       "aniSpeed": 25,
-      "aniIndex": 0,
+      "aniIndex": 9,
       "objectType": 10,
-      "isCollected": true
+      "isCollected": false
     },
     {
       "x": 864.0,
@@ -83,11 +83,11 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 18,
+      "aniTick": 21,
       "aniSpeed": 25,
-      "aniIndex": 8,
+      "aniIndex": 9,
       "objectType": 10,
-      "isCollected": true
+      "isCollected": false
     },
     {
       "x": 1200.0,
@@ -100,11 +100,11 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 10,
+      "aniTick": 21,
       "aniSpeed": 25,
-      "aniIndex": 7,
+      "aniIndex": 9,
       "objectType": 10,
-      "isCollected": true
+      "isCollected": false
     },
     {
       "x": 288.0,
@@ -117,9 +117,9 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 12,
+      "aniTick": 4,
       "aniSpeed": 25,
-      "aniIndex": 1,
+      "aniIndex": 5,
       "objectType": 10,
       "isCollected": true
     },
@@ -134,9 +134,9 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 24,
+      "aniTick": 21,
       "aniSpeed": 25,
-      "aniIndex": 0,
+      "aniIndex": 9,
       "objectType": 10,
       "isCollected": false
     }
@@ -153,9 +153,9 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 8,
+      "aniTick": 21,
       "aniSpeed": 25,
-      "aniIndex": 1,
+      "aniIndex": 0,
       "objectType": 20,
       "isCollected": true
     },
@@ -170,11 +170,11 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 2,
+      "aniTick": 21,
       "aniSpeed": 25,
-      "aniIndex": 0,
+      "aniIndex": 5,
       "objectType": 20,
-      "isCollected": true
+      "isCollected": false
     },
     {
       "x": 624.0,
@@ -187,9 +187,9 @@
         "width": 18.0,
         "height": 15.0
       },
-      "aniTick": 11,
+      "aniTick": 24,
       "aniSpeed": 25,
-      "aniIndex": 3,
+      "aniIndex": 6,
       "objectType": 20,
       "isCollected": true
     }
@@ -197,13 +197,13 @@
   "pigsArray": [
     {
       "attackBox": {
-        "x": 385.20044,
+        "x": 330.74896,
         "y": 163.5,
         "width": 15.0,
         "height": 28.0
       },
       "topHitbox": {
-        "x": 405.20044,
+        "x": 350.74896,
         "y": 163.5,
         "width": 11.0,
         "height": 4.5
@@ -228,7 +228,7 @@
       "width": 57,
       "height": 42,
       "hitbox": {
-        "x": 400.20044,
+        "x": 345.74896,
         "y": 163.5,
         "width": 21.0,
         "height": 28.0
@@ -236,13 +236,13 @@
     },
     {
       "attackBox": {
-        "x": 198.8992,
+        "x": 186.74928,
         "y": 259.5,
         "width": 15.0,
         "height": 28.0
       },
       "topHitbox": {
-        "x": 218.8992,
+        "x": 206.74928,
         "y": 259.5,
         "width": 11.0,
         "height": 4.5
@@ -267,7 +267,7 @@
       "width": 57,
       "height": 42,
       "hitbox": {
-        "x": 213.8992,
+        "x": 201.74928,
         "y": 259.5,
         "width": 21.0,
         "height": 28.0
@@ -275,13 +275,13 @@
     },
     {
       "attackBox": {
-        "x": 748.8015,
+        "x": 701.1012,
         "y": 259.5,
         "width": 15.0,
         "height": 28.0
       },
       "topHitbox": {
-        "x": 732.8015,
+        "x": 721.1012,
         "y": 259.5,
         "width": 11.0,
         "height": 4.5
@@ -294,7 +294,7 @@
       "fallSpeed": 1.5599995,
       "gravity": 0.06,
       "enemySpeed": 0.45000002,
-      "runDirection": 1,
+      "runDirection": 0,
       "mirrorX": 0,
       "mirrorWidth": 1,
       "yLevel": 5,
@@ -306,7 +306,7 @@
       "width": 57,
       "height": 42,
       "hitbox": {
-        "x": 727.8015,
+        "x": 716.1012,
         "y": 259.5,
         "width": 21.0,
         "height": 28.0
@@ -314,13 +314,13 @@
     },
     {
       "attackBox": {
-        "x": 560.8516,
+        "x": 541.0511,
         "y": 355.5,
         "width": 15.0,
         "height": 28.0
       },
       "topHitbox": {
-        "x": 544.8516,
+        "x": 525.0511,
         "y": 355.5,
         "width": 11.0,
         "height": 4.5
@@ -345,7 +345,7 @@
       "width": 57,
       "height": 42,
       "hitbox": {
-        "x": 539.8516,
+        "x": 520.0511,
         "y": 355.5,
         "width": 21.0,
         "height": 28.0
@@ -353,20 +353,20 @@
     },
     {
       "attackBox": {
-        "x": 971.70105,
+        "x": 928.4999,
         "y": 403.5,
         "width": 15.0,
         "height": 28.0
       },
       "topHitbox": {
-        "x": 955.70105,
+        "x": 912.4999,
         "y": 403.5,
         "width": 11.0,
         "height": 4.5
       },
-      "aniIndex": 0,
-      "enemyAction": 7,
-      "aniTick": 0,
+      "aniIndex": 1,
+      "enemyAction": 1,
+      "aniTick": 21,
       "aniSpeed": 25,
       "startForTheFirstTime": false,
       "fallSpeed": 1.5599995,
@@ -376,15 +376,15 @@
       "mirrorX": 0,
       "mirrorWidth": 1,
       "yLevel": 8,
-      "playerYLevel": 7,
+      "playerYLevel": 5,
       "seePlayerRange": 240.0,
-      "alive": false,
+      "alive": true,
       "x": 912.0,
       "y": 384.0,
       "width": 57,
       "height": 42,
       "hitbox": {
-        "x": 950.70105,
+        "x": 907.4999,
         "y": 403.5,
         "width": 21.0,
         "height": 28.0
@@ -392,38 +392,38 @@
     },
     {
       "attackBox": {
-        "x": 1117.2021,
+        "x": 1168.5005,
         "y": 451.5,
         "width": 15.0,
         "height": 28.0
       },
       "topHitbox": {
-        "x": 1137.2021,
+        "x": 1152.5005,
         "y": 451.5,
         "width": 11.0,
         "height": 4.5
       },
-      "aniIndex": 0,
-      "enemyAction": 7,
-      "aniTick": 0,
+      "aniIndex": 1,
+      "enemyAction": 1,
+      "aniTick": 21,
       "aniSpeed": 25,
       "startForTheFirstTime": false,
       "fallSpeed": 1.5599995,
       "gravity": 0.06,
       "enemySpeed": 0.45000002,
-      "runDirection": 0,
+      "runDirection": 1,
       "mirrorX": 0,
       "mirrorWidth": 1,
       "yLevel": 9,
-      "playerYLevel": 9,
+      "playerYLevel": 5,
       "seePlayerRange": 240.0,
-      "alive": false,
+      "alive": true,
       "x": 1152.0,
       "y": 432.0,
       "width": 57,
       "height": 42,
       "hitbox": {
-        "x": 1132.2021,
+        "x": 1147.5005,
         "y": 451.5,
         "width": 21.0,
         "height": 28.0
@@ -431,13 +431,13 @@
     },
     {
       "attackBox": {
-        "x": 286.64777,
+        "x": 309.14838,
         "y": 499.5,
         "width": 15.0,
         "height": 28.0
       },
       "topHitbox": {
-        "x": 306.64777,
+        "x": 329.14838,
         "y": 499.5,
         "width": 11.0,
         "height": 4.5
@@ -462,7 +462,7 @@
       "width": 57,
       "height": 42,
       "hitbox": {
-        "x": 301.64777,
+        "x": 324.14838,
         "y": 499.5,
         "width": 21.0,
         "height": 28.0
@@ -470,13 +470,13 @@
     },
     {
       "attackBox": {
-        "x": 311.54193,
+        "x": 442.9455,
         "y": 643.5,
         "width": 15.0,
         "height": 28.0
       },
       "topHitbox": {
-        "x": 331.54193,
+        "x": 462.9455,
         "y": 643.5,
         "width": 11.0,
         "height": 4.5
@@ -501,7 +501,7 @@
       "width": 57,
       "height": 42,
       "hitbox": {
-        "x": 326.54193,
+        "x": 457.9455,
         "y": 643.5,
         "width": 21.0,
         "height": 28.0
@@ -509,20 +509,20 @@
     },
     {
       "attackBox": {
-        "x": 1297.2021,
+        "x": 1226.1099,
         "y": 643.5,
         "width": 15.0,
         "height": 28.0
       },
       "topHitbox": {
-        "x": 1281.2021,
+        "x": 1210.1099,
         "y": 643.5,
         "width": 11.0,
         "height": 4.5
       },
-      "aniIndex": 4,
+      "aniIndex": 1,
       "enemyAction": 1,
-      "aniTick": 24,
+      "aniTick": 21,
       "aniSpeed": 25,
       "startForTheFirstTime": false,
       "fallSpeed": 1.5599995,
@@ -540,12 +540,12 @@
       "width": 57,
       "height": 42,
       "hitbox": {
-        "x": 1276.2021,
+        "x": 1205.1099,
         "y": 643.5,
         "width": 21.0,
         "height": 28.0
       }
     }
   ],
-  "numberOfPigsAlive": 1
+  "numberOfPigsAlive": 3
 }

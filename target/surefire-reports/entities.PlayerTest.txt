@@ -1,0 +1,34 @@
+-------------------------------------------------------------------------------
+Test set: entities.PlayerTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec <<< FAILURE!
+entities.PlayerTest.testPlayerInitialization()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "entities.Player.getXPosition()" because "this.player" is null
+	at entities.PlayerTest.testPlayerInitialization(PlayerTest.java:62)
+
+entities.PlayerTest.testDiamondCollection()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "entities.Player.getHitBox()" because "this.player" is null
+	at entities.PlayerTest.movePlayer(PlayerTest.java:35)
+	at entities.PlayerTest.testDiamondCollection(PlayerTest.java:73)
+
+entities.PlayerTest.testHeartCollection()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "entities.Player.getHitBox()" because "this.player" is null
+	at entities.PlayerTest.movePlayer(PlayerTest.java:35)
+	at entities.PlayerTest.testHeartCollection(PlayerTest.java:83)
+
+entities.PlayerTest.testPlayerMovementRight()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "entities.Player.getXPosition()" because "this.player" is null
+	at entities.PlayerTest.testPlayerMovementRight(PlayerTest.java:91)
+
+entities.PlayerTest.testPlayerMovementLeft()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "entities.Player.getXPosition()" because "this.player" is null
+	at entities.PlayerTest.testPlayerMovementLeft(PlayerTest.java:101)
+
+entities.PlayerTest.testPlayerJumping()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "entities.Player.getYPosition()" because "this.player" is null
+	at entities.PlayerTest.testPlayerJumping(PlayerTest.java:111)
+
+entities.PlayerTest.testPlayerFallToPit()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "entities.Player.getHitbox()" because "this.player" is null
+	at entities.PlayerTest.testPlayerFallToPit(PlayerTest.java:123)
+
