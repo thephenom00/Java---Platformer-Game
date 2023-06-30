@@ -56,7 +56,7 @@ public abstract class Enemy extends Entity{
      */
     protected boolean canSeePlayer(int[][] lvlData, Player player) {
         playerYLevel = (int) (player.getHitbox().y / TILES_SIZE);
-
+        yLevel = (int) (hitbox.y / TILES_SIZE);
         if (playerYLevel == yLevel) { // Enemy and Player are in the same Y position
             if (isPlayerInRange(player)) {
                 if (!isThereObstacle(lvlData, hitbox, player.hitbox, yLevel)) {

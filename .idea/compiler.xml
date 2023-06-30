@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="DeathBeforeDishonor" />
         <module name="leductha" />
+        <module name="Java-Herni-Engine" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Java-Herni-Engine" options="-Xlint:unchecked" />
       <module name="leductha" options="-Xlint:unchecked" />
     </option>
   </component>
