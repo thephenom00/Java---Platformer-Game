@@ -129,6 +129,7 @@ public class PlayerTest {
     @Test
     public void testPlayerMovementLeft() {
         double expectedPosition = player.getXPosition() - 15;
+
         // Test for going left
         player.setLeft(true);
 
@@ -140,10 +141,14 @@ public class PlayerTest {
     @Test
     public void testPlayerJumping() {
         double initialYPosition = player.getYPosition();
+
         // Test for jumping
         player.setJump(true);
+
         playerUpdate();
+
         double finalYPosition = player.getYPosition();
+
         assertNotEquals(initialYPosition, finalYPosition);
         assertTrue(finalYPosition < initialYPosition);
     }
@@ -151,9 +156,12 @@ public class PlayerTest {
 
     @Test
     public void testPlayerFallToPit() {
+        assertFalse(player.dead);
+
         // Moves player into a pit
         player.getHitbox().y = 500 * SCALE;
         player.checkOutOfBounds();
+
         assertTrue(player.dead);
     }
 
