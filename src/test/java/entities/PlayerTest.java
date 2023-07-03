@@ -22,10 +22,7 @@ public class PlayerTest {
     @Mock
     private Playing playing;
     private Physics physics;
-    private LoadSave loadSave;
     private ObjectController objectController;
-    private LevelController levelController;
-    private Size size;
     private EnemyController enemyController;
     private Pig pig;
 
@@ -70,9 +67,6 @@ public class PlayerTest {
         player = new Player(33, 420, 100, 100, playing);
         pig = new Pig(200, 100);
         player.loadLvlData(level);
-        loadSave = new LoadSave();
-        size = new Size(); // SCALE set to 1.5f
-        enemyController = new EnemyController(playing);
 
         when(playing.getObjectController()).thenReturn(objectController);
     }
