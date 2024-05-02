@@ -48,3 +48,14 @@ Náplň mojí semestrální práce bude platformová skákací hra inspirovaná 
 ## **Uživatelský manuál**
 [Click](https://github.com/thephenom00/Java-Herni-Engine/files/11860332/PJV.-.uzivatelska.prirucka.pdf)<br />
 <br />
+
+## Ukázka hry ##
+![Menu](documentation/menu.png) \
+![Game](documentation/game.png) \
+![Hit](documentation/hit.png) \
+![Kill](documentation/kill2.png) \
+![Kill](documentation/kill.png)
+
+
+
+
