@@ -1,4 +1,4 @@
-# Semestrální práce - Platformová skákací hra
+# Java Platformer Game
 
 ## Stručný popis
 Náplň mojí semestrální práce bude platformová skákací hra inspirovaná tituly jako Mario nebo Manic Miner. Hráč bude ovládat hlavního hrdinu, který se bude pohybovat po různých úrovních, sbírat předměty a porážet nepřátele. Úrovně budou různě tvarované, od rovných lineárních úrovní až po více komplikované úrovně s různými překážkami a nástrahami.
@@ -29,7 +29,7 @@ Náplň mojí semestrální práce bude platformová skákací hra inspirovaná 
 - **PLAY:** Začne hrát samotnou hru.
 - **LOAD:** Načíst.
 - **SAVE:** Uložit.
-- **QUIT:** Vypnout hru.
+- **QUIT:** Vypnout hru.x
 
 ## Ovládání
 - Hra se bude moci ovládat pouze klávesami "A", "D", "Mezerník". 
@@ -50,11 +50,21 @@ Náplň mojí semestrální práce bude platformová skákací hra inspirovaná 
 <br />
 
 ## Ukázka hry ##
-![Menu](documentation/menu.png) \
-![Game](documentation/game.png) \
-![Hit](documentation/hit.png) \
-![Kill](documentation/kill2.png) \
-![Kill](documentation/kill.png)
+https://github.com/thephenom00/Java-Platformer-Game/assets/133682647/a8a83a74-ea23-4231-8a45-bf0ccb797f30
+
+
+<div align="center">
+    <img src="documentation/game.png"/>
+</div> 
+
+<div align="center">
+  <img src="documentation/hit.png" height="250"/>
+  <img src="documentation/kill2.png" height="250"/>
+  <img src="documentation/kill.png" height="250"/>
+  
+</div> 
+
+
 
 
 
